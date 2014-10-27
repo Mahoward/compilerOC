@@ -10,3 +10,4 @@ Files to include:
    stingset.h
    stringset.cpp
    main.cpp
+   scanner.l
