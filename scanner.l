@@ -47,6 +47,8 @@ IDENT           ({LETTER}({LETTER}|{DIGIT})*)
 "false"         { return yylval_token (TOK_FALSE); }
 "true"          { return yylval_token (TOK_TRUE); }
 "null"          { return yylval_token (TOK_NULL); }
+"ord"           { return yylval_token (TOK_ORD); }
+"chr"           { return yylval_token (TOK_CHR); }
 
 {NUMBER}        { return yylval_token (NUMBER); }
 {IDENT}         { return yylval_token (TOK_IDENT); }
@@ -68,9 +70,8 @@ IDENT           ({LETTER}({LETTER}|{DIGIT})*)
 ">"             { return yylval_token (TOK_GT); }
 ">="            { return yylval_token (TOK_GE); }
 
-(’([^\\’\n]|\\[\\’"0nt])’)          { return yylval_token (TOK_NULL); }
-(\"([^\\"\n]|\\[\\’"0nt])*\")       { return yylval_token (TOK_NULL); }
-
+(’([^\\’\n]|\\[\\’"0nt])’)          { return yylval_token (TOK_CHARCON); }
+(\"([^\\"\n]|\\[\\’"0nt])*\")       { return yylval_token (TOK_STRINGCON); }
 
 {NOTNUMBER}     { scanner_badtoken (yytext);
                   return yylval_token (NUMBER); }

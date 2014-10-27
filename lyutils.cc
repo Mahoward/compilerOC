@@ -1,4 +1,3 @@
-
 #include <vector>
 #include <string>
 using namespace std;
@@ -97,6 +96,3 @@ void scanner_include (void) {
               included_filenames.back().c_str(), scan_linenr);
    }
 }
-
-RCSC("$Id: lyutils.cc,v 1.3 2013-10-10 18:17:45-07 - - $")
-
