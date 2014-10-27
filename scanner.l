@@ -1,5 +1,4 @@
 %{
-// $Id: scanner.l,v 1.4 2014-10-20 14:27:17-07 - - $
 
 #include "auxlib.h"
 #include "lyutils.h"
@@ -11,11 +10,14 @@
 
 %option 8bit
 %option debug
+%option ecs
 %option nodefault
 %option nounput
 %option noyywrap
+%option perf-report
 %option verbose
 %option warn
+
 
 LETTER          [A-Za-z_]
 DIGIT           [0-9]
@@ -31,9 +33,23 @@ IDENT           ({LETTER}({LETTER}|{DIGIT})*)
 [ \t]+          { IGNORE (white space) }
 \n              { scanner_newline(); }
 
-{NUMBER}        { return yylval_token (NUMBER); }
-{IDENT}         { return yylval_token (IDENT); }
 "void"          { return yylval_token (TOK_VOID); }
+"bool"          { return yylval_token (TOK_BOOL); }
+"char"          { return yylval_token (TOK_CHAR); }
+"int"           { return yylval_token (TOK_INT); }
+"string"        { return yylval_token (TOK_STRING); }
+"struct"        { return yylval_token (TOK_STRUCT); }
+"if"            { return yylval_token (TOK_IF); }
+"else"          { return yylval_token (TOK_ELSE); }
+"while"         { return yylval_token (TOK_WHILE); }
+"return"        { return yylval_token (TOK_RETURN); }
+"new"           { return yylval_token (TOK_NEW); }
+"false"         { return yylval_token (TOK_FALSE); }
+"true"          { return yylval_token (TOK_TRUE); }
+"null"          { return yylval_token (TOK_NULL); }
+
+{NUMBER}        { return yylval_token (NUMBER); }
+{IDENT}         { return yylval_token (TOK_IDENT); }
 
 "="             { return yylval_token ('='); }
 "+"             { return yylval_token ('+'); }
@@ -45,11 +61,20 @@ IDENT           ({LETTER}({LETTER}|{DIGIT})*)
 ")"             { return yylval_token (')'); }
 ";"             { return yylval_token (';'); }
 
+"=="            { return yylval_token (TOK_EQ); }
+"!="            { return yylval_token (TOK_NE); }
+"<"             { return yylval_token (TOK_LT); }
+"<="            { return yylval_token (TOK_LE); }
+">"             { return yylval_token (TOK_GT); }
+">="            { return yylval_token (TOK_GE); }
+
+(’([^\\’\n]|\\[\\’"0nt])’)          { return yylval_token (TOK_NULL); }
+(\"([^\\"\n]|\\[\\’"0nt])*\")       { return yylval_token (TOK_NULL); }
+
+
 {NOTNUMBER}     { scanner_badtoken (yytext);
                   return yylval_token (NUMBER); }
 
 .               { scanner_badchar (*yytext); }
 
 %%
-
-RCSC("$Id: scanner.l,v 1.4 2014-10-20 14:27:17-07 - - $")
