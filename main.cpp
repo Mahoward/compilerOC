@@ -55,6 +55,7 @@ void cpplines (FILE* yyin, char* filename) {
          if (token == NULL) break;
    //      printf ("token %d.%d: [%s]\n",
    //              linenr, tokenct, token);
+         print_tok()
          intern_stringset(token);
       }
       ++linenr;
