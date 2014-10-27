@@ -30,13 +30,13 @@ void chomp (char* string, char delim) {
 }
 
 
-void cpplines (FILE* pipe, char* filename) {
+void cpplines (FILE* yyin, char* filename) {
    int linenr = 1;
    char inputname[LINESIZE];
    strcpy (inputname, filename);
    for (;;) {
       char buffer[LINESIZE];
-      char* fgets_rc = fgets (buffer, LINESIZE, pipe);
+      char* fgets_rc = fgets (buffer, LINESIZE, yyin);
       if (fgets_rc == NULL) break;
       chomp (buffer, '\n');
       //printf ("%s:line %d: [%s]\n", filename, linenr, buffer);
@@ -115,12 +115,12 @@ int main (int argc, char** argv) {
       return 1;
    }
    string command = CPP + " " + cpp_flag + " " + filename;
-   FILE* pipe = popen (command.c_str(), "r");
-   if (pipe == NULL) {
+   yyin = popen (command.c_str(), "r");
+   if (yyin == NULL) {
       syserrprintf (command.c_str());
    }else {
-      cpplines (pipe, filename);
-      int pclose_rc = pclose (pipe);
+      cpplines (yyin, filename);
+      int pclose_rc = pclose (yyin);
       eprint_status (command.c_str(), pclose_rc);
       if (pclose_rc != 0) return EXIT_FAILURE;
    }
