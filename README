@@ -1,0 +1,13 @@
+Michael Howard
+mahoward
+The following code was provided by Mackey:
+auxlib.h
+auxlib.cpp
+stringset.cpp
+stringset.h
+
+In main.cpp:
+   void chomp (char* string, char delim)
+   void cpplines (FILE* pipe, char* filename)
+
+   and parts of int main (int argc, char** argv)
