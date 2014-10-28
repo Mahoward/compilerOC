@@ -1,5 +1,6 @@
 %{
 // Dummy parser for scanner project.
+#include "lyutils.h"
 %}
 
 %debug
