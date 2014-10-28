@@ -20,7 +20,7 @@ CYGEN     = yyparse.cpp
 CGENS     = ${CLGEN} ${CYGEN}
 ALLGENS   = ${HYGEN} ${CGENS}
 EXECBIN   = zexprsm
-ALLCSRC   = ${CSOURCES} ${CLGEN}
+ALLCSRC   = ${CSOURCES} ${CGENS}
 OBJECTS   = ${ALLCSRC:.cpp=.o}
 LREPORT   = yylex.output
 YREPORT   = yyparse.output
