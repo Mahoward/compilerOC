@@ -12,54 +12,39 @@ using namespace std;
 #include <unistd.h>
 
 #include "auxlib.h"
+#include "lyutils.h"
 #include "stringset.h"
 
 const string CPP = "/usr/bin/cpp";
 const size_t LINESIZE = 1024;
 
-int yy_flex_debug = 0;
-int yydebug = 0;
+string yyin_cpp_command;
 string cpp_flag = "";
 
-// Chomp the last character from a buffer if it is delim.
-void chomp (char* string, char delim) {
-   size_t len = strlen (string);
-   if (len == 0) return;
-   char* nlpos = string + len - 1;
-   if (*nlpos == delim) *nlpos = '\0';
+void yyin_cpp_popen (const char* filename) {
+   yyin_cpp_command = CPP;
+   yyin_cpp_command += " ";
+   yyin_cpp_command += filename;
+   yyin = popen (yyin_cpp_command.c_str(), "r");
+   if (yyin == NULL) {
+      syserrprintf (yyin_cpp_command.c_str());
+      exit (get_exitstatus());
+   }
 }
 
-
-void cpplines (FILE* yyin, char* filename) {
-   int linenr = 1;
-   char inputname[LINESIZE];
-   strcpy (inputname, filename);
-   for (;;) {
-      char buffer[LINESIZE];
-      char* fgets_rc = fgets (buffer, LINESIZE, yyin);
-      if (fgets_rc == NULL) break;
-      chomp (buffer, '\n');
-      //printf ("%s:line %d: [%s]\n", filename, linenr, buffer);
-      // http://gcc.gnu.org/onlinedocs/cpp/Preprocessor-Output.html
-      int sscanf_rc = sscanf (buffer, "# %d \"%[^\"]\"",
-                              &linenr, filename);
-      if (sscanf_rc == 2) {
-         //printf ("DIRECTIVE: line %d file \"%s\"\n", linenr, filename);
-         continue;
-      }
-      char* savepos = NULL;
-      char* bufptr = buffer;
-      for (int tokenct = 1;; ++tokenct) {
-         char* token = strtok_r (bufptr, " \t\n", &savepos);
-         bufptr = NULL;
-         if (token == NULL) break;
-   //      printf ("token %d.%d: [%s]\n",
-   //              linenr, tokenct, token);
-         print_tok()
-         intern_stringset(token);
-      }
-      ++linenr;
-   }
+void yyin_cpp_pclose (void) {
+   int pclose_rc = pclose (yyin);
+   eprint_status (yyin_cpp_command.c_str(), pclose_rc);
+   if (pclose_rc != 0) set_exitstatus (EXIT_FAILURE);
+}
+
+void print_str(const char* filename){
+   int len = strlen(filename);
+   char stringset_file[len];
+   strncpy(stringset_file, strtok(filename, "."), len);
+   strcat(stringset_file,".str");
+   FILE *out = fopen(stringset_file, "w+");
+   dump_stringset(out);
 }
 
 //set_opts modeled by:
@@ -69,12 +54,8 @@ int set_opts(int argc, char **argv){
    opterr = 0;
    while ((c = getopt (argc, argv, "ly@:D:")) != -1)
       switch (c){
-         case 'l':
-            yy_flex_debug = 1;
-            break;
-         case 'y':
-            yydebug = 1;
-            break;
+         case 'l': yy_flex_debug = 1;   break;
+         case 'y': yydebug = 1;   break;
       case 'D':
          cpp_flag.append("-D");
          cpp_flag.append(optarg);
@@ -115,21 +96,12 @@ int main (int argc, char** argv) {
       printf("Input Error: .oc files only\n");
       return 1;
    }
-   string command = CPP + " " + cpp_flag + " " + filename;
-   yyin = popen (command.c_str(), "r");
-   if (yyin == NULL) {
-      syserrprintf (command.c_str());
-   }else {
-      cpplines (yyin, filename);
-      int pclose_rc = pclose (yyin);
-      eprint_status (command.c_str(), pclose_rc);
-      if (pclose_rc != 0) return EXIT_FAILURE;
-   }
-   int len = strlen(filename);
-   char stringset_file[len];
-   strncpy(stringset_file, strtok(filename, "."), len);
-   strcat(stringset_file,".str");
-   FILE *out = fopen(stringset_file, "w+");
-   dump_stringset(out);
+
+   yyin_cpp_popen(filename);
+   yyin_cpp_pclose();
+
+   print_tok(filename);
+   print_str(filename);
+
    return get_exitstatus();
 }
