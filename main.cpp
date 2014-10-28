@@ -98,11 +98,11 @@ int main (int argc, char** argv) {
       return 1;
    }
 
-   yyin_cpp_popen(filename);
-   
+   //yyin_cpp_popen(filename);
 
 
-   yyin_cpp_pclose();
+
+   //yyin_cpp_pclose();
 
    //print_str(filename);
 
