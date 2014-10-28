@@ -25,6 +25,8 @@ string cpp_flag = "";
 void yyin_cpp_popen (const char* filename) {
    yyin_cpp_command = CPP;
    yyin_cpp_command += " ";
+   yyin_cpp_command += cpp_flag;
+   yyin_cpp_command += " ";
    yyin_cpp_command += filename;
    yyin = popen (yyin_cpp_command.c_str(), "r");
    if (yyin == NULL) {
