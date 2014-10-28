@@ -78,7 +78,7 @@ int set_opts(int argc, char **argv){
                   optopt);
          return -1;
       default:
-         abort ();
+         return -1;
       }
    return optind;
 }
