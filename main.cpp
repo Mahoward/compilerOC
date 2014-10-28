@@ -101,8 +101,7 @@ int main (int argc, char** argv) {
    yyin_cpp_popen(filename);
    yyin_cpp_pclose();
 
-   print_tok(filename);
-   print_str(filename);
+   //print_str(filename);
 
    return get_exitstatus();
 }
