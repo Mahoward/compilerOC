@@ -13,7 +13,7 @@
 %token TOK_EQ TOK_NE TOK_LT TOK_LE TOK_GT TOK_GE
 %token TOK_IDENT TOK_INTCON TOK_CHARCON TOK_STRINGCON
 
-%token TOK_BLOCK TOK_CALL TOK_IFELSE TOK_INITDECL
+%token TOK_BLOCK TOK_CALL TOK_IFELSE TOK_INITDECL ROOT
 %token TOK_POS TOK_NEG TOK_NEWARRAY TOK_TYPEID TOK_FIELD
 
 %start program
@@ -35,4 +35,3 @@ token   : '(' | ')' | '[' | ']' | '{' | '}' | ';' | ',' | '.'
 const char *get_yytname (int symbol) {
    return yytname [YYTRANSLATE (symbol)];
 }
-
