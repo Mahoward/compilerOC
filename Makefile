@@ -10,18 +10,18 @@ VALGRIND  = valgrind --leak-check=full --show-reachable=yes
 # Definitions of list of files:
 #
 HSOURCES  = astree.h  emit.h  lyutils.h  auxlib.h  stringset.h
-CSOURCES  = astree.cc emit.cc lyutils.cc auxlib.cc stringset.cc main.cc
+CSOURCES  = astree.cpp emit.cpp lyutils.cpp auxlib.cpp stringset.cpp main.cpp
 LSOURCES  = scanner.l
 YSOURCES  = parser.y
 ETCSRC    = README ${MKFILE} ${DEPSFILE}
-CLGEN     = yylex.cc
+CLGEN     = yylex.cpp
 HYGEN     = yyparse.h
-CYGEN     = yyparse.cc
+CYGEN     = yyparse.cpp
 CGENS     = ${CLGEN} ${CYGEN}
 ALLGENS   = ${HYGEN} ${CGENS}
 EXECBIN   = zexprsm
 ALLCSRC   = ${CSOURCES} ${CGENS}
-OBJECTS   = ${ALLCSRC:.cc=.o}
+OBJECTS   = ${ALLCSRC:.cpp=.o}
 LREPORT   = yylex.output
 YREPORT   = yyparse.output
 IREPORT   = ident.output
@@ -52,7 +52,7 @@ ${EXECBIN} : ${OBJECTS}
 #
 # Build an object file form a C source file.
 #
-%.o : %.cc
+%.o : %.cpp
 	${GCC} -c $<
 
 
@@ -125,8 +125,7 @@ tests : ${EXECBIN}
 #
 again :
 	gmake --no-print-directory spotless deps ci all lis
-	
+
 ifeq "${NEEDINCL}" ""
 include ${DEPSFILE}
 endif
-
