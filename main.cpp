@@ -90,7 +90,10 @@ int main (int argc, char** argv) {
    if(argi+1 < argc){
       printf("Input Error: Multiple Input Files Not Allowed\n");
       return 1;
-   }else if(argi == argc)return 1;
+   }else if(argi == argc){
+      printf("Input Error: No File Specified\n");
+      return 1;
+   }
    char *filename = argv[argi];
    char *is_oc = strrchr(filename,'o');
    if(is_oc == NULL || strcmp(is_oc,"oc") != 0){
