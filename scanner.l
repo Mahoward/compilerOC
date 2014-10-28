@@ -50,7 +50,6 @@ IDENT           ({LETTER}({LETTER}|{DIGIT})*)
 "ord"           { return yylval_token (TOK_ORD); }
 "chr"           { return yylval_token (TOK_CHR); }
 
-{NUMBER}        { return yylval_token (NUMBER); }
 {IDENT}         { return yylval_token (TOK_IDENT); }
 
 "="             { return yylval_token ('='); }
