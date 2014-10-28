@@ -21,10 +21,6 @@
 
 LETTER          [A-Za-z_]
 DIGIT           [0-9]
-MANTISSA        ({DIGIT}+\.?{DIGIT}*|\.{DIGIT}+)
-EXPONENT        ([Ee][+-]?{DIGIT}+)
-NUMBER          ({MANTISSA}{EXPONENT}?)
-NOTNUMBER       ({MANTISSA}[Ee][+-]?)
 IDENT           ({LETTER}({LETTER}|{DIGIT})*)
 
 %%
@@ -68,12 +64,10 @@ IDENT           ({LETTER}({LETTER}|{DIGIT})*)
 "<="            { return yylval_token (TOK_LE); }
 ">"             { return yylval_token (TOK_GT); }
 ">="            { return yylval_token (TOK_GE); }
+[0-9]+          { return yylval_token (TOK_INTCON); }
 
 (’([^\\’\n]|\\[\\’"0nt])’)          { return yylval_token (TOK_CHARCON); }
 (\"([^\\"\n]|\\[\\’"0nt])*\")       { return yylval_token (TOK_STRINGCON); }
-
-{NOTNUMBER}     { scanner_badtoken (yytext);
-                  return yylval_token (NUMBER); }
 
 .               { scanner_badchar (*yytext); }
 
