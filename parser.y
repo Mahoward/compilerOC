@@ -29,6 +29,7 @@ token   : '(' | ')' | '[' | ']' | '{' | '}' | ';' | ',' | '.'
         | TOK_FALSE | TOK_TRUE | TOK_NULL | TOK_NEW | TOK_ARRAY
         | TOK_EQ | TOK_NE | TOK_LT | TOK_LE | TOK_GT | TOK_GE
         | TOK_IDENT | TOK_INTCON | TOK_CHARCON | TOK_STRINGCON
+        | TOK_ORD | TOK_CHR | TOK_INTCON | ROOT
         ;
 
 %%
