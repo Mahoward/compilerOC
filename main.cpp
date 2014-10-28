@@ -39,7 +39,7 @@ void yyin_cpp_pclose (void) {
    if (pclose_rc != 0) set_exitstatus (EXIT_FAILURE);
 }
 
-void print_str(const char* filename){
+void print_str(char* filename){
    int len = strlen(filename);
    char stringset_file[len];
    strncpy(stringset_file, strtok(filename, "."), len);
