@@ -1,13 +1,17 @@
 Michael Howard
 mahoward
-The following code was provided by Mackey:
-auxlib.h
-auxlib.cpp
-stringset.cpp
-stringset.h
 
-In main.cpp:
-   void chomp (char* string, char delim)
-   void cpplines (FILE* pipe, char* filename)
 
-   and parts of int main (int argc, char** argv)
+Files to include:
+   auxlib.h
+   auxlib.cpp
+   lyutils.h
+   lyutils.cpp
+   stingset.h
+   stringset.cpp
+   main.cpp
+   scanner.l
+   tokens.h
+
+void bool char int string struct if else while return new
+false true null ord chr
