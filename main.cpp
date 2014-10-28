@@ -11,6 +11,7 @@ using namespace std;
 #include <string.h>
 #include <unistd.h>
 
+#include "astree.h"
 #include "auxlib.h"
 #include "lyutils.h"
 #include "stringset.h"
