@@ -28,6 +28,7 @@ void yyin_cpp_popen (const char* filename) {
    yyin_cpp_command += filename;
    yyin = popen (yyin_cpp_command.c_str(), "r");
    if (yyin == NULL) {
+      syserrprintf ("%d", yyin);
       syserrprintf (yyin_cpp_command.c_str());
       exit (get_exitstatus());
    }
