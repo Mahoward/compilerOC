@@ -129,18 +129,18 @@ int set_opts(int argc, char **argv){
    opterr = 0;
    while ((c = getopt (argc, argv, "ly@:D:")) != -1)
       switch (c){
-         case 'l': yy_flex_debug = 1;
-         case 'y': yydebug = 1;
+         case 'l': yy_flex_debug = 1;break;
+         case 'y': yydebug = 1;break;
       case 'D':
          cpp_flag.append("-D");
          cpp_flag.append(optarg);
-
+         break;
       case '@':
          char debug_arg[LINESIZE];
          debug_arg[0] = '@';
          strncat(debug_arg, optarg, strlen(optarg));
          set_debugflags(debug_arg);
-
+         break;
       case '?':
          if (optopt == 'D' || optopt == '@')
             fprintf (stderr, "Option -%c requires an argument.\n", optopt);
