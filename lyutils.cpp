@@ -10,6 +10,7 @@ using namespace std;
 
 #include "lyutils.h"
 #include "auxlib.h"
+#include "stringset.h"
 
 astree* yyparse_astree = NULL;
 int scan_linenr = 1;
@@ -65,6 +66,7 @@ int yylval_token (int symbol) {
    int offset = scan_offset - yyleng;
    yylval = new_astree (symbol, included_filenames.size() - 1,
                         scan_linenr, offset, yytext);
+   intern_stringset (yytext);
    return symbol;
 }
 

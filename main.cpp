@@ -67,6 +67,39 @@ void get_tok(){
    }
 }
 
+/*
+TOK_VOID
+TOK_BOOL
+TOK_CHAR
+TOK_INT
+TOK_STRING
+TOK_IF
+TOK_ELSE
+TOK_WHILE
+TOK_RETURN
+TOK_STRUCT
+TOK_FALSE
+TOK_TRUE
+TOK_NULL
+TOK_NEW
+TOK_ARRAY
+TOK_EQ
+TOK_NE
+TOK_LT
+TOK_LE
+TOK_GT
+TOK_GE
+TOK_IDENT
+TOK_INTCON
+TOK_CHARCON
+TOK_STRINGCON
+TOK_ORD
+TOK_CHR
+TOK_INTCON
+ROOT
+*/
+
+
 void yyin_cpp_pclose(void){
    int pclose_rc = pclose (yyin);
    eprint_status (yyin_cpp_command.c_str(), pclose_rc);
@@ -137,11 +170,11 @@ int main (int argc, char** argv) {
 
    yyin_cpp_popen(filename);
 
-   get_tok();
+   //get_tok();
 
    yyin_cpp_pclose();
 
-   //print_str(filename);
+   print_str(filename);
 
    return get_exitstatus();
 }
