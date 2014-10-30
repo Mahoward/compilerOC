@@ -43,12 +43,12 @@ void get_tok(){
       switch (token) {
          case YYEOF:
             printf ("END OF FILE\n");
-            return 0;
-         case IDENT:
-            printf ("IDENT \"%s\"\n", yytext);
+            return;
+         case TOK_IDENT:
+            printf ("TOK_IDENT \"%s\"\n", yytext);
             break;
-         case NUMBER:
-            printf ("NUMBER \"%s\"\n", yytext);
+         case TOK_NUMBER:
+            printf ("TOK_NUMBER \"%s\"\n", yytext);
             break;
          case '+':
          case '-':
