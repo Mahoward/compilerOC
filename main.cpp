@@ -44,61 +44,61 @@ void get_tok(){
          case YYEOF:
             printf ("END OF FILE\n");
             return;
-         case: TOK_VOID:
+         case TOK_VOID:
 
-         case: TOK_BOOL:
+         case TOK_BOOL:
 
-         case: TOK_CHAR:
+         case TOK_CHAR:
 
-         case: TOK_INT:
+         case TOK_INT:
 
-         case: TOK_STRING:
+         case TOK_STRING:
 
-         case: TOK_IF:
+         case TOK_IF:
 
-         case: TOK_ELSE:
+         case TOK_ELSE:
 
-         case: TOK_WHILE:
+         case TOK_WHILE:
 
-         case: TOK_RETURN:
+         case TOK_RETURN:
 
-         case: TOK_STRUCT:
+         case TOK_STRUCT:
 
-         case: TOK_FALSE:
+         case TOK_FALSE:
 
-         case: TOK_TRUE:
+         case TOK_TRUE:
 
-         case: TOK_NULL:
+         case TOK_NULL:
 
-         case: TOK_NEW:
+         case TOK_NEW:
 
-         case: TOK_ARRAY:
+         case TOK_ARRAY:
 
-         case: TOK_EQ:
+         case TOK_EQ:
 
-         case: TOK_NE:
+         case TOK_NE:
 
-         case: TOK_LT:
+         case TOK_LT:
 
-         case: TOK_LE:
+         case TOK_LE:
 
-         case: TOK_GT:
+         case TOK_GT:
 
-         case: TOK_GE:
+         case TOK_GE:
 
-         case: TOK_IDENT:
+         case TOK_IDENT:
 
-         case: TOK_INTCON:
+         case TOK_INTCON:
 
-         case: TOK_CHARCON:
+         case TOK_CHARCON:
 
-         case: TOK_STRINGCON:
+         case TOK_STRINGCON:
 
-         case: TOK_ORD:
+         case TOK_ORD:
 
-         case: TOK_CHR:
+         case TOK_CHR:
 
-         case: TOK_INTCON:
+         case TOK_INTCON:
             printf ("\"%s\"\n", yytext);
             break;
          default:
