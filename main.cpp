@@ -98,7 +98,6 @@ void get_tok(){
 
          case TOK_CHR:
 
-         case TOK_INTCON:
             printf ("\"%s\"\n", yytext);
             break;
          default:
