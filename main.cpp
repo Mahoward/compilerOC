@@ -151,6 +151,8 @@ int set_opts(int argc, char **argv){
 }
 
 int main (int argc, char** argv) {
+   yydebug = 0;
+   yy_flex_debug = 0;
    set_execname (argv[0]);
    int argi = set_opts(argc, argv);
    if(argi == -1)return 1;
