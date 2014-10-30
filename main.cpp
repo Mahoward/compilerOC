@@ -170,7 +170,8 @@ int main (int argc, char** argv) {
 
    yyin_cpp_popen(filename);
 
-   get_tok();
+   int token = yylex();
+   //get_tok();
 
    yyin_cpp_pclose();
 
