@@ -57,6 +57,15 @@ IDENT           ({LETTER}({LETTER}|{DIGIT})*)
 "("             { return yylval_token ('('); }
 ")"             { return yylval_token (')'); }
 ";"             { return yylval_token (';'); }
+"[]"            { return yylval_token ('[]');}
+"["             { return yylval_token ('['); }
+"]"             { return yylval_token (']'); }
+"{"             { return yylval_token ('{'); }
+"}"             { return yylval_token ('}'); }
+","             { return yylval_token (','); }
+"."             { return yylval_token ('.'); }
+"%"             { return yylval_token ('%'); }
+"!"             { return yylval_token ('!'); }
 
 "=="            { return yylval_token (TOK_EQ); }
 "!="            { return yylval_token (TOK_NE); }
