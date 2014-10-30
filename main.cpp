@@ -62,7 +62,7 @@ void get_tok(){
             printf ("NEWLINE\n");
             break;
          default:
-            printf ("ERROR \"%s\"\n", yytext);
+            printf (" ");
       }
    }
 }
