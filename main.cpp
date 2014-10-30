@@ -35,11 +35,11 @@ void yyin_cpp_popen(const char* filename){
       exit (get_exitstatus());
    }
 }
-
+/*
 void get_tok(){
    for (;;) {
       int token = yylex();
-      //if (yy_flex_debug) fflush (NULL);
+      if (yy_flex_debug) fflush (NULL);
       switch (token) {
          case YYEOF:
             printf ("END OF FILE\n");
@@ -77,27 +77,36 @@ void get_tok(){
          case TOK_EQ:
 
          case TOK_NE:
-
+            printf ("\"%s\"\n", yytext);
+            break;
          case TOK_LT:
-
+            printf ("\"%s\"\n", yytext);
+            break;
          case TOK_LE:
-
+            printf ("\"%s\"\n", yytext);
+            break;
          case TOK_GT:
-
+            printf ("\"%s\"\n", yytext);
+            break;
          case TOK_GE:
-
+            printf ("\"%s\"\n", yytext);
+            break;
          case TOK_IDENT:
-
+            printf ("\"%s\"\n", yytext);
+            break;
          case TOK_INTCON:
-
+            printf ("\"%s\"\n", yytext);
+            break;
          case TOK_CHARCON:
-
+            printf ("\"%s\"\n", yytext);
+            break;
          case TOK_STRINGCON:
-
+            printf ("\"%s\"\n", yytext);
+            break;
          case TOK_ORD:
-
+            printf ("\"%s\"\n", yytext);
+            break;
          case TOK_CHR:
-
             printf ("\"%s\"\n", yytext);
             break;
          default:
@@ -105,7 +114,7 @@ void get_tok(){
       }
    }
 }
-
+*/
 
 void yyin_cpp_pclose(void){
    int pclose_rc = pclose (yyin);
