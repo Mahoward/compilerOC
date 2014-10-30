@@ -15,6 +15,7 @@ using namespace std;
 #include "auxlib.h"
 #include "lyutils.h"
 #include "stringset.h"
+#include "yyparse.h"
 
 const string CPP = "/usr/bin/cpp";
 const size_t LINESIZE = 1024;
