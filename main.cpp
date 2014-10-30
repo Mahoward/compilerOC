@@ -44,60 +44,68 @@ void get_tok(){
          case YYEOF:
             printf ("END OF FILE\n");
             return;
-         case TOK_IDENT:
-            printf ("TOK_IDENT \"%s\"\n", yytext);
-            break;
-         case TOK_INT:
-            printf ("TOK_INT \"%s\"\n", yytext);
-            break;
-         case '+':
-         case '-':
-         case '*':
-         case '/':
-         case '=':
-         case ';':
-            printf ("OPERATOR \"%s\"\n", yytext);
-            break;
-         case '\n':
-            printf ("NEWLINE\n");
+         case: TOK_VOID:
+
+         case: TOK_BOOL:
+
+         case: TOK_CHAR:
+
+         case: TOK_INT:
+
+         case: TOK_STRING:
+
+         case: TOK_IF:
+
+         case: TOK_ELSE:
+
+         case: TOK_WHILE:
+
+         case: TOK_RETURN:
+
+         case: TOK_STRUCT:
+
+         case: TOK_FALSE:
+
+         case: TOK_TRUE:
+
+         case: TOK_NULL:
+
+         case: TOK_NEW:
+
+         case: TOK_ARRAY:
+
+         case: TOK_EQ:
+
+         case: TOK_NE:
+
+         case: TOK_LT:
+
+         case: TOK_LE:
+
+         case: TOK_GT:
+
+         case: TOK_GE:
+
+         case: TOK_IDENT:
+
+         case: TOK_INTCON:
+
+         case: TOK_CHARCON:
+
+         case: TOK_STRINGCON:
+
+         case: TOK_ORD:
+
+         case: TOK_CHR:
+
+         case: TOK_INTCON:
+            printf ("\"%s\"\n", yytext);
             break;
          default:
-            printf (" ");
+            printf ("");
       }
    }
 }
-
-/*
-TOK_VOID
-TOK_BOOL
-TOK_CHAR
-TOK_INT
-TOK_STRING
-TOK_IF
-TOK_ELSE
-TOK_WHILE
-TOK_RETURN
-TOK_STRUCT
-TOK_FALSE
-TOK_TRUE
-TOK_NULL
-TOK_NEW
-TOK_ARRAY
-TOK_EQ
-TOK_NE
-TOK_LT
-TOK_LE
-TOK_GT
-TOK_GE
-TOK_IDENT
-TOK_INTCON
-TOK_CHARCON
-TOK_STRINGCON
-TOK_ORD
-TOK_CHR
-TOK_INTCON
-ROOT
-*/
 
 
 void yyin_cpp_pclose(void){
@@ -122,18 +130,18 @@ int set_opts(int argc, char **argv){
    opterr = 0;
    while ((c = getopt (argc, argv, "ly@:D:")) != -1)
       switch (c){
-         case 'l': yy_flex_debug = 1;   break;
-         case 'y': yydebug = 1;   break;
+         case 'l': yy_flex_debug = 1;
+         case 'y': yydebug = 1;
       case 'D':
          cpp_flag.append("-D");
          cpp_flag.append(optarg);
-         break;
+
       case '@':
          char debug_arg[LINESIZE];
          debug_arg[0] = '@';
          strncat(debug_arg, optarg, strlen(optarg));
          set_debugflags(debug_arg);
-         break;
+
       case '?':
          if (optopt == 'D' || optopt == '@')
             fprintf (stderr, "Option -%c requires an argument.\n", optopt);
