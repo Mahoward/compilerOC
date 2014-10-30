@@ -47,8 +47,8 @@ void get_tok(){
          case TOK_IDENT:
             printf ("TOK_IDENT \"%s\"\n", yytext);
             break;
-         case TOK_NUMBER:
-            printf ("TOK_NUMBER \"%s\"\n", yytext);
+         case TOK_INT:
+            printf ("TOK_INT \"%s\"\n", yytext);
             break;
          case '+':
          case '-':
