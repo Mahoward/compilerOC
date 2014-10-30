@@ -22,7 +22,7 @@ const size_t LINESIZE = 1024;
 string yyin_cpp_command;
 string cpp_flag = "";
 
-void yyin_cpp_popen (const char* filename) {
+void yyin_cpp_popen(const char* filename){
    yyin_cpp_command = CPP;
    yyin_cpp_command += " ";
    yyin_cpp_command += cpp_flag;
@@ -35,7 +35,38 @@ void yyin_cpp_popen (const char* filename) {
    }
 }
 
-void yyin_cpp_pclose (void) {
+void get_tok(){
+   for (;;) {
+      int token = yylex();
+      if (yy_flex_debug) fflush (NULL);
+      switch (token) {
+         case YYEOF:
+            printf ("END OF FILE\n");
+            return 0;
+         case IDENT:
+            printf ("IDENT \"%s\"\n", yytext);
+            break;
+         case NUMBER:
+            printf ("NUMBER \"%s\"\n", yytext);
+            break;
+         case '+':
+         case '-':
+         case '*':
+         case '/':
+         case '=':
+         case ';':
+            printf ("OPERATOR \"%s\"\n", yytext);
+            break;
+         case '\n':
+            printf ("NEWLINE\n");
+            break;
+         default:
+            printf ("ERROR \"%s\"\n", yytext);
+      }
+   }
+}
+
+void yyin_cpp_pclose(void){
    int pclose_rc = pclose (yyin);
    eprint_status (yyin_cpp_command.c_str(), pclose_rc);
    if (pclose_rc != 0) set_exitstatus (EXIT_FAILURE);
@@ -105,7 +136,7 @@ int main (int argc, char** argv) {
 
    yyin_cpp_popen(filename);
 
-
+   get_tok();
 
    yyin_cpp_pclose();
 
