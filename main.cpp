@@ -39,7 +39,7 @@ void yyin_cpp_popen(const char* filename){
 void get_tok(){
    for (;;) {
       int token = yylex();
-      if (yy_flex_debug) fflush (NULL);
+      //if (yy_flex_debug) fflush (NULL);
       switch (token) {
          case YYEOF:
             printf ("END OF FILE\n");
@@ -170,11 +170,11 @@ int main (int argc, char** argv) {
 
    yyin_cpp_popen(filename);
 
-   //get_tok();
+   get_tok();
 
    yyin_cpp_pclose();
 
-   print_str(filename);
+   //print_str(filename);
 
    return get_exitstatus();
 }
