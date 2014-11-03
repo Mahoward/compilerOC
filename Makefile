@@ -14,6 +14,7 @@ CSOURCES  = astree.cpp lyutils.cpp auxlib.cpp stringset.cpp main.cpp
 LSOURCES  = scanner.l
 YSOURCES  = parser.y
 ETCSRC    = README ${MKFILE} ${DEPSFILE}
+SUBSRC    = README ${HSOURCES} ${CSOURCES} ${LSOURCES} ${YSOURCES} ${MKFILE}
 CLGEN     = yylex.cpp
 HYGEN     = yyparse.h
 CYGEN     = yyparse.cpp
@@ -93,9 +94,15 @@ clean :
 		${patsubst %, ${test}.%, out err}}
 
 spotless : clean
+	- rm test_files/*.str *.tok
 	- rm ${EXECBIN} List.*.ps List.*.pdf
 
+
+submit: spotless
+	- rm test_files/*.str *.tok
+	submit cmps104a-wm.f14 asg2 ${SUBSRC}
 
+
 #
 # Build the dependencies file using the C preprocessor
 #
