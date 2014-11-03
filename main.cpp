@@ -44,13 +44,13 @@ void yyin_cpp_pclose(void){
    if (pclose_rc != 0) set_exitstatus (EXIT_FAILURE);
 }
 
-void print_str(char* filename){
+char *print_file(char* filename,char* extenstion){
    int len = strlen(filename);
-   char stringset_file[len];
-   strncpy(stringset_file, strtok(filename, "."), len);
-   strcat(stringset_file,".str");
-   FILE *out = fopen(stringset_file, "w+");
-   dump_stringset(out);
+   char file[len];
+   strncpy(file, strtok(filename, "."), len);
+   strcat(file,".");
+   strcat(file,extenstion);
+   return file;
 }
 
 //set_opts modeled by:
@@ -109,16 +109,18 @@ int main (int argc, char** argv) {
 
    }
 
+   tokfile = fopen(print_file(filename, "tok"), "w+");
    yyin_cpp_popen(filename);
    int tok;
    for(;;){
       tok = yylex();
       if(tok == YYEOF)break;
    }
+   FILE *out = fopen(print_file(filename, "str"), "w+");
+   dump_stringset(out);
 
    yyin_cpp_pclose();
 
-   //print_str(filename);
 
    return get_exitstatus();
 }
