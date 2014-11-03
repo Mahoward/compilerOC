@@ -75,7 +75,7 @@ void dump_astree (FILE* outfile, astree* root) {
    fflush (NULL);
 }
 
-void yyprint (FILE* outfile, unsigned short toknum, astree* yyvaluep) {
+void yyprint (FILE* outfile, unsigned short toknum, astree* yyvaluep){
    DEBUGF ('f', "toknum = %d, yyvaluep = %p\n", toknum, yyvaluep);
    if (is_defined_token (toknum)) {
       dump_node (outfile, yyvaluep);
@@ -102,6 +102,3 @@ void free_ast2 (astree* tree1, astree* tree2) {
    free_ast (tree1);
    free_ast (tree2);
 }
-
-RCSC("$Id: astree.cc,v 1.14 2013-10-10 18:48:18-07 - - $")
-

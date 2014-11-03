@@ -49,28 +49,29 @@ void scanner_useraction (void) {
 void yyerror (const char* message) {
    assert (not included_filenames.empty());
    errprintf ("%:%s: %d: %s\n",
-              included_filenames.back().c_str(), scan_linenr, message);
+            included_filenames.back().c_str(), scan_linenr, message);
 }
 
 void scanner_badchar (unsigned char bad) {
    char char_rep[16];
    sprintf (char_rep, isgraph ((int) bad) ? "%c" : "\\%03o", bad);
    errprintf ("%:%s: %d: invalid source character (%s)\n",
-              included_filenames.back().c_str(), scan_linenr, char_rep);
+            included_filenames.back().c_str(), scan_linenr, char_rep);
 }
 
 void scanner_badtoken (char* lexeme) {
    errprintf ("%:%s: %d: invalid token (%s)\n",
-              included_filenames.back().c_str(), scan_linenr, lexeme);
+             included_filenames.back().c_str(), scan_linenr, lexeme);
 }
 
 int yylval_token (int symbol) {
    int offset = scan_offset - yyleng;
    yylval = new_astree (symbol, included_filenames.size() - 1,
                         scan_linenr, offset, yytext);
-   fprintf (tokfile, "  %2lu %3d.%03d %3d %-13s (%s)\n",included_filenames.size()-1,
-                                    scan_linenr, offset, symbol,
-                                    get_yytname(symbol), yytext);
+   fprintf (tokfile, "  %2lu %3d.%03d %3d %-13s (%s)\n",
+                     included_filenames.size()-1,
+                     scan_linenr, offset, symbol,
+                     get_yytname(symbol), yytext);
    intern_stringset(yytext);
    return symbol;
 }
@@ -91,7 +92,7 @@ void scanner_include (void) {
    scanner_newline();
    char filename[strlen (yytext) + 1];
    int linenr;
-   int scan_rc = sscanf (yytext, "# %d \"%[^\"]\"", &linenr, filename);
+   int scan_rc = sscanf (yytext,"# %d \"%[^\"]\"", &linenr, filename);
    if (scan_rc != 2) {
       errprintf ("%: %d: [%s]: invalid directive, ignored\n",
                  scan_rc, yytext);

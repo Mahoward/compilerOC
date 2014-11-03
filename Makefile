@@ -14,7 +14,8 @@ CSOURCES  = astree.cpp lyutils.cpp auxlib.cpp stringset.cpp main.cpp
 LSOURCES  = scanner.l
 YSOURCES  = parser.y
 ETCSRC    = README ${MKFILE} ${DEPSFILE}
-SUBSRC    = README ${HSOURCES} ${CSOURCES} ${LSOURCES} ${YSOURCES} ${MKFILE}
+CDSRC     = ${HSOURCES} ${CSOURCES} ${LSOURCES} ${YSOURCES}
+SUBSRC    = README ${MKFILE} ${CDSRC}
 CLGEN     = yylex.cpp
 HYGEN     = yyparse.h
 CYGEN     = yyparse.cpp
@@ -96,7 +97,6 @@ clean :
 spotless : clean
 	- rm test_files/*.str test_files/*.tok
 	- rm ${EXECBIN} List.*.ps List.*.pdf
-
 
 submit: spotless
 	submit cmps104a-wm.f14 asg2 ${SUBSRC}

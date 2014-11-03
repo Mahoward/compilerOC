@@ -76,8 +76,8 @@ IDENT           ({LETTER}({LETTER}|{DIGIT})*)
 ">="            { return yylval_token (TOK_GE); }
 [0-9]+          { return yylval_token (TOK_INTCON); }
 
-(’([^\\’\n]|\\[\\’"0nt])’)          { return yylval_token (TOK_CHARCON); }
-(\"([^\\"\n]|\\[\\’"0nt])*\")       { return yylval_token (TOK_STRINGCON); }
+(’([^\\’\n]|\\[\\’"0nt])’)     { return yylval_token (TOK_CHARCON); }
+(\"([^\\"\n]|\\[\\’"0nt])*\")  { return yylval_token (TOK_STRINGCON);}
 
 .               { scanner_badchar (*yytext); }
 

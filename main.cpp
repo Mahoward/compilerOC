@@ -54,8 +54,6 @@ char *print_file(char* filename,const char* extenstion){
    return outfile;
 }
 
-//set_opts modeled by:
-//http://www.gnu.org/software/libc/manual/html_node/Example-of-Getopt.html#Example-of-Getopt
 int set_opts(int argc, char **argv){
    int c;
    opterr = 0;
@@ -75,7 +73,7 @@ int set_opts(int argc, char **argv){
          break;
       case '?':
          if (optopt == 'D' || optopt == '@')
-            fprintf (stderr, "Option -%c requires an argument.\n", optopt);
+          fprintf(stderr,"Option -%c requires an argument.\n",optopt);
          else if (isprint (optopt))
             fprintf (stderr, "Unknown option `-%c'.\n", optopt);
          else
