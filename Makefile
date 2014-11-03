@@ -94,12 +94,11 @@ clean :
 		${patsubst %, ${test}.%, out err}}
 
 spotless : clean
-	- rm test_files/*.str *.tok
+	- rm test_files/*.str test_files/*.tok
 	- rm ${EXECBIN} List.*.ps List.*.pdf
 
 
 submit: spotless
-	- rm test_files/*.str *.tok
 	submit cmps104a-wm.f14 asg2 ${SUBSRC}
 
 
