@@ -67,7 +67,7 @@ int yylval_token (int symbol) {
    yylval = new_astree (symbol, included_filenames.size() - 1,
                         scan_linenr, offset, yytext);
    printf ("%d %d.%3d %d %s (%s)\n",included_filenames.size(),
-                            scan_liner, offset, yyval_token(symbol),
+                            scan_linenr, offset, yylval_token(symbol),
                             get_yytname(symbol), yytext);
    return symbol;
 }

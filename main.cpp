@@ -104,13 +104,14 @@ int main (int argc, char** argv) {
    if(is_oc == NULL || strcmp(is_oc,"oc") != 0){
       printf("Input Error: .oc files only\n");
       return 1;
+
    }
 
    yyin_cpp_popen(filename);
    int tok;
    for(;;){
       tok = yylex();
-      if(tok = YYEOF)break;
+      if(tok == YYEOF)break;
    }
 
    yyin_cpp_pclose();
