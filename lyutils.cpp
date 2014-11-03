@@ -68,7 +68,7 @@ int yylval_token (int symbol) {
    int offset = scan_offset - yyleng;
    yylval = new_astree (symbol, included_filenames.size() - 1,
                         scan_linenr, offset, yytext);
-   fprintf (tokfile, "  %2lu %3d.%03d %3d %-13s (%s)\n",included_filenames.size(),
+   fprintf (tokfile, "  %2lu %3d.%03d %3d %-13s (%s)\n",included_filenames.size()-1,
                                     scan_linenr, offset, symbol,
                                     get_yytname(symbol), yytext);
    intern_stringset(yytext);
