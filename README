@@ -12,6 +12,3 @@ Files to include:
    main.cpp
    scanner.l
    tokens.h
-
-void bool char int string struct if else while return new
-false true null ord chr
