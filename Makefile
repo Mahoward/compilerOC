@@ -34,7 +34,7 @@ LISTSRC   = ${ALLSRC} ${HYGEN}
 #
 # Definitions of the compiler and compilation options:
 #
-GCC       = g++ -g -O0 -Wall -Wextra -std=gnu++0x -Wmultichar
+GCC       = g++ -g -O0 -Wall -Wextra -std=gnu++0x -Wno-multichar
 MKDEPS    = g++ -MM -std=gnu++0x
 
 #
