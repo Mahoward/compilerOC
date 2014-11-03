@@ -44,12 +44,13 @@ void yyin_cpp_pclose(void){
    if (pclose_rc != 0) set_exitstatus (EXIT_FAILURE);
 }
 
-char *print_file(char* filename,char* extenstion){
+char *print_file(char* filename,const char* extenstion){
    int len = strlen(filename);
    char file[len];
    strncpy(file, strtok(filename, "."), len);
    strcat(file,".");
    strcat(file,extenstion);
+   printf("%s", file);
    return file;
 }
 
