@@ -24,7 +24,7 @@ string yyin_cpp_command;
 string cpp_flag = "";
 
 extern FILE  *tokfile;
-char outfile[1024];
+char outfile[LINESIZE];
 
 void yyin_cpp_popen(const char* filename){
    yyin_cpp_command = CPP;
@@ -47,6 +47,7 @@ void yyin_cpp_pclose(void){
 
 char *print_file(char* filename,const char* extenstion){
    int len = strlen(filename);
+   memset(outfile,0,strlen(outfile));
    strncpy(outfile, strtok(filename, "."), len);
    strcat(outfile,".");
    strcat(outfile,extenstion);
