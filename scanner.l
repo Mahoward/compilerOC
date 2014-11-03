@@ -57,7 +57,7 @@ IDENT           ({LETTER}({LETTER}|{DIGIT})*)
 "("             { return yylval_token ('('); }
 ")"             { return yylval_token (')'); }
 ";"             { return yylval_token (';'); }
-"[]"            { return yylval_token ('[]');}
+"[]"            { return yylval_token ("[]");}
 "["             { return yylval_token ('['); }
 "]"             { return yylval_token (']'); }
 "{"             { return yylval_token ('{'); }
