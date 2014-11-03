@@ -35,86 +35,6 @@ void yyin_cpp_popen(const char* filename){
       exit (get_exitstatus());
    }
 }
-/*
-void get_tok(){
-   for (;;) {
-      int token = yylex();
-      if (yy_flex_debug) fflush (NULL);
-      switch (token) {
-         case YYEOF:
-            printf ("END OF FILE\n");
-            return;
-         case TOK_VOID:
-
-         case TOK_BOOL:
-
-         case TOK_CHAR:
-
-         case TOK_INT:
-
-         case TOK_STRING:
-
-         case TOK_IF:
-
-         case TOK_ELSE:
-
-         case TOK_WHILE:
-
-         case TOK_RETURN:
-
-         case TOK_STRUCT:
-
-         case TOK_FALSE:
-
-         case TOK_TRUE:
-
-         case TOK_NULL:
-
-         case TOK_NEW:
-
-         case TOK_ARRAY:
-
-         case TOK_EQ:
-
-         case TOK_NE:
-            printf ("\"%s\"\n", yytext);
-            break;
-         case TOK_LT:
-            printf ("\"%s\"\n", yytext);
-            break;
-         case TOK_LE:
-            printf ("\"%s\"\n", yytext);
-            break;
-         case TOK_GT:
-            printf ("\"%s\"\n", yytext);
-            break;
-         case TOK_GE:
-            printf ("\"%s\"\n", yytext);
-            break;
-         case TOK_IDENT:
-            printf ("\"%s\"\n", yytext);
-            break;
-         case TOK_INTCON:
-            printf ("\"%s\"\n", yytext);
-            break;
-         case TOK_CHARCON:
-            printf ("\"%s\"\n", yytext);
-            break;
-         case TOK_STRINGCON:
-            printf ("\"%s\"\n", yytext);
-            break;
-         case TOK_ORD:
-            printf ("\"%s\"\n", yytext);
-            break;
-         case TOK_CHR:
-            printf ("\"%s\"\n", yytext);
-            break;
-         default:
-            printf ("");
-      }
-   }
-}
-*/
 
 void yyin_cpp_pclose(void){
    int pclose_rc = pclose (yyin);
@@ -187,8 +107,11 @@ int main (int argc, char** argv) {
    }
 
    yyin_cpp_popen(filename);
-
-   get_tok();
+   int tok;
+   for(;;){
+      tok = yylex();
+      if(tok = YYEOF)break;
+   }
 
    yyin_cpp_pclose();
 
