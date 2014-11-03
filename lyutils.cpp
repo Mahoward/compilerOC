@@ -72,7 +72,6 @@ int yylval_token (int symbol) {
                      included_filenames.size()-1,
                      scan_linenr, offset, symbol,
                      get_yytname(symbol), yytext);
-   intern_stringset(yytext);
    return symbol;
 }
 
