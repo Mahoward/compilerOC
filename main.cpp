@@ -24,6 +24,7 @@ string yyin_cpp_command;
 string cpp_flag = "";
 
 extern FILE  *tokfile;
+char *outfile;
 
 void yyin_cpp_popen(const char* filename){
    yyin_cpp_command = CPP;
@@ -46,12 +47,10 @@ void yyin_cpp_pclose(void){
 
 char *print_file(char* filename,const char* extenstion){
    int len = strlen(filename);
-   char file[len];
-   strncpy(file, strtok(filename, "."), len);
-   strcat(file,".");
-   strcat(file,extenstion);
-   printf("%s", file);
-   return file;
+   strncpy(outfile, strtok(filename, "."), len);
+   strcat(outfile,".");
+   strcat(outfile,extenstion);
+   return outfile;
 }
 
 //set_opts modeled by:
