@@ -17,6 +17,8 @@ int scan_linenr = 1;
 int scan_offset = 0;
 bool scan_echo = false;
 vector<string> included_filenames;
+extern FILE  *tokfile;
+File *tokfile;
 
 const string* scanner_filename (int filenr) {
    return &included_filenames.at(filenr);

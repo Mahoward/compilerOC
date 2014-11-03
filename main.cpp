@@ -23,6 +23,8 @@ const size_t LINESIZE = 1024;
 string yyin_cpp_command;
 string cpp_flag = "";
 
+extern FILE  *tokfile;
+
 void yyin_cpp_popen(const char* filename){
    yyin_cpp_command = CPP;
    yyin_cpp_command += " ";
