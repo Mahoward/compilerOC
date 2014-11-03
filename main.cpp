@@ -24,7 +24,7 @@ string yyin_cpp_command;
 string cpp_flag = "";
 
 extern FILE  *tokfile;
-char *outfile;
+char outfile[1024];
 
 void yyin_cpp_popen(const char* filename){
    yyin_cpp_command = CPP;
