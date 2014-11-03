@@ -109,8 +109,8 @@ int main (int argc, char** argv) {
 
    }
 
-   tokfile = fopen(print_file(filename, "tok"), "w+");
    yyin_cpp_popen(filename);
+   tokfile = fopen(print_file(filename, "tok"), "w+");
    int tok;
    for(;;){
       tok = yylex();
