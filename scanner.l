@@ -22,6 +22,8 @@
 LETTER          [A-Za-z_]
 DIGIT           [0-9]
 IDENT           ({LETTER}({LETTER}|{DIGIT})*)
+CHARCON         (’([^\\’\n]|\\[\\’"0nt])’)
+STRINGCON       (\"([^\\"\n]|\\[\\’"0nt])*\")
 
 %%
 
@@ -53,6 +55,7 @@ IDENT           ({LETTER}({LETTER}|{DIGIT})*)
 "-"             { return yylval_token ('-'); }
 "*"             { return yylval_token ('*'); }
 "/"             { return yylval_token ('/'); }
+"\\"            { return yylval_token ('\\') }
 "^"             { return yylval_token ('^'); }
 "("             { return yylval_token ('('); }
 ")"             { return yylval_token (')'); }
@@ -76,8 +79,8 @@ IDENT           ({LETTER}({LETTER}|{DIGIT})*)
 ">="            { return yylval_token (TOK_GE); }
 [0-9]+          { return yylval_token (TOK_INTCON); }
 
-(’([^\\’\n]|\\[\\’"0nt])’)     { return yylval_token (TOK_CHARCON); }
-(\"([^\\"\n]|\\[\\’"0nt])*\")  { return yylval_token (TOK_STRINGCON);}
+CHARCON   { return yylval_token (TOK_CHARCON); }
+STRINGCON { return yylval_token (TOK_STRINGCON);}
 
 .               { scanner_badchar (*yytext); }
 
