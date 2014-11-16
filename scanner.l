@@ -22,8 +22,8 @@
 LETTER          [A-Za-z_]
 DIGIT           [0-9]
 IDENT           ({LETTER}({LETTER}|{DIGIT})*)
-CHARCON         ('([^\\'n]|\\[\\'"0nt])')
-STRINGCON       (\"([^\\"\n]|\\[\\’"0nt])*\")
+CHARCON         ('([^\\'\n]|\\[\\'"0nt])')
+STRINGCON       (\"([^\\"\n]|\\[\\'"0nt])*\")
 
 %%
 
