@@ -63,7 +63,7 @@ astree* create_funct_e(astree* root, astree* block){
   return root;
 }
 
-char *tok_base_name(const char *tname){
+const char *tok_base_name(const char *tname){
   if (strstr (tname, "TOK_") == tname) tname += 4;
   return tname;
 }
