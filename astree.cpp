@@ -58,7 +58,7 @@ astree* create_funct_p(astree* val, astree* param,
   param->symbol = TOK_PARAM;
   adopt1(param, list);
   adopt2(root, val, param);
-  adopt2(root, block);
+  adopt1(root, block);
   return root;
 }
 
