@@ -45,7 +45,8 @@ astree* adopt1sym (astree* root, astree* child, int symbol) {
   return root;
 }
 
-astree* create_funct_p(astree* val, astree* param, astree* list, astree* block){
+astree* create_funct_p(astree* val, astree* param,
+                       astree* list, astree* block){
   astree *root;
   if(strcmp(";", const_cast<char*>(block->lexinfo->c_str())) == 0){
     root = new_astree(TOK_PROTOTYPE,

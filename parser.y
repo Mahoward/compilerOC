@@ -76,7 +76,8 @@ basetype  : TOK_VOID            { $$ = $1; }
           ;
 
 function  : identdecl'('midecl')'block
-                                { $$ = create_funct_p($1, $2, $3, $5),
+                                { $$ = create_funct_p($1, $2,
+                                                      $3, $5);
                                        free_ast2($2, $4); }
           | identdecl'('')'block
                                 { $$ = create_funct_e($1, $4);
