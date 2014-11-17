@@ -76,11 +76,8 @@ basetype  : TOK_VOID            { $$ = $1; }
           ;
 
 function  : identdecl param')'block
-                                { $$ = create_funct_p($1, $2, $4);
+                                { $$ = create_funct($1, $2, $4);
                                        free_ast2($2, $4); }
-          | identdecl'('')'block
-                                { $$ = create_funct_e($1, $4);
-                                       free_ast2($2, $3); }
           ;
 
 param     : param','identdecl   { $$ = adopt1($1, $3);
