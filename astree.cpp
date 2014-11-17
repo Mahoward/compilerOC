@@ -55,9 +55,9 @@ astree* create_funct_p(astree* val, astree* param,
     root = new_astree(TOK_FUNCTION,
                        val->filenr, val->linenr, val->offset, "");
   }
-  params->symbol = TOK_PARAM;
+  param->symbol = TOK_PARAM;
 
-  return adopt1(adopt2(root, val, params), block);
+  return adopt1(adopt2(root, val, param), block);
 }
 
 astree* create_funct_e(astree* val, astree* block){
