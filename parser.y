@@ -95,7 +95,7 @@ identdecl : basetype TOK_ARRAY TOK_IDENT
 
 block     : '{'mstate'}'        { $1->symbol = TOK_BLOCK;
                                   $$ = adopt1($1, $2);
-                                       free_ast2($1, $3); }
+                                       free_ast($3); }
           | ';'                 { $$ = $1; }
           ;
 
