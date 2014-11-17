@@ -76,8 +76,8 @@ STRINGCON       (\"([^\\"\n]|\\[\\'"0nt])*\")
 ">="            { return yylval_token (TOK_GE); }
 [0-9]+          { return yylval_token (TOK_INTCON); }
 
-CHARCON   { return yylval_token (TOK_CHARCON); }
-STRINGCON { return yylval_token (TOK_STRINGCON);}
+{CHARCON}   { return yylval_token (TOK_CHARCON); }
+{STRINGCON} { return yylval_token (TOK_STRINGCON);}
 
 .               { scanner_badchar (*yytext); }
 
