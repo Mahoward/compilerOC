@@ -107,8 +107,7 @@ identdecl : basetype TOK_ARRAY TOK_IDENT
                                 { $$ = adopt2($1, $2,
                                         adopt1sym($3, NULL,
                                         TOK_DECLID)); }
-          | basetype TOK_IDENT  { $$ = adopt1($1,
-                                        adopt1sym($2, NULL,
+          | basetype TOK_IDENT  { $$ = adopt1sym($1, $2,
                                         TOK_DECLID)); }
           ;
 
