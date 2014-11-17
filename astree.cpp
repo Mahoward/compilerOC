@@ -45,20 +45,21 @@ astree* adopt1sym (astree* root, astree* child, int symbol) {
   return root;
 }
 
-astree* create_funct_p(astree* root, astree* left, astree* right){
-  if(right->lexinfo.compare(";") == 0){
+astree* create_funct_p(astree* root, astree* params, astree* block){
+  if(strcmp(";", const_cast<char*>(block->lexinfo->c_str())) == 0){
     root->symbol = TOK_PROTOTYPE;
   }
-  adopt1 (root, left);
-  adopt1 (root, right);
+  params->symbol = TOK_PARAMLIST;
+  adopt1 (root, params);
+  adopt1 (root, block);
   return root;
 }
 
-astree* create_funct_e(astree* root, astree* child){
-  if(child->lexinfo.compare(";") == 0){
+astree* create_funct_e(astree* root, astree* block){
+  if(strcmp(";", const_cast<char*>(block->lexinfo->c_str())) == 0){
     root->symbol = TOK_PROTOTYPE;
   }
-  adopt1(root, child);
+  adopt1(root, block);
   return root;
 }
 
