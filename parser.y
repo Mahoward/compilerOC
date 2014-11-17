@@ -182,8 +182,8 @@ expr      : expr '=' expr       { $$ = adopt2($2, $1, $3); }
           | '(' expr ')'        { $$ = $2; free_ast2 ($1, $3); }
           ;
 
-mexpr     : mexpr ',' expr       { $$ = adopt1($1, $2); }
-          | expr             { $$ = $1; free_ast($2); }
+mexpr     : mexpr ',' expr      { $$ = adopt1($1, $2); }
+          | expr                { $$ = $1; }
 
 allocator : TOK_NEW TOK_IDENT '('')'
                                 { $$ = adopt1($1,
