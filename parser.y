@@ -89,9 +89,8 @@ prototype : identdecl'('midecl')'';'
           ;
 
 function  : identdecl'('midecl')'block
-                                { $$ = adopt2($1,
-                                        adopt1sym($3, NULL,
-                                        TOK_PARAMLIST), $5);
+                                { $3->symbol = TOK_PARAMLIST
+                                  $$ = adopt2($1, 3, $5);
                                        free_ast2($2, $4); }
           | identdecl'('')'block
                                 { $$ = adopt1($1, $4);
