@@ -45,14 +45,12 @@ program   : program structdef   { $$ = adopt1($1, $2); }
           ;
 
 structdef : TOK_STRUCT TOK_IDENT '{'mfdecl'}'
-                                { $$ = adopt2($1,
-                                       adopt1sym($2, NULL,
-                                       TOK_TYPEID), $4);
+                                { $2->symbol = TOK_TYPEID;
+                                  $$ = adopt2($1, $2, $4);
                                       free_ast2($3, $5); }
           | TOK_STRUCT TOK_IDENT '{''}'
-                                { $$ = adopt1($1,
-                                       adopt1sym($2, NULL,
-                                       TOK_TYPEID));
+                                { $2->symbol = TOK_TYPEID;
+                                  $$ = adopt1($1, $2);
                                       free_ast2($3, $4); }
           ;
 
@@ -62,12 +60,10 @@ mfdecl    : mfdecl fielddecl';' { $$ = adopt1($1, $2);
           ;
 
 fielddecl : basetype TOK_ARRAY TOK_IDENT
-                                { $$ = adopt2($1, $2,
-                                        adopt1sym($3, NULL,
-                                        TOK_FIELD)); }
-          | basetype TOK_IDENT  { $$ = adopt1($1,
-                                        adopt1sym($2, NULL,
-                                        TOK_FIELD)); }
+                                { $3->symbol = TOK_FIELD;
+                                  $$ = adopt2($1, $2, $3); }
+          | basetype TOK_IDENT  { $2->symbol = TOK_FIELD;
+                                  $$ = adopt1($1, $2); }
           ;
 
 basetype  : TOK_VOID            { $$ = $1; }
@@ -75,14 +71,13 @@ basetype  : TOK_VOID            { $$ = $1; }
           | TOK_CHAR            { $$ = $1; }
           | TOK_INT             { $$ = $1; }
           | TOK_STRING          { $$ = $1; }
-          | TOK_IDENT           { $$ = adopt1sym($1, NULL,
-                                        TOK_FIELD); }
+          | TOK_IDENT           { $1->symbol = TOK_FIELD;
+                                  $$ = $1; }
           ;
 
 prototype : identdecl'('midecl')'';'
-                                { $$ = adopt1($1,
-                                        adopt1sym($3, NULL,
-                                        TOK_PARAMLIST));
+                                { $3->symbol = TOK_PARAMLIST;
+                                  $$ = adopt1($1, $3);
                                        free_ast2($2, $4); }
           | identdecl'('')'';'  { $$ = adopt1($1,$4);
                                        free_ast2($2, $3); }
@@ -104,8 +99,8 @@ midecl    : midecl','identdecl  { $$ = adopt1($1, $3);
 
 identdecl : basetype TOK_ARRAY TOK_IDENT
                                 { $$ = adopt2($1, $2, $3); }
-          | basetype TOK_IDENT  { $$ = adopt1sym($1, $2,
-                                        TOK_DECLID); }
+          | basetype TOK_IDENT  { $1->symbol = TOK_DECLID;
+                                  $$ = adopt1($1, $2); }
           ;
 
 block     : '{'mstate'}'        { $$ = $2;
