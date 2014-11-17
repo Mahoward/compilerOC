@@ -46,7 +46,7 @@ astree* adopt1sym (astree* root, astree* child, int symbol) {
 }
 
 astree* create_funct_p(astree* root, astree* left, astree* right){
-  if(strcmp(right->lexinfo, ";") == 0){
+  if(right->lexinfo.compare(";") == 0){
     root->symbol = TOK_PROTOTYPE;
   }
   adopt1 (root, left);
@@ -55,7 +55,7 @@ astree* create_funct_p(astree* root, astree* left, astree* right){
 }
 
 astree* create_funct_e(astree* root, astree* child){
-  if(strcmp(childa->lexinfo, ";") == 0){
+  if(child->lexinfo.compare(";") == 0){
     root->symbol = TOK_PROTOTYPE;
   }
   adopt1(root, child);
