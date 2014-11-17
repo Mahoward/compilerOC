@@ -150,11 +150,11 @@ ifelse    : TOK_IF '('expr')'statement TOK_ELSE statement
                                        free_ast2($2, $4); }
           ;
 
-return    : TOK_RETURN';'       { $$ = adopt1sym($1, NULL,
+return    : TOK_RETURN expr';'
+                                { $$ = adopt1($1, $2); }
+          | TOK_RETURN';'       { $$ = adopt1sym($1, NULL,
                                         TOK_RETURNVOID);
                                        free_ast($2); }
-          | TOK_RETURN statement
-                                { $$ = adopt1($1, $2); }
           ;
 
 expr      : expr '=' expr       { $$ = adopt2($2, $1, $3); }
