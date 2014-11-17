@@ -143,8 +143,8 @@ ifelse    : TOK_IF '('expr')'statement %prec TOK_ELSE
 
 return    : TOK_RETURN expr';'
                                 { $$ = adopt1($1, $2); }
-          | TOK_RETURN';'       { $$ = adopt1sym($1, NULL,
-                                        TOK_RETURNVOID);
+          | TOK_RETURN';'       { $1->symbol = TOK_RETURNVOID;
+                                  $$ = $1;
                                        free_ast($2); }
           ;
 
@@ -180,9 +180,8 @@ mexpr     : mexpr ',' expr      { $$ = adopt1($1, $2); }
           | expr                { $$ = $1; }
 
 allocator : TOK_NEW TOK_IDENT '('')'
-                                { $$ = adopt1($1,
-                                        adopt1sym($2, NULL,
-                                        TOK_TYPEID)); }
+                                { $2->symbol = TOK_TYPEID;
+                                  $$ = adopt1($1, $2); }
           | TOK_NEW TOK_STRING '('expr')'
                                 { $$ = adopt1sym($1, $4,
                                         TOK_NEWSTRING); }
@@ -191,8 +190,8 @@ allocator : TOK_NEW TOK_IDENT '('')'
                                         TOK_NEWARRAY), $4); }
           ;
 
-call      : TOK_IDENT '('')'    { $$ = adopt1sym($1, NULL,
-                                        TOK_CALL);
+call      : TOK_IDENT '('')'    { $1->symbol = TOK_CALL;
+                                  $$ = $1;
                                        free_ast2($2, $3);}
           | TOK_IDENT '('mexpr')'
                                 { $$ = adopt1sym($1, $3,
@@ -200,12 +199,10 @@ call      : TOK_IDENT '('')'    { $$ = adopt1sym($1, NULL,
           ;
 
 variable  : TOK_IDENT           { $$ = $1; }
-          | expr '[' expr ']'   { $$ = adopt1($1,
-                                        adopt1sym($3, NULL,
-                                        TOK_INDEX)); }
-          | expr '.' TOK_IDENT  { $$ = adopt1($1,
-                                        adopt1sym($3, NULL,
-                                       TOK_FIELD)); }
+          | expr '[' expr ']'   { $3->symbol = TOK_INDEX;
+                                  $$ = adopt1($1, $3); }
+          | expr '.' TOK_IDENT  { $3->symbol = TOK_FIELD;
+                                  $$ = adopt1($1, $3); }
           ;
 
 constant  : TOK_INTCON                 { $$ = $1; }
