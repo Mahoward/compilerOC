@@ -18,7 +18,7 @@
 
 %token TOK_BLOCK TOK_CALL TOK_IFELSE TOK_INITDECL TOK_DECLID
 %token TOK_POS TOK_NEG TOK_NEWARRAY TOK_TYPEID TOK_FIELD
-%token TOK_RETURNVOID TOK_FUNCTION TOK_PARAMLIST TOK_PROTOTYPE
+%token TOK_RETURNVOID TOK_FUNCTION TOK_PARAM TOK_PROTOTYPE
 
 %right      TOK_IF TOK_THEN TOK_ELSE
 %right      '='
@@ -76,7 +76,8 @@ basetype  : TOK_VOID            { $$ = $1; }
           ;
 
 function  : identdecl'('midecl')'block
-                                { $$ = create_funct_p($1, $3, $5);
+                                { $$ = create_funct_p($1, $2,
+                                                      $3, $5),
                                        free_ast2($2, $4); }
           | identdecl'('')'block
                                 { $$ = create_funct_e($1, $4);
