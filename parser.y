@@ -26,9 +26,9 @@
 %left       '+' '-'
 %left       '*' '/' '%'
 %right      TOK_POS TOK_NEG '!' TOK_ORD TOK_CHR
-$left       '[' ']' '.' '(' ')'
+%left       '[' ']' '.' '(' ')'
 %nonassoc   TOK_NEW
-%right      TOK_POS "u+" TOK_NEG "u-"
+%right      POS "u+" NEG "u-"
 
 %start start
 
@@ -79,7 +79,7 @@ basetype  : TOK_VOID            { $$ = $1; }
                                         TOK_FIELD); }
           ;
 
-prototype : identdecl'(' midecl ')';'
+prototype : identdecl'(' midecl ')'';'
                                 { $$ = adopt1($1,
                                         adopt1sym($3, NULL,
                                         TOK_PARAMLIST));
@@ -210,7 +210,7 @@ call      : TOK_IDENT '('')'    { $$ = adopt1sym($1, NULL,
 variable  : TOK_IDENT           { $$ = $1; }
           | expr '[' expr ']'   { $$ = adopt1($1,
                                         adopt1sym($3, NULL,
-                                        TOK_INDEX); }); }
+                                        TOK_INDEX)); }
           | expr '.' TOK_IDENT  { $$ = adopt1($1,
                                         adopt1sym($3, NULL,
                                        TOK_FIELD); }
