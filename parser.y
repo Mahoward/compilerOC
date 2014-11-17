@@ -113,8 +113,8 @@ statement : block               { $$ = $1; }
           ;
 
 vardecl   : identdecl '=' expr ';'
-                                { $$ = adopt1($1, $3);
-                                       free_ast2($2, $4); }
+                                { $$ = adopt2($2, $1, $3);
+                                       free_ast($4); }
           ;
 
 while     : TOK_WHILE '('expr')'statement
