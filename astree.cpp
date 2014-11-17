@@ -48,6 +48,8 @@ astree* adopt1sym (astree* root, astree* child, int symbol) {
 astree* create_funct_p(astree* root, astree* params, astree* block){
   if(strcmp(";", const_cast<char*>(block->lexinfo->c_str())) == 0){
     root->symbol = TOK_PROTOTYPE;
+  }else{
+    root->symbol = TOK_FUNCTION;
   }
   params->symbol = TOK_PARAMLIST;
   adopt1 (root, params);
@@ -58,6 +60,8 @@ astree* create_funct_p(astree* root, astree* params, astree* block){
 astree* create_funct_e(astree* root, astree* block){
   if(strcmp(";", const_cast<char*>(block->lexinfo->c_str())) == 0){
     root->symbol = TOK_PROTOTYPE;
+  }else{
+    root->symbol = TOK_FUNCTION;
   }
   adopt1(root, block);
   return root;
