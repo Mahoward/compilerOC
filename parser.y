@@ -184,7 +184,7 @@ allocator : TOK_NEW TOK_IDENT '('')'
 
 call      : TOK_IDENT '('')'    { $2->symbol = TOK_CALL;
                                   $$ = adopt1($2, $1);
-                                       free_ast2($3);}
+                                       free_ast($3);}
           | TOK_IDENT '('mexpr')'
                                 { $2->symbol = TOK_CALL;
                                   $$ = adopt2($2, $1, $3);}
