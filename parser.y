@@ -77,7 +77,7 @@ basetype  : TOK_VOID            { $$ = $1; }
 
 function  : identdecl param')'block
                                 { $$ = create_funct($1, $2, $4);
-                                       free_ast2($2, $4); }
+                                       free_ast($3); }
           ;
 
 param     : param','identdecl   { $$ = adopt1($1, $3);
@@ -93,7 +93,8 @@ identdecl : basetype TOK_ARRAY TOK_IDENT
                                   $$ = adopt1($1, $2); }
           ;
 
-block     : '{'mstate'}'        { $$ = $2;
+block     : '{'mstate'}'        { $1->symbol = TOK_BLOCK;
+                                  $$ = adopt1($1, $2);
                                        free_ast2($1, $3); }
           | ';'                 { $$ = $1; }
           ;
