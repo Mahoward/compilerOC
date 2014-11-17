@@ -65,6 +65,9 @@ astree* create_funct_e(astree* root, astree* block){
 
 
 static void dump_node (FILE* outfile, astree* node) {
+  fprintf (outfile, "%s \"%s\" %ld.%ld.%ld",
+            tok_base_name(get_yytname (node->symbol)), node->lexinfo->c_str(),
+            node->filenr, node->linenr, node->offset);
   fprintf (outfile, "%p->{%s(%d) %ld:%ld.%03ld \"%s\" [",
         node, get_yytname (node->symbol), node->symbol,
         node->filenr, node->linenr, node->offset,
@@ -79,6 +82,12 @@ static void dump_node (FILE* outfile, astree* node) {
 */
 }
 
+char *tok_base_name(const char *symbol){
+
+  char *tname = get_yytname (symbol);
+  if (strstr (tname, "TOK_") == tname) tname += 4;
+  return tname;
+}
 static void dump_astree_rec (FILE* outfile, astree* root, int depth) {
   if (root == NULL) return;
   //fprintf (outfile, "%*s%s ", depth * 3, "", root->lexinfo->c_str());
