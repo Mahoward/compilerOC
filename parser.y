@@ -84,11 +84,10 @@ prototype : identdecl'('midecl')'';'
           ;
 
 function  : identdecl'('midecl')'block
-                                { $3->symbol = TOK_PARAMLIST;
-                                  $$ = adopt2($1, $3, $5);
+                                { $$ = create_funct_p($1, $3, $5);
                                        free_ast2($2, $4); }
           | identdecl'('')'block
-                                { $$ = adopt1($1, $4);
+                                { $$ = create_funct_e($1, $4);
                                        free_ast2($2, $3); }
           ;
 
