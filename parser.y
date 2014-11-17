@@ -75,17 +75,16 @@ basetype  : TOK_VOID            { $$ = $1; }
                                   $$ = $1; }
           ;
 
-function  : identdecl'('midecl')'block
-                                { $$ = create_funct_p($1, $2,
-                                                      $3, $5);
+function  : identdecl'param')'block
+                                { $$ = create_funct_p($1, $2, $4);
                                        free_ast2($2, $4); }
           | identdecl'('')'block
                                 { $$ = create_funct_e($1, $4);
                                        free_ast2($2, $3); }
           ;
 
-midecl    : midecl','identdecl  { $$ = adopt1($1, $3);
-                                  free_ast($2); }
+param     : '('param','identdecl  { $$ = adopt2($1, $2, $4);
+                                  free_ast($3); }
           | identdecl           { $$ = $1 }
           ;
 

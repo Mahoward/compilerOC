@@ -22,8 +22,7 @@ astree* new_astree (int symbol, int filenr, int linenr, int offset,
 astree* adopt1 (astree* root, astree* child);
 astree* adopt2 (astree* root, astree* left, astree* right);
 astree* adopt1sym (astree* root, astree* child, int symbol);
-astree* create_funct_p(astree* val, astree* param,
-                       astree* list, astree* block);
+astree* create_funct_p(astree* val, astree* param, astree* block);
 astree* create_funct_e(astree* val, astree* block);
 void dump_astree (FILE* outfile, astree* root);
 void yyprint (FILE* outfile, unsigned short toknum, astree* yyvaluep);

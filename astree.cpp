@@ -45,8 +45,7 @@ astree* adopt1sym (astree* root, astree* child, int symbol) {
   return root;
 }
 
-astree* create_funct_p(astree* val, astree* param,
-                       astree* list, astree* block){
+astree* create_funct_p(astree* val, astree* param, astree* block){
   astree *root;
   if(strcmp(";", const_cast<char*>(block->lexinfo->c_str())) == 0){
     root = new_astree(TOK_PROTOTYPE,
@@ -56,8 +55,9 @@ astree* create_funct_p(astree* val, astree* param,
                        val->filenr, val->linenr, val->offset, "");
   }
   param->symbol = TOK_PARAM;
-
-  return adopt1(adopt2(root, val, adopt1(param, list)), block);
+  adopt2(root, val, param);
+  adopt1(root, block);
+  return root;
 }
 
 astree* create_funct_e(astree* val, astree* block){
