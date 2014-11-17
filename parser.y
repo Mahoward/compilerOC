@@ -108,7 +108,7 @@ identdecl : basetype TOK_ARRAY TOK_IDENT
                                         adopt1sym($3, NULL,
                                         TOK_DECLID)); }
           | basetype TOK_IDENT  { $$ = adopt1sym($1, $2,
-                                        TOK_DECLID)); }
+                                        TOK_DECLID); }
           ;
 
 block     : '{'mstate'}'        { $$ = $2;
