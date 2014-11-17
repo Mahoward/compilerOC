@@ -104,23 +104,21 @@ midecl    : midecl','identdecl  { $$ = adopt1($1, $3);
           ;
 
 identdecl : basetype TOK_ARRAY TOK_IDENT
-                                { $$ = adopt2($1, $2,
-                                        adopt1sym($3, NULL,
-                                        TOK_DECLID)); }
+                                { $$ = adopt2($1, $2, $3); }
           | basetype TOK_IDENT  { $$ = adopt1sym($1, $2,
                                         TOK_DECLID); }
           ;
 
 block     : '{'mstate'}'        { $$ = $2;
                                        free_ast2($1, $3); }
+          | ';'                 { $$ = $1; }
           ;
 
 mstate    : mstate statement    { $$ = adopt1($1, $2); }
           | statement           { $$ = $1}
           ;
 
-statement : ';'                 { free_ast($1); }
-          | block               { $$ = $1; }
+statement : block               { $$ = $1; }
           | vardecl             { $$ = $1; }
           | while               { $$ = $1; }
           | ifelse              { $$ = $1; }
