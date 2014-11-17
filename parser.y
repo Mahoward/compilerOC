@@ -97,7 +97,6 @@ block     : '{'mstate'}'        { $1->symbol = TOK_BLOCK;
                                   $$ = adopt1($1, $2);
                                        free_ast($3); }
           | ';'                 { $$ = $1; }
-          |
           ;
 
 mstate    : mstate statement    { $$ = adopt1($1, $2); }
