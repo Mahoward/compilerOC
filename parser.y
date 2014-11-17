@@ -34,7 +34,7 @@
 
 %%
 
-start     : program             { yypars_astree = $1; }
+start     : program             { yyparse_astree = $1; }
           ;
 program   : program structdef   { $$ = adopt1($1, $2); }
           | program function    { $$ = adopt1($1, $2); }
@@ -52,7 +52,7 @@ structdef : TOK_STRUCT TOK_IDENT '{'mfdecl'}'
           | TOK_STRUCT TOK_IDENT '{''}'
                                 { $$ = adopt1($1,
                                        adopt1sym($2, NULL,
-                                       TOK_TYPEID);
+                                       TOK_TYPEID));
                                       free_ast2($3, $4); }
           ;
 
@@ -202,9 +202,10 @@ allocator : TOK_NEW TOK_IDENT '('')'
 
 call      : TOK_IDENT '('')'    { $$ = adopt1sym($1, NULL,
                                         TOK_CALL);
-                                       free_ast($2, $3);}
+                                       free_ast2($2, $3);}
           | TOK_IDENT '('mexpr')'
-                                { $$ = }
+                                { $$ = adopt1sym($1, $3,
+                                        TOK_CALL));}
           ;
 
 variable  : TOK_IDENT           { $$ = $1; }
@@ -213,7 +214,7 @@ variable  : TOK_IDENT           { $$ = $1; }
                                         TOK_INDEX)); }
           | expr '.' TOK_IDENT  { $$ = adopt1($1,
                                         adopt1sym($3, NULL,
-                                       TOK_FIELD); }
+                                       TOK_FIELD)); }
           ;
 
 constant  : TOK_INTCON                 { $$ = $1; }
