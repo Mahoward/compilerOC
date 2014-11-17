@@ -62,8 +62,8 @@ mfdecl    : mfdecl fielddecl';' { $$ = adopt1($1, $2);
           ;
 
 fielddecl : basetype TOK_ARRAY TOK_IDENT
-                                { $$ = adopt2($1, $4,
-                                        adopt1sym($2, NULL,
+                                { $$ = adopt2($1, $2,
+                                        adopt1sym($3, NULL,
                                         TOK_FIELD)); }
           | basetype TOK_IDENT  { $$ = adopt1($1,
                                         adopt1sym($2, NULL,
@@ -75,7 +75,7 @@ basetype  : TOK_VOID            { $$ = $1; }
           | TOK_CHAR            { $$ = $1; }
           | TOK_INT             { $$ = $1; }
           | TOK_STRING          { $$ = $1; }
-          | TOK_IDENT           { $$ = adopt1sym($2, NULL,
+          | TOK_IDENT           { $$ = adopt1sym($1, NULL,
                                         TOK_FIELD); }
           ;
 
