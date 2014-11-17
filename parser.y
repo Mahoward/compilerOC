@@ -75,9 +75,8 @@ basetype  : TOK_VOID            { $$ = $1; }
                                   $$ = $1; }
           ;
 
-function  : identdecl'('param')'block
-                                { $$ = create_funct_p($1, $2,
-                                                      $3, $5);
+function  : identdecl param')'block
+                                { $$ = create_funct_p($1, $2, $4);
                                        free_ast2($2, $4); }
           | identdecl'('')'block
                                 { $$ = create_funct_e($1, $4);
@@ -86,7 +85,9 @@ function  : identdecl'('param')'block
 
 param     : param','identdecl   { $$ = adopt1($1, $3);
                                   free_ast($3); }
-          | identdecl           { $$ = $1 }
+          | '(' identdecl       { $$ = adopt1sym($1, $2, TOK_PARAM); }
+          | '('                 { $1->symbol = TOK_PARAM;
+                                  $$ = $1;}
           ;
 
 identdecl : basetype TOK_ARRAY TOK_IDENT
