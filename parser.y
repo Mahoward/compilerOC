@@ -205,7 +205,7 @@ call      : TOK_IDENT '('')'    { $$ = adopt1sym($1, NULL,
                                        free_ast2($2, $3);}
           | TOK_IDENT '('mexpr')'
                                 { $$ = adopt1sym($1, $3,
-                                        TOK_CALL));}
+                                        TOK_CALL);}
           ;
 
 variable  : TOK_IDENT           { $$ = $1; }
