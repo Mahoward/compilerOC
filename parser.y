@@ -90,7 +90,7 @@ midecl    : midecl','identdecl  { $$ = adopt1($1, $3);
 
 identdecl : basetype TOK_ARRAY TOK_IDENT
                                 { $$ = adopt2($1, $2, $3); }
-          | basetype TOK_IDENT  { $1->symbol = TOK_DECLID;
+          | basetype TOK_IDENT  { $2->symbol = TOK_DECLID;
                                   $$ = adopt1($1, $2); }
           ;
 
