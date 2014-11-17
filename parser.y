@@ -75,14 +75,6 @@ basetype  : TOK_VOID            { $$ = $1; }
                                   $$ = $1; }
           ;
 
-prototype : identdecl'('midecl')'';'
-                                { $3->symbol = TOK_PARAMLIST;
-                                  $$ = adopt1($1, $3);
-                                       free_ast2($2, $4); }
-          | identdecl'('')'';'  { $$ = adopt1($1,$4);
-                                       free_ast2($2, $3); }
-          ;
-
 function  : identdecl'('midecl')'block
                                 { $$ = create_funct_p($1, $3, $5);
                                        free_ast2($2, $4); }
