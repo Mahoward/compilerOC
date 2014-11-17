@@ -182,12 +182,12 @@ allocator : TOK_NEW TOK_IDENT '('')'
                                         TOK_NEWARRAY), $4); }
           ;
 
-call      : TOK_IDENT '('')'    { $1->symbol = TOK_CALL;
-                                  $$ = $1;
-                                       free_ast2($2, $3);}
+call      : TOK_IDENT '('')'    { $2->symbol = TOK_CALL;
+                                  $$ = adopt1($2, $1);
+                                       free_ast2($3);}
           | TOK_IDENT '('mexpr')'
-                                { $$ = adopt1sym($1, $3,
-                                        TOK_CALL);}
+                                { $2->symbol = TOK_CALL;
+                                  $$ = adopt2($2, $1, $3);}
           ;
 
 variable  : TOK_IDENT           { $$ = $1; }
