@@ -45,24 +45,29 @@ astree* adopt1sym (astree* root, astree* child, int symbol) {
   return root;
 }
 
-astree* create_funct_p(astree* root, astree* params, astree* block){
+astree* create_funct_p(astree* val, astree* params, astree* block){
+  astree *root;
   if(strcmp(";", const_cast<char*>(block->lexinfo->c_str())) == 0){
-    root->symbol = TOK_PROTOTYPE;
+    root = new_astree(TOK_PROTOTYPE,
+                       val->filenr, val->linenr, val->offset, "");
   }else{
-    root->symbol = TOK_FUNCTION;
+    root = new_astree(TOK_FUNCTION,
+                       val->filenr, val->linenr, val->offset, "");
   }
   params->symbol = TOK_PARAMLIST;
-  adopt1 (root, params);
-  adopt1 (root, block);
-  return root;
+  return adopt2(root, val, params);
 }
 
-astree* create_funct_e(astree* root, astree* block){
+astree* create_funct_e(astree* val, astree* block){
+  astree *root = new_astree(TOK_FUNCTION,
+                     val->filenr, val->linenr, val->offset, "");
   if(strcmp(";", const_cast<char*>(block->lexinfo->c_str())) == 0){
-    root->symbol = TOK_PROTOTYPE;
+
   }else{
-    root->symbol = TOK_FUNCTION;
+    root = new_astree(TOK_FUNCTION,
+                       val->filenr, val->linenr, val->offset, "");
   }
+
   adopt1(root, block);
   return root;
 }
