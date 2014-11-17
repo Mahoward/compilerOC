@@ -79,7 +79,7 @@ basetype  : TOK_VOID            { $$ = $1; }
                                         TOK_FIELD); }
           ;
 
-prototype : identdecl'(' midecl ')'';'
+prototype : identdecl'('midecl')'';'
                                 { $$ = adopt1($1,
                                         adopt1sym($3, NULL,
                                         TOK_PARAMLIST));
