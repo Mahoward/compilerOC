@@ -24,7 +24,7 @@
 %right      '='
 %left       TOK_EQ TOK_NE TOK_LT TOK_LE TOK_GT TOK_GE
 %left       '+' '-'
-%left       '*' '\' '%'
+%left       '*' '/' '%'
 %right      TOK_POS TOK_NEG '!' TOK_ORD TOK_CHR
 $left       '[' ']' '.' '(' ')'
 %nonassoc   TOK_NEW
