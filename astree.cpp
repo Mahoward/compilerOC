@@ -58,7 +58,7 @@ astree* create_funct(astree* val, astree* param, astree* block){
   adopt2(root, val, param);
   adopt1(root, block);
   return root;
-}
+}
 
 const char *tok_base_name(const char *tname){
   if (strstr (tname, "TOK_") == tname) tname += 4;
@@ -67,8 +67,9 @@ const char *tok_base_name(const char *tname){
 
 static void dump_node (FILE* outfile, astree* node) {
   fprintf (outfile, "%s \"%s\" %ld.%ld.%ld",
-            tok_base_name(get_yytname (node->symbol)), node->lexinfo->c_str(),
-            node->filenr, node->linenr, node->offset);
+            tok_base_name(get_yytname (node->symbol)),
+                  node->lexinfo->c_str(),node->filenr,
+                  node->linenr, node->offset);
   /*bool need_space = false;
   for (size_t child = 0; child < node->children.size(); ++child) {
     if (need_space) fprintf (outfile, " ");
