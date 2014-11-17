@@ -88,7 +88,7 @@ prototype : identdecl'(' midecl ')'';'
                                        free_ast2($2, $3); }
           ;
 
-function  : identdecl'(' midecl ')'block
+function  : identdecl'('midecl')'block
                                 { $$ = adopt2($1,
                                         adopt1sym($3, NULL,
                                         TOK_PARAMLIST), $5);
