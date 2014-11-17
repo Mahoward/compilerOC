@@ -113,7 +113,7 @@ statement : block               { $$ = $1; }
           ;
 
 vardecl   : identdecl '=' expr ';'
-                                { $2->symbol = TOK_VARDECL
+                                { $2->symbol = TOK_VARDECL;
                                   $$ = adopt2($2, $1, $3);
                                        free_ast($4); }
           ;
