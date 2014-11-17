@@ -140,13 +140,13 @@ while     : TOK_WHILE '('expr')'statement
                                        free_ast2($2, $4); }
           ;
 
-ifelse    : TOK_IF '('expr')'statement TOK_ELSE statement
+ifelse    : TOK_IF '('expr')'statement %prec TOK_ELSE
+                                { $$ = adopt2($1, $3, $5);
+                                       free_ast2($2, $4); }
+          | TOK_IF '('expr')'statement TOK_ELSE statement
                                 { $$ = adopt2(adopt1sym($1,
                                         $3, TOK_IFELSE),
                                         $5,$7);
-                                       free_ast2($2, $4); }
-          | TOK_IF '('expr')'statement
-                                { $$ = adopt2($1, $3, $5);
                                        free_ast2($2, $4); }
           ;
 
