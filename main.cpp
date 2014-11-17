@@ -111,10 +111,15 @@ int main (int argc, char** argv) {
    yyin_cpp_popen(filename);
    tokfile = fopen(print_file(filename, "tok"), "w+");
    int tok;
-   for(;;){
+
+   parsecode = yyparse();
+   if (parsecode) {
+      errprintf ("%:parse failed (%d)\n", parsecode);
+
+   /*for(;;){
       tok = yylex();
       if(tok == YYEOF)break;
-   }
+   }*/
    FILE *out = fopen(print_file(filename, "str"), "w+");
    dump_stringset(out);
 
