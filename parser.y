@@ -28,6 +28,7 @@
 %right      TOK_POS TOK_NEG '!' TOK_ORD TOK_CHR
 %left       '[' ']' '.' '(' ')'
 %nonassoc   TOK_NEW
+
 %right      POS "u+" NEG "u-"
 
 %start start
@@ -98,7 +99,7 @@ block     : '{''}'              { $1->symbol = TOK_BLOCK;
                                   $$ = $1;}
           | '{'mstate'}'        { $1->symbol = TOK_BLOCK;
                                   $$ = adopt1($1, $2);
-                                       free_ast($3); }
+                                  free_ast($3); }
           | ';'                 { $1->symbol = TOK_BLOCK;
                                   $$ = $1; }
           ;
@@ -113,7 +114,7 @@ statement : block               { $$ = $1; }
           | ifelse              { $$ = $1; }
           | return              { $$ = $1; }
           | expr';'             { $$ = $1;
-                                       free_ast($2); }
+                                  free_ast($2); }
           ;
 
 vardecl   : identdecl '=' expr ';'
