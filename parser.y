@@ -88,17 +88,19 @@ param     : param','identdecl   { $$ = adopt1($1, $3);
           ;
 
 identdecl : basetype TOK_ARRAY TOK_IDENT
-                                { $$ = adopt2($1, $2, $3); }
+                                { $3->symbol = TOK_DECLID;
+                                  $$ = adopt2($1, $2, $3); }
           | basetype TOK_IDENT  { $2->symbol = TOK_DECLID;
                                   $$ = adopt1($1, $2); }
           ;
 
 block     : '{''}'              { $1->symbol = TOK_BLOCK;
-                                  $$ = $1;} 
+                                  $$ = $1;}
           | '{'mstate'}'        { $1->symbol = TOK_BLOCK;
                                   $$ = adopt1($1, $2);
                                        free_ast($3); }
-          | ';'                 { $$ = $1; }
+          | ';'                 { $1->symbol = TOK_BLOCK;
+                                  $$ = $1; }
           ;
 
 mstate    : mstate statement    { $$ = adopt1($1, $2); }
