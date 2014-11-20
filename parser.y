@@ -95,18 +95,16 @@ identdecl : basetype TOK_ARRAY TOK_IDENT
                                   $$ = adopt1($1, $2); }
           ;
 
-block     : '{''}'              { $1->symbol = TOK_BLOCK;
-                                  $$ = $1;}
-          | '{'mstate'}'        { $1->symbol = TOK_BLOCK;
-                                  $$ = adopt1($1, $2);
-                                  free_ast($3); }
-          | ';'                 { $1->symbol = TOK_BLOCK;
-                                  $$ = $1; }
-          ;
+block:          '{' '}'         { $1->symbol = TOK_BLOCK;
+                                  $$ = $1;
+                                  free_ast($2); }
+              | blocklist '}' { $$ = $1; free_ast($2); }
+              | ';'           { $$ = $1; }
 
-mstate    : mstate statement    { $$ = adopt1($1, $2); }
-          | statement           { $$ = $1}
-          ;
+blocklist:      blocklist statement { $$ = adopt1($1, $2); }
+              | '{' statement
+                { $$ = adopt1(adopt1sym($1, $2, TOK_BLOCK), NULL); }
+              ;
 
 statement : block               { $$ = $1; }
           | vardecl             { $$ = $1; }
