@@ -104,7 +104,7 @@ block     : '{''}'              { $1->symbol = TOK_BLOCK;
                                   $$ = $1; }
           ;
 
-mstate    : mstate statement    { $$ = adopt1($1, $2); }
+mstate    : mstate';' statement    { $$ = adopt1($1, $2); }
           | statement           { $$ = $1}
           ;
 
@@ -145,31 +145,31 @@ return    : TOK_RETURN expr';'
                                        free_ast($2); }
           ;
 
-expr      : expr '=' expr ';'      { $$ = adopt2($2, $1, $3); }
-          | expr TOK_EQ expr';'   { $$ = adopt2($2, $1, $3); }
-          | expr TOK_NE expr';'   { $$ = adopt2($2, $1, $3); }
-          | expr TOK_LT expr';'   { $$ = adopt2($2, $1, $3); }
-          | expr TOK_LE expr';'   { $$ = adopt2($2, $1, $3); }
-          | expr TOK_GT expr';'   { $$ = adopt2($2, $1, $3); }
-          | expr TOK_GE expr';'   { $$ = adopt2($2, $1, $3); }
-          | expr '+' expr';'       { $$ = adopt2($2, $1, $3); }
-          | expr '-' expr';'       { $$ = adopt2($2, $1, $3); }
-          | expr '*' expr';'       { $$ = adopt2($2, $1, $3); }
-          | expr '/' expr';'       { $$ = adopt2($2, $1, $3); }
-          | expr '%' expr';'       { $$ = adopt2($2, $1, $3); }
-          | '+' expr';' %prec TOK_POS
+expr      : expr '=' expr       { $$ = adopt2($2, $1, $3); }
+          | expr TOK_EQ expr    { $$ = adopt2($2, $1, $3); }
+          | expr TOK_NE expr    { $$ = adopt2($2, $1, $3); }
+          | expr TOK_LT expr    { $$ = adopt2($2, $1, $3); }
+          | expr TOK_LE expr    { $$ = adopt2($2, $1, $3); }
+          | expr TOK_GT expr    { $$ = adopt2($2, $1, $3); }
+          | expr TOK_GE expr    { $$ = adopt2($2, $1, $3); }
+          | expr '+' expr       { $$ = adopt2($2, $1, $3); }
+          | expr '-' expr       { $$ = adopt2($2, $1, $3); }
+          | expr '*' expr       { $$ = adopt2($2, $1, $3); }
+          | expr '/' expr       { $$ = adopt2($2, $1, $3); }
+          | expr '%' expr       { $$ = adopt2($2, $1, $3); }
+          | '+' expr %prec TOK_POS
                                 { $$ = adopt1sym ($1, $2,
                                         TOK_POS); }
-          | '-' expr';' %prec TOK_NEG
+          | '-' expr %prec TOK_NEG
                                 { $$ = adopt1sym ($1, $2,
                                         TOK_NEG); }
-          | '!' expr';'            { $$ = adopt1 ($1, $2); }
-          | TOK_ORD expr';'        { $$ = adopt1 ($1, $2); }
-          | TOK_CHR expr';'        { $$ = adopt1 ($1, $2); }
-          | allocator';'           { $$ = $1; }
-          | call';'                { $$ = $1; }
-          | variable';'            { $$ = $1; }
-          | constant';'            { $$ = $1; }
+          | '!' expr            { $$ = adopt1 ($1, $2); }
+          | TOK_ORD expr        { $$ = adopt1 ($1, $2); }
+          | TOK_CHR expr        { $$ = adopt1 ($1, $2); }
+          | allocator           { $$ = $1; }
+          | call                { $$ = $1; }
+          | variable            { $$ = $1; }
+          | constant            { $$ = $1; }
           | '(' expr ')'        { $$ = $2; free_ast2 ($1, $3); }
           ;
 
