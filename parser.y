@@ -104,7 +104,7 @@ block     : '{''}'              { $1->symbol = TOK_BLOCK;
                                   $$ = $1; }
           ;
 
-mstate    : mstate';' statement    { $$ = adopt1($1, $2); }
+mstate    : mstate statement    { $$ = adopt1($1, $2); }
           | statement           { $$ = $1}
           ;
 
