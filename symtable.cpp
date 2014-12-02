@@ -53,12 +53,12 @@ void populate_fields(astree* root, symbol_table* fields){
       int attr = var_type(root->children[i]);
       sym->attributes.set(attr);
       sym->attributes.set(ATTR_field);
-      key = (string *)root->children[i]->children[0]->lexinfo;
+      string *key = (string *)root->children[i]->children[0]->lexinfo;
       sym->filenr = root->children[i]->children[0]->filenr;
       sym->linenr = root->children[i]->children[0]->linenr;
       sym->offset = root->children[i]->children[0]->offset;
       root->children[i]->children[0];
-      fields.insert(sym)
+      fields.insert({key, sym})
     }
 }
 
