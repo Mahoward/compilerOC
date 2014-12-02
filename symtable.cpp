@@ -23,8 +23,44 @@ symbol_table global_table;
 stack <symbol_table> sym_stack;
 int depth = 0;
 
+int var_type(astree* node){
+  switch(node->symbol){
+    case TOK_BOOL:
+      return ATTR_bool;
+      break;
+    case TOK_CHAR:
+      return ATTR_char;
+      break;
+    case TOK_INT:
+      return ATTR_int;
+      break;
+    case TOK_STRING:
+      return ATTR_string;
+      break;
+    case TOK_IDENT:
+      return ATTR_struct;
+      break;
+    default:
+      printf("VAR TYPE ERROR\n");
+  }
+}
 
-void populate_fields(astree* root, symbol_table* fields){}
+
+void populate_fields(astree* root, symbol_table* fields){
+  for(size_t i = 0; i < root->children.size(); i++){
+    if(root->children[i]->symbol != TOK_TYPEID){
+      symbol* sym = new symbol();
+      int attr = var_type(root->children[i]->symbol);
+      sym->attributes.set(attr);
+      sym->attributes.set(ATTR_field);
+      key = (string *)root->children[i]->children[0]->lexinfo;
+      sym->filenr = root->children[i]->children[0]->filenr;
+      sym->linenr = root->children[i]->children[0]->linenr;
+      sym->offset = root->children[i]->children[0]->offset;
+      root->children[i]->children[0];
+      fields.insert(sym)
+    }
+}
 
 string *populate_struct_sym(astree* root, symbol* struct_sym){
   string *key = NULL;
@@ -51,10 +87,10 @@ void insert_struct(astree* root){
   if(key == NULL){
     printf("KEY ERROR\n");
   }else{
-    printf("Key:%s\n", key->c_str());
+    /*printf("Key:%s\n", key->c_str());
     printf("struct_sym: %ld, %ld, %ld, %ld\n",
             struct_sym->filenr,struct_sym->linenr,
-            struct_sym->offset,struct_sym->blocknr);
+            struct_sym->offset,struct_sym->blocknr);*/
     struct_table.insert({key, struct_sym});
   }
 }
