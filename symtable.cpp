@@ -46,7 +46,7 @@ int var_type(astree* node){
 }
 
 
-void populate_fields(astree* root, symbol_table* fields){
+void populate_fields(astree* root, symbol_table fields){
   for(size_t i = 0; i < root->children.size(); i++){
     if(root->children[i]->symbol != TOK_TYPEID){
       symbol* sym = new symbol();
@@ -58,7 +58,7 @@ void populate_fields(astree* root, symbol_table* fields){
       sym->linenr = root->children[i]->children[0]->linenr;
       sym->offset = root->children[i]->children[0]->offset;
       root->children[i]->children[0];
-      &fields.insert({key, sym});
+      fields.insert({key, sym});
     }
 }
 
@@ -82,7 +82,7 @@ void insert_struct(astree* root){
   symbol* struct_sym = new symbol();
   struct_sym->attributes.set(ATTR_struct);
   struct_sym->fields = new symbol_table();
-  populate_fields(root, struct_sym->fields);
+  populate_fields(root, &struct_sym->fields);
   string* key = populate_struct_sym(root, struct_sym);
   if(key == NULL){
     printf("KEY ERROR\n");
