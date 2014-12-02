@@ -50,7 +50,7 @@ void populate_fields(astree* root, symbol_table* fields){
   for(size_t i = 0; i < root->children.size(); i++){
     if(root->children[i]->symbol != TOK_TYPEID){
       symbol* sym = new symbol();
-      int attr = var_type(root->children[i]->symbol);
+      int attr = var_type(root->children[i]);
       sym->attributes.set(attr);
       sym->attributes.set(ATTR_field);
       key = (string *)root->children[i]->children[0]->lexinfo;
