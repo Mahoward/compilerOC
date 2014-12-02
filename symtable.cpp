@@ -12,6 +12,7 @@
 
 //Added Project libraries
 #include "astree.h"
+#include "symtable.h"
 #include "yyparse.h"
 
 symbol_table struct_table;
