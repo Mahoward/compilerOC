@@ -15,7 +15,7 @@ using namespace std;
 #include "auxlib.h"
 #include "lyutils.h"
 #include "stringset.h"
-#include "symtable.h"
+//#include "symtable.h"
 #include "yyparse.h"
 
 const string CPP = "/usr/bin/cpp";
