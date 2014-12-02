@@ -43,20 +43,16 @@ stack <symbol_table> sym_stack;
 int depth = 0;
 
 
-void populate_fields(astree* root, symbol_table* fields){
-  for(vector<astree*>::iterator it = root->children.begin();
-    it != root->children.end(); it++){}
-}
+void populate_fields(astree* root, symbol_table* fields){}
 
 string *populate_struct_sym(astree* root, symbol* struct_sym){
   string *key = NULL;
-  for(vector<astree*>::iterator it = root->children.begin();
-    it != root->children.end(); it++){
-      if(it->symbol == TOK_TYPEID){
-        key = *it->lexinfo;
-        struct_sym->filenr = it->filenr;
-        struct_sym->linenr = it->linenr;
-        struct_sym->offset = it->offset;
+  for(int i = 0; i < root->children.size(); i++){
+      if(root->children[i]->symbol == TOK_TYPEID){
+        key = root->children[i]->lexinfo;
+        struct_sym->filenr = root->children[i]->filenr;
+        struct_sym->linenr = root->children[i]->linenr;
+        struct_sym->offset = root->children[i]->offset;
         struct_sym->blocknr = 0;
         return key;
         break;
@@ -85,8 +81,7 @@ void visit(astree* root){
         break;
       default:
         insert_standard(root);
-        for(vector<astree*>::iterator it = root->children.begin();
-          it != root->children.end(); it++){
+        for(int i = 0; i < root->children.size(); i++){
             visit(*it);
         }
     }
