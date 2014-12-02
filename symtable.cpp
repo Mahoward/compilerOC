@@ -52,7 +52,7 @@ string *populate_struct_sym(astree* root, symbol* struct_sym){
   string *key = NULL;
   for(vector<astree*>::iterator it = root->children.begin();
     it != root->children.end(); it++){
-      if(*it->symbol == TOK_TYPEID){
+      if(it->symbol == TOK_TYPEID){
         key = *it->lexinfo;
         struct_sym->filenr = it->filenr;
         struct_sym->linenr = it->linenr;
