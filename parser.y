@@ -57,7 +57,7 @@ contstruct  : contstruct fielddecl ';'  {free_ast($3);
             ;
 
 fielddecl   : basetype TOK_IDENT        { $2->symbol = TOK_FIELD;
-                                          $$ = adopt1 ($1,$2)); }
+                                          $$ = adopt1 ($1,$2); }
             | basetype TOK_ARRAY TOK_IDENT
                                         { $3->symbol = TOK_FIELD;
                                           $$ = adopt2 ($2, $1, $3); }
