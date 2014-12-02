@@ -60,6 +60,7 @@ void populate_fields(astree* root, symbol_table fields){
       root->children[i]->children[0];
       fields.insert({key, sym});
     }
+  }
 }
 
 string *populate_struct_sym(astree* root, symbol* struct_sym){
