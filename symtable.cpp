@@ -79,13 +79,13 @@ void insert_struct(astree* root){
 }
 
 void visit(astree* root){
+    printf("%s", tok_base_name(get_yytname (root->symbol)));
     switch(root->symbol){
       case TOK_STRUCT:
         insert_struct(root);
         break;
       default:
         for(size_t i = 0; i < root->children.size(); i++){
-
             visit(root->children[i]);
         }
     }
