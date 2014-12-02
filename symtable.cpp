@@ -70,6 +70,10 @@ void insert_struct(astree* root){
   if(key == NULL){
     printf("KEY ERROR\n");
   }else{
+    printf("Key:%s\n", key);
+    printf("struct_sym: %d, %d, %d, %d\n", 
+            struct_sym->filenr,struct_sym->linenr,
+            struct_sym->offset,struct_sym->blocknr);
     struct_table.insert({key, struct_sym});
   }
 }
@@ -84,5 +88,4 @@ void visit(astree* root){
             visit(root->children[i]);
         }
     }
-
 }
