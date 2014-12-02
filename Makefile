@@ -99,7 +99,7 @@ spotless : clean
 	- rm ${EXECBIN} List.*.ps List.*.pdf
 
 submit: spotless
-	submit cmps104a-wm.f14 asg3 ${SUBSRC}
+	submit cmps104a-wm.f14 asg4 ${SUBSRC}
 
 
 #
