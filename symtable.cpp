@@ -22,7 +22,7 @@ symbol_table struct_table;
 symbol_table global_table;
 stack <symbol_table> sym_stack;
 int depth = 0;
-
+/*
 int var_type(astree* node){
   switch(node->symbol){
     case TOK_BOOL:
@@ -91,15 +91,15 @@ void insert_struct(astree* root){
     /*printf("Key:%s\n", key->c_str());
     printf("struct_sym: %ld, %ld, %ld, %ld\n",
             struct_sym->filenr,struct_sym->linenr,
-            struct_sym->offset,struct_sym->blocknr);*/
+            struct_sym->offset,struct_sym->blocknr);
     struct_table.insert({key, struct_sym});
   }
 }
-
+*/
 void visit(astree* root){
     switch(root->symbol){
       case TOK_STRUCT:
-        insert_struct(root);
+        //insert_struct(root);
         break;
       default:
         for(size_t i = 0; i < root->children.size(); i++){
