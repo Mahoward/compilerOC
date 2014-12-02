@@ -45,27 +45,24 @@ program   : program structdef   { $$ = adopt1($1, $2); }
           |                     { $$ = new_parseroot(); }
           ;
 
-structdef : TOK_STRUCT TOK_IDENT '{'mfdecl'}'
-                                { $2->symbol = TOK_TYPEID;
-                                  $$ = adopt2($1, $2, $4);
-                                      free_ast2($3, $5); }
-          | TOK_STRUCT TOK_IDENT '{''}'
-                                { $2->symbol = TOK_TYPEID;
-                                  $$ = adopt1($1, $2);
-                                      free_ast2($3, $4); }
-          ;
+structdef   : contstruct '}'            { $$ = $1; free_ast($2); }
+            ;
 
-mfdecl    : mfdecl fielddecl';' { $$ = adopt1($1, $2);
-                                       free_ast($3); }
-          | fielddecl';'        { $$ = $1; free_ast($2); }
-          ;
+contstruct  : contstruct fielddecl ';'  {free_ast($3);
+                                            $$ = adopt1($1, $2);
+                                        }
+            | TOK_STRUCT TOK_IDENT '{'  {$$ = adopt1sym($1,
+                                            $2, TOK_TYPEID);
+                                            free_ast($3);}
+            ;
 
-fielddecl : basetype TOK_ARRAY TOK_IDENT
-                                { $3->symbol = TOK_FIELD;
-                                  $$ = adopt2($1, $2, $3); }
-          | basetype TOK_IDENT  { $2->symbol = TOK_FIELD;
-                                  $$ = adopt1($1, $2); }
-          ;
+fielddecl   : basetype TOK_IDENT        { $$ = adopt1 ($1, changeSym($2,
+                                            TOK_FIELD)); }
+            | basetype TOK_ARRAY TOK_IDENT
+                                        { $$ = adopt2 ($2, $1,
+                                            changeSym($3, TOK_FIELD)); }
+            ;
+
 
 basetype  : TOK_VOID            { $$ = $1; }
           | TOK_BOOL            { $$ = $1; }
