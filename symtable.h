@@ -1,6 +1,24 @@
 #ifndef __SYMTABLE_H__
 #define __SYMTABLE_H__
 
+#include <bitset>
+#include <string>
+#include <unordered_map>
+#include <vector>
+
+//Added C libraries
+#include <stdio.h>
+#include <stdlib.h>
+
+//Added C++ libraries
+#include <stack>
+
+//Added Project libraries
+#include "astree.h"
+#include "lyutils.h"
+#include "symtable.h"
+#include "yyparse.h"
+#include "auxlib.h"
 
 using namespace std;
 
