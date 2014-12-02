@@ -14,6 +14,7 @@
 #include "astree.h"
 #include "symtable.h"
 #include "yyparse.h"
+#include "auxlib.h"
 
 symbol_table struct_table;
 symbol_table global_table;
