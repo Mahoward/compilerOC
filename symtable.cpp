@@ -48,7 +48,7 @@ void populate_fields(astree* root, symbol_table* fields){
     it != root->children.end(); it++){}
 }
 
-string *populate_struct_sym(astree* root, symbol_table* struct_sym){
+string *populate_struct_sym(astree* root, symbol* struct_sym){
   string *key = NULL;
   for(vector<astree*>::iterator it = root->children.begin();
     it != root->children.end(); it++){
