@@ -58,7 +58,7 @@ void populate_fields(astree* root, symbol_table* fields){
       sym->linenr = root->children[i]->children[0]->linenr;
       sym->offset = root->children[i]->children[0]->offset;
       root->children[i]->children[0];
-      fields.insert({key, sym})
+      &fields.insert({key, sym});
     }
 }
 
