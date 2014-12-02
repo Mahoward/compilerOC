@@ -15,6 +15,7 @@ using namespace std;
 #include "auxlib.h"
 #include "lyutils.h"
 #include "stringset.h"
+#include "symtable.h"
 #include "yyparse.h"
 
 const string CPP = "/usr/bin/cpp";
@@ -118,6 +119,9 @@ int main (int argc, char** argv) {
 
    FILE *str_out = fopen(print_file(filename, "str"), "w+");
    dump_stringset(str_out);
+
+   printf("HI\n");
+   visit(yyparse_astree);
 
    FILE *ast_out = fopen(print_file(filename, "ast"), "w+");
    dump_astree(ast_out, yyparse_astree);
