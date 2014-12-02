@@ -54,9 +54,9 @@ string *populate_struct_sym(astree* root, symbol* struct_sym){
     it != root->children.end(); it++){
       if(*it->symbol == TOK_TYPEID){
         key = *it->lexinfo;
-        struct_sym->filenr = *it->filenr;
-        struct_sym->linenr = *it->linenr;
-        struct_sym->offset = *it->offset;
+        struct_sym->filenr = it->filenr;
+        struct_sym->linenr = it->linenr;
+        struct_sym->offset = it->offset;
         struct_sym->blocknr = 0;
         return key;
         break;
