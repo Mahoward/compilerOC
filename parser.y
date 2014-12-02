@@ -52,7 +52,7 @@ contstruct  : contstruct fielddecl ';'  {free_ast($3);
                                             $$ = adopt1($1, $2);
                                         }
             | TOK_STRUCT TOK_IDENT '{'  { $2->symbol = TOK_TYPEID;
-                                          $$ = adopt1sym($1, $2);
+                                          $$ = adopt1($1, $2);
                                             free_ast($3);}
             ;
 
