@@ -59,7 +59,6 @@ void insert_struct(astree* root){
 }
 
 void visit(astree* root){
-    printf("%s", get_yytname (root->symbol));
     switch(root->symbol){
       case TOK_STRUCT:
         insert_struct(root);
