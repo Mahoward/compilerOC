@@ -47,9 +47,9 @@ void populate_fields(astree* root, symbol_table* fields){}
 
 string *populate_struct_sym(astree* root, symbol* struct_sym){
   string *key = NULL;
-  for(int i = 0; i < root->children.size(); i++){
+  for(size_t i = 0; i < root->children.size(); i++){
       if(root->children[i]->symbol == TOK_TYPEID){
-        key = root->children[i]->lexinfo;
+        key = (string *)root->children[i]->lexinfo;
         struct_sym->filenr = root->children[i]->filenr;
         struct_sym->linenr = root->children[i]->linenr;
         struct_sym->offset = root->children[i]->offset;
@@ -80,9 +80,8 @@ void visit(astree* root){
         insert_struct(root);
         break;
       default:
-        insert_standard(root);
-        for(int i = 0; i < root->children.size(); i++){
-            visit(*it);
+        for(size_t i = 0; i < root->children.size(); i++){
+            visit(root->children[i]);
         }
     }
 
