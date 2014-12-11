@@ -65,6 +65,11 @@ void populate_fields(astree* root, symbol_table& fields){
       }
     }
   }
+  vector<string*> fieldTest = fields.enum_keys();
+  printf("Keys of Fields\n");
+  for (int w=0; w < fieldTest.size(); w++){
+    printf("%s\n", fieldTest[w]->c_str());
+  }
 }
 
 string *populate_struct_sym(astree* root, symbol* struct_sym){
