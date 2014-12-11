@@ -44,7 +44,7 @@ string *get_att_string(string attrs, symbol* sym){
 void print_block(string *key, symbol* struct_sym){
   string attrs = "";
   string *attp = get_att_string(attrs, struct_sym);
-  printf("%s (%ld.%ld.%ld) {%ld} %s",
+  printf("%s (%ld.%ld.%ld) {%ld} %s\n",
   key->c_str(), struct_sym->filenr,
   struct_sym->linenr, struct_sym->offset,
   struct_sym->blocknr, attp->c_str());
