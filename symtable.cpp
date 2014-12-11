@@ -38,6 +38,7 @@ int var_type(astree* node){
       break;
     default:
       printf("VAR TYPE ERROR\n");
+      return -1;
   }
 }
 
