@@ -2,6 +2,7 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
+#include <iostream>
 
 //Added C libraries
 #include <stdio.h>
@@ -20,7 +21,7 @@ stack <symbol_table> sym_stack;
 int depth = 0;
 
 void get_att_string(symbol* struct_sym){
-  printf("%lu", struct_sym->attributes);
+  cout << struct_sym->attributes;
 }
 
 void print_block(string *key, symbol* struct_sym){
