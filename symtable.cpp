@@ -89,7 +89,7 @@ void insert_struct(astree* root){
     printf("struct_sym: %ld, %ld, %ld, %ld\n",
             struct_sym->filenr,struct_sym->linenr,
             struct_sym->offset,struct_sym->blocknr);
-    struct_table.insert({key, struct_sym});
+    //struct_table.insert({key, struct_sym});
   }
 }
 
