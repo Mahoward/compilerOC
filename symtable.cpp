@@ -54,11 +54,11 @@ void populate_fields(astree* root, symbol_table& fields){
           sym->attributes.set(attr);
           sym->attributes.set(ATTR_field);
           key = (string *)root->children[i]->children[q]->lexinfo;
-          printf("%s", key.c_str());
-          struct_sym->filenr = root->children[i]->children[q]->filenr;
-          struct_sym->linenr = root->children[i]->children[q]->linenr;
-          struct_sym->offset = root->children[i]->children[q]->offset;
-          struct_sym->blocknr = -1;
+          printf("%s", key->c_str());
+          sym->filenr = root->children[i]->children[q]->filenr;
+          sym->linenr = root->children[i]->children[q]->linenr;
+          sym->offset = root->children[i]->children[q]->offset;
+          sym->blocknr = -1;
           //fields.insert({key, sym});
           break;
         }
