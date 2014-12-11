@@ -78,7 +78,8 @@ string *populate_struct_sym(astree* root, symbol* struct_sym){
 void insert_struct(astree* root){
   symbol* struct_sym = new symbol();
   struct_sym->attributes.set(ATTR_struct);
-  populate_fields(root, struct_sym->fields);
+  struct_sym->fields = new symbol_table();
+  populate_fields(root, &struct_sym->fields);
   string* key = populate_struct_sym(root, struct_sym);
   if(key == NULL){
     printf("KEY ERROR\n");
