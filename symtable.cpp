@@ -19,6 +19,17 @@ symbol_table global_table;
 stack <symbol_table> sym_stack;
 int depth = 0;
 
+void get_att_string(){
+  cout << struct_sym->attributes;
+}
+
+void print_block(symbol* struct_sym){
+  get_att_string();
+  printf("%s (%ld.%ld.%ld) {%ld}",
+  key->c_str(), struct_sym->filenr,
+  struct_sym->linenr, struct_sym->offset,
+  struct_sym->blocknr);
+}
 int var_type(astree* node){
   switch(node->symbol){
     case TOK_BOOL:
@@ -109,6 +120,7 @@ void insert_struct(astree* root){
             //struct_sym->filenr, struct_sym->linenr,
             //struct_sym->offset, struct_sym->blocknr);
     //struct_table.insert({key, struct_sym});
+    print_block()
     struct_table.insert({key, struct_sym});
   }
 }
