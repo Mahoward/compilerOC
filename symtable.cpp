@@ -39,6 +39,7 @@ string *get_att_string(symbol* sym){
   if(sym->attributes[ATTR_const])   {attrs->append("const ");}
   if(sym->attributes[ATTR_vreg])    {attrs->append("vreg ");}
   if(sym->attributes[ATTR_vaddr])   {attrs->append("vaddr ");}
+  return attrs;
 }
 
 void print_block(string *key, symbol* struct_sym){
@@ -46,7 +47,7 @@ void print_block(string *key, symbol* struct_sym){
   printf("%s (%ld.%ld.%ld) {%ld} %s",
   key->c_str(), struct_sym->filenr,
   struct_sym->linenr, struct_sym->offset,
-  struct_sym->blocknr, attrs);
+  struct_sym->blocknr, attrs->c_str());
 }
 int var_type(astree* node){
   switch(node->symbol){
