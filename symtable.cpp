@@ -21,7 +21,7 @@ stack <symbol_table> sym_stack;
 int depth = 0;
 
 void get_att_string(symbol* struct_sym){
-  cout << ATTR_struct;
+  cout << struct_sym->attributes[ATTR_struct];
 }
 
 void print_block(string *key, symbol* struct_sym){
