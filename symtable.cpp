@@ -21,7 +21,7 @@ stack <symbol_table> sym_stack;
 int depth = 0;
 
 string *get_att_string(symbol* sym){
-  string *attrs = NULL;
+  string attrs = "";
   if(sym->attributes[ATTR_void])    {attrs->append("void ");}
   if(sym->attributes[ATTR_bool])    {attrs->append("bool ");}
   if(sym->attributes[ATTR_char])    {attrs->append("char ");}
@@ -39,7 +39,7 @@ string *get_att_string(symbol* sym){
   if(sym->attributes[ATTR_const])   {attrs->append("const ");}
   if(sym->attributes[ATTR_vreg])    {attrs->append("vreg ");}
   if(sym->attributes[ATTR_vaddr])   {attrs->append("vaddr ");}
-  return attrs;
+  return &attrs;
 }
 
 void print_block(string *key, symbol* struct_sym){
