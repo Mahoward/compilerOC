@@ -22,23 +22,23 @@ int depth = 0;
 
 string *get_att_string(symbol* sym){
   string attrs = "";
-  if(sym->attributes[ATTR_void])    {attrs->append("void ");}
-  if(sym->attributes[ATTR_bool])    {attrs->append("bool ");}
-  if(sym->attributes[ATTR_char])    {attrs->append("char ");}
-  if(sym->attributes[ATTR_int])     {attrs->append("int ");}
-  if(sym->attributes[ATTR_null])    {attrs->append("null ");}
-  if(sym->attributes[ATTR_string])  {attrs->append("string ");}
-  if(sym->attributes[ATTR_struct])  {attrs->append("struct ");}
-  if(sym->attributes[ATTR_array])   {attrs->append("array ");}
-  if(sym->attributes[ATTR_function]){attrs->append("function ");}
-  if(sym->attributes[ATTR_variable]){attrs->append("variable ");}
-  if(sym->attributes[ATTR_field])   {attrs->append("field ");}
-  if(sym->attributes[ATTR_typeid])  {attrs->append("typeid ");}
-  if(sym->attributes[ATTR_param])   {attrs->append("param ");}
-  if(sym->attributes[ATTR_lval])    {attrs->append("lval ");}
-  if(sym->attributes[ATTR_const])   {attrs->append("const ");}
-  if(sym->attributes[ATTR_vreg])    {attrs->append("vreg ");}
-  if(sym->attributes[ATTR_vaddr])   {attrs->append("vaddr ");}
+  if(sym->attributes[ATTR_void])    {attrs.append("void ");}
+  if(sym->attributes[ATTR_bool])    {attrs.append("bool ");}
+  if(sym->attributes[ATTR_char])    {attrs.append("char ");}
+  if(sym->attributes[ATTR_int])     {attrs.append("int ");}
+  if(sym->attributes[ATTR_null])    {attrs.append("null ");}
+  if(sym->attributes[ATTR_string])  {attrs.append("string ");}
+  if(sym->attributes[ATTR_struct])  {attrs.append("struct ");}
+  if(sym->attributes[ATTR_array])   {attrs.append("array ");}
+  if(sym->attributes[ATTR_function]){attrs.append("function ");}
+  if(sym->attributes[ATTR_variable]){attrs.append("variable ");}
+  if(sym->attributes[ATTR_field])   {attrs.append("field ");}
+  if(sym->attributes[ATTR_typeid])  {attrs.append("typeid ");}
+  if(sym->attributes[ATTR_param])   {attrs.append("param ");}
+  if(sym->attributes[ATTR_lval])    {attrs.append("lval ");}
+  if(sym->attributes[ATTR_const])   {attrs.append("const ");}
+  if(sym->attributes[ATTR_vreg])    {attrs.append("vreg ");}
+  if(sym->attributes[ATTR_vaddr])   {attrs.append("vaddr ");}
   return &attrs;
 }
 
