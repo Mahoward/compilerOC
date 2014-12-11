@@ -65,10 +65,15 @@ void populate_fields(astree* root, symbol_table& fields){
       }
     }
   }
-  vector<string*> fieldTest = fields.enum_keys();
+  vector<string*> keys;
+  keys.reserve(fields.size());
+
+  for(auto kv : fields) {
+    keys.push_back(kv.first);
+  }
   printf("Keys of Fields\n");
-  for (int w=0; w < fieldTest.size(); w++){
-    printf("%s\n", fieldTest[w]->c_str());
+  for (size_t w=0; w < keys.size(); w++){
+    printf("%s\n", keys[w]->c_str());
   }
 }
 
