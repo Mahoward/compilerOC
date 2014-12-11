@@ -20,16 +20,33 @@ symbol_table global_table;
 stack <symbol_table> sym_stack;
 int depth = 0;
 
-void get_att_string(symbol* struct_sym){
-  cout << struct_sym->attributes[ATTR_struct];
+string *get_att_string(symbol* sym){
+  string *attrs = " ";
+  if(sym->attributes[ATTR_void]){attrs.append("void ");}
+  if(sym->attributes[ATTR_bool]){attrs.append("bool ");}
+  if(sym->attributes[ATTR_char]){attrs.append("char ");}
+  if(sym->attributes[ATTR_int]){attrs.append("int ");}
+  if(sym->attributes[ATTR_null]){attrs.append("null ");}
+  if(sym->attributes[ATTR_string]){attrs.append("string ");}
+  if(sym->attributes[ATTR_struct]){attrs.append("struct ");}
+  if(sym->attributes[ATTR_array]){attrs.append("array ");}
+  if(sym->attributes[ATTR_function]){attrs.append("function ");}
+  if(sym->attributes[ATTR_variable]){attrs.append("variable ");}
+  if(sym->attributes[ATTR_field]){attrs.append("field ");}
+  if(sym->attributes[ATTR_typeid]){attrs.append("typeid ");}
+  if(sym->attributes[ATTR_param]){attrs.append("param ");}
+  if(sym->attributes[ATTR_lval]){attrs.append("lval ");}
+  if(sym->attributes[ATTR_const]){attrs.append("const ");}
+  if(sym->attributes[ATTR_vreg]){attrs.append("vreg ");}
+  if(sym->attributes[ATTR_vaddr]){attrs.append("vaddr ");}
 }
 
 void print_block(string *key, symbol* struct_sym){
-  get_att_string(struct_sym);
+  string *attrs = get_att_string(struct_sym);
   printf("%s (%ld.%ld.%ld) {%ld}",
   key->c_str(), struct_sym->filenr,
   struct_sym->linenr, struct_sym->offset,
-  struct_sym->blocknr);
+  struct_sym->blocknr, attrs);
 }
 int var_type(astree* node){
   switch(node->symbol){
