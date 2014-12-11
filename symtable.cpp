@@ -86,9 +86,9 @@ void insert_struct(astree* root){
     printf("KEY ERROR\n");
   }else{
     printf("Key:%s\n", key->c_str());
-    printf("struct_sym: %ld, %ld, %ld, %ld\n",
-            struct_sym->filenr,struct_sym->linenr,
-            struct_sym->offset,struct_sym->blocknr);
+    printf("struct_sym: (%ld.%ld.%ld) {%ld}\n",
+            struct_sym->filenr,struct_sym->blocknr,
+            struct_sym->linenr,struct_sym->offset);
     //struct_table.insert({key, struct_sym});
   }
 }
