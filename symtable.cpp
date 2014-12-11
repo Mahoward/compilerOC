@@ -21,7 +21,7 @@ stack <symbol_table> sym_stack;
 int depth = 0;
 
 string *get_att_string(symbol* sym){
-  string *attrs = " ";
+  string *attrs = NULL;
   if(sym->attributes[ATTR_void])    {attrs->append("void ");}
   if(sym->attributes[ATTR_bool])    {attrs->append("bool ");}
   if(sym->attributes[ATTR_char])    {attrs->append("char ");}
@@ -43,7 +43,7 @@ string *get_att_string(symbol* sym){
 
 void print_block(string *key, symbol* struct_sym){
   string *attrs = get_att_string(struct_sym);
-  printf("%s (%ld.%ld.%ld) {%ld}",
+  printf("%s (%ld.%ld.%ld) {%ld} %s",
   key->c_str(), struct_sym->filenr,
   struct_sym->linenr, struct_sym->offset,
   struct_sym->blocknr, attrs);
