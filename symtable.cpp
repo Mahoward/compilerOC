@@ -19,12 +19,12 @@ symbol_table global_table;
 stack <symbol_table> sym_stack;
 int depth = 0;
 
-void get_att_string(){
+void get_att_string(symbol* struct_sym){
   printf(struct_sym->attributes);
 }
 
 void print_block(symbol* struct_sym){
-  get_att_string();
+  get_att_string(struct_sym);
   printf("%s (%ld.%ld.%ld) {%ld}",
   key->c_str(), struct_sym->filenr,
   struct_sym->linenr, struct_sym->offset,
@@ -120,7 +120,7 @@ void insert_struct(astree* root){
             //struct_sym->filenr, struct_sym->linenr,
             //struct_sym->offset, struct_sym->blocknr);
     //struct_table.insert({key, struct_sym});
-    print_block()
+    print_block(struct_sym);
     struct_table.insert({key, struct_sym});
   }
 }
