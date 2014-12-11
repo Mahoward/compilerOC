@@ -20,7 +20,7 @@ stack <symbol_table> sym_stack;
 int depth = 0;
 
 void get_att_string(){
-  cout << struct_sym->attributes;
+  printf(struct_sym->attributes);
 }
 
 void print_block(symbol* struct_sym){
