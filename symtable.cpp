@@ -54,7 +54,7 @@ void populate_fields(astree* root, symbol_table& fields){
           sym->attributes.set(attr);
           sym->attributes.set(ATTR_field);
           key = (string *)root->children[i]->children[q]->lexinfo;
-          printf("%s\n", key->c_str());
+          //printf("%s\n", key->c_str());
           sym->filenr = root->children[i]->children[q]->filenr;
           sym->linenr = root->children[i]->children[q]->linenr;
           sym->offset = root->children[i]->children[q]->offset;
@@ -65,6 +65,7 @@ void populate_fields(astree* root, symbol_table& fields){
       }
     }
   }
+  /* Debug code
   vector<string*> keys;
   keys.reserve(fields.size());
 
@@ -75,6 +76,7 @@ void populate_fields(astree* root, symbol_table& fields){
   for (size_t w=0; w < keys.size(); w++){
     printf("%s\n", keys[w]->c_str());
   }
+  */
 }
 
 string *populate_struct_sym(astree* root, symbol* struct_sym){
@@ -102,11 +104,12 @@ void insert_struct(astree* root){
   if(key == NULL){
     printf("KEY ERROR\n");
   }else{
-    printf("Key:%s\n", key->c_str());
-    printf("struct_sym: (%ld.%ld.%ld) {%ld}\n",
-            struct_sym->filenr, struct_sym->linenr,
-            struct_sym->offset, struct_sym->blocknr);
+    //printf("Key:%s\n", key->c_str());
+    //printf("struct_sym: (%ld.%ld.%ld) {%ld}\n",
+            //struct_sym->filenr, struct_sym->linenr,
+            //struct_sym->offset, struct_sym->blocknr);
     //struct_table.insert({key, struct_sym});
+    struct_table.insert({key, sym});
   }
 }
 
