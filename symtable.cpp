@@ -44,10 +44,10 @@ string *get_att_string(symbol* sym){
 
 void print_block(string *key, symbol* struct_sym){
   string *attp = get_att_string(struct_sym);
-  printf("%s (%ld.%ld.%ld) {%ld} %s\n",
+  printf("%s (%ld.%ld.%ld) {%ld} %s \"%s\"\n",
   key->c_str(), struct_sym->filenr,
   struct_sym->linenr, struct_sym->offset,
-  struct_sym->blocknr, attp->c_str());
+  struct_sym->blocknr, attp->c_str(), key->c_str());
 }
 int var_type(astree* node){
   switch(node->symbol){
