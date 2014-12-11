@@ -7,10 +7,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//Added C++ libraries
-#include <stack>
-
-
 //Added Project libraries
 #include "astree.h"
 #include "lyutils.h"

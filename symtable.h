@@ -13,11 +13,6 @@
 //Added C++ libraries
 #include <stack>
 
-//Added Project libraries
-#include "astree.h"
-#include "lyutils.h"
-#include "yyparse.h"
-#include "auxlib.h"
 
 using namespace std;
 
