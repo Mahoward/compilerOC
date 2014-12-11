@@ -16,7 +16,6 @@
 //Added Project libraries
 #include "astree.h"
 #include "lyutils.h"
-#include "symtable.h"
 #include "yyparse.h"
 #include "auxlib.h"
 
