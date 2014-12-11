@@ -20,30 +20,30 @@ symbol_table global_table;
 stack <symbol_table> sym_stack;
 int depth = 0;
 
-string *get_att_string(string attrs, symbol* sym){
-  if(sym->attributes[ATTR_void])    {attrs.append("void ");}
-  if(sym->attributes[ATTR_bool])    {attrs.append("bool ");}
-  if(sym->attributes[ATTR_char])    {attrs.append("char ");}
-  if(sym->attributes[ATTR_int])     {attrs.append("int ");}
-  if(sym->attributes[ATTR_null])    {attrs.append("null ");}
-  if(sym->attributes[ATTR_string])  {attrs.append("string ");}
-  if(sym->attributes[ATTR_struct])  {attrs.append("struct ");}
-  if(sym->attributes[ATTR_array])   {attrs.append("array ");}
-  if(sym->attributes[ATTR_function]){attrs.append("function ");}
-  if(sym->attributes[ATTR_variable]){attrs.append("variable ");}
-  if(sym->attributes[ATTR_field])   {attrs.append("field ");}
-  if(sym->attributes[ATTR_typeid])  {attrs.append("typeid ");}
-  if(sym->attributes[ATTR_param])   {attrs.append("param ");}
-  if(sym->attributes[ATTR_lval])    {attrs.append("lval ");}
-  if(sym->attributes[ATTR_const])   {attrs.append("const ");}
-  if(sym->attributes[ATTR_vreg])    {attrs.append("vreg ");}
-  if(sym->attributes[ATTR_vaddr])   {attrs.append("vaddr ");}
-  return &attrs;
+string *get_att_string(symbol* sym){
+  string *attrs = new string;
+  if(sym->attributes[ATTR_void])    {attrs->append("void ");}
+  if(sym->attributes[ATTR_bool])    {attrs->append("bool ");}
+  if(sym->attributes[ATTR_char])    {attrs->append("char ");}
+  if(sym->attributes[ATTR_int])     {attrs->append("int ");}
+  if(sym->attributes[ATTR_null])    {attrs->append("null ");}
+  if(sym->attributes[ATTR_string])  {attrs->append("string ");}
+  if(sym->attributes[ATTR_struct])  {attrs->append("struct ");}
+  if(sym->attributes[ATTR_array])   {attrs->append("array ");}
+  if(sym->attributes[ATTR_function]){attrs->append("function ");}
+  if(sym->attributes[ATTR_variable]){attrs->append("variable ");}
+  if(sym->attributes[ATTR_field])   {attrs->append("field ");}
+  if(sym->attributes[ATTR_typeid])  {attrs->append("typeid ");}
+  if(sym->attributes[ATTR_param])   {attrs->append("param ");}
+  if(sym->attributes[ATTR_lval])    {attrs->append("lval ");}
+  if(sym->attributes[ATTR_const])   {attrs->append("const ");}
+  if(sym->attributes[ATTR_vreg])    {attrs->append("vreg ");}
+  if(sym->attributes[ATTR_vaddr])   {attrs->append("vaddr ");}
+  return attrs;
 }
 
 void print_block(string *key, symbol* struct_sym){
-  string attrs = "";
-  string *attp = get_att_string(attrs, struct_sym);
+  string *attp = get_att_string(struct_sym);
   printf("%s (%ld.%ld.%ld) {%ld} %s\n",
   key->c_str(), struct_sym->filenr,
   struct_sym->linenr, struct_sym->offset,
