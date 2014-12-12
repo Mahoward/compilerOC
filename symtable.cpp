@@ -108,6 +108,19 @@ void set_var_type(astree* node, symbol* sym, const string* struct_name){
     break;
   }
 }
+
+void push_table(){
+  symbol_table* table = new symbol_table();
+  sym_stack.push(table);
+}
+
+void pop_table(){
+  sym_stack.pop();
+}
+
+void insert_table(string* key, symbol* sym){
+  sym_stack.top()->insert({key, sym});
+}
 /*-----------Printing-------------*/
 void print_fields(string *struct_name, symbol* struct_sym){
   vector<string*> keys;
@@ -252,7 +265,6 @@ void populate_param(astree* root, vector<symbol*> parameters){
   block_stack.push(blocknr);
   blocknr++;
   block_count++;
-  symbol_table* table = new symbol_table();
   for(size_t i = 0; i < root->children.size(); i++){
     if(root->children[i]->symbol == TOK_PARAM){
       string *key = NULL;
@@ -263,7 +275,6 @@ void populate_param(astree* root, vector<symbol*> parameters){
           set_var_type(root->children[i]->children[q], sym,
                        root->children[i]->children[q]->lexinfo);
           print_sym(key, sym);
-          table->insert({key, sym});
           parameters.push_back(sym);
         }
       }
@@ -325,7 +336,7 @@ void insert_function(astree* root){
         populate_param(root, *sym->parameters);
         break;
       case TOK_BLOCK:
-        //visit(root->children[i]);
+        visit(root->children[i]);
         break;
       default:
         break;
