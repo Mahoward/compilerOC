@@ -30,7 +30,7 @@ string *get_att_string(string *key, symbol* sym){
   if(sym->attributes[ATTR_string])  {attrs->append("string ");}
   if(sym->attributes[ATTR_struct])  {attrs->append("struct ");
                                       attrs->append("\"");
-                                      attrs->append(sym->struct_name);
+                                      attrs->append(&sym->struct_name);
                                       attrs->append("\" ");}
   if(sym->attributes[ATTR_array])   {attrs->append("array ");}
   if(sym->attributes[ATTR_function]){attrs->append("function ");}
@@ -85,7 +85,7 @@ void populate_fields(astree* root, symbol_table& fields){
           symbol* sym = new symbol();
           sym->struct_name = new string;
           int attr = var_type(root->children[i]);
-          if(attr == ATTR_struct){sym->struct_name->append(root->children[i]->lexinfo);}
+          if(attr == ATTR_struct){sym->struct_name->append(&root->children[i]->lexinfo);}
           sym->attributes.set(attr);
           sym->attributes.set(ATTR_field);
           key = (string *)root->children[i]->children[q]->lexinfo;
@@ -135,7 +135,7 @@ void insert_struct(astree* root){
   struct_sym->struct_name = new string;
   struct_sym->attributes.set(ATTR_struct);
   struct_sym->fields = new symbol_table();
-  struct_sym->struct_name->append(root->lexinfo);
+  struct_sym->struct_name->append(&root->lexinfo);
   populate_fields(root, *struct_sym->fields);
   string* key = populate_struct_sym(root, struct_sym);
   if(key == NULL){
