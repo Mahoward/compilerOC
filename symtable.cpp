@@ -119,7 +119,7 @@ string *populate_struct_sym(astree* root, symbol* struct_sym){
   for(size_t i = 0; i < root->children.size(); i++){
       if(root->children[i]->symbol == TOK_TYPEID){
         key = (string *)root->children[i]->lexinfo;
-        struct_sym->struct_name->append(*root->children[i]->lexinfo)
+        struct_sym->struct_name->append(*root->children[i]->lexinfo);
         struct_sym->filenr = root->children[i]->filenr;
         struct_sym->linenr = root->children[i]->linenr;
         struct_sym->offset = root->children[i]->offset;
@@ -135,7 +135,7 @@ void insert_struct(astree* root){
   symbol* struct_sym = new symbol();
   struct_sym->struct_name = new string;
   struct_sym->attributes.set(ATTR_struct);
-  struct_sym->fields = new symbol_table();;
+  struct_sym->fields = new symbol_table();
   populate_fields(root, *struct_sym->fields);
   string* key = populate_struct_sym(root, struct_sym);
   if(key == NULL){
