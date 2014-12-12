@@ -14,5 +14,5 @@ node func (node head, int length) {
 		}
 	}
 }
-int foo;
+
 node h = func (null, 10);
