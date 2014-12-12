@@ -83,6 +83,7 @@ void populate_fields(astree* root, symbol_table& fields){
       for(size_t q = 0; q < root->children[i]->children.size(); q++){
         if(root->children[i]->children[q]->symbol == TOK_FIELD){
           symbol* sym = new symbol();
+          sym->struct_name = new string;
           int attr = var_type(root->children[i]);
           if(attr == ATTR_struct){sym->struct_name->append(root->children[i]->lexinfo);}
           sym->attributes.set(attr);
@@ -131,6 +132,7 @@ string *populate_struct_sym(astree* root, symbol* struct_sym){
 
 void insert_struct(astree* root){
   symbol* struct_sym = new symbol();
+  struct_sym->struct_name = new string;
   struct_sym->attributes.set(ATTR_struct);
   struct_sym->fields = new symbol_table();
   struct_sym->struct_name->append(root->lexinfo);
