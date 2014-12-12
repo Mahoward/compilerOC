@@ -112,7 +112,7 @@ void populate_fields(astree* root, symbol_table& fields){
           sym->attributes.set(ATTR_field);
           key = (string *)root->children[i]->children[q]->lexinfo;
           if(attr == ATTR_struct){
-            printf("%s", key->c_str());
+            printf("%s\n", key->c_str());
             sym->struct_name->append(*root->children[i]->lexinfo);
           }
           sym->filenr = root->children[i]->children[q]->filenr;
