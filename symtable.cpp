@@ -153,24 +153,42 @@ void print_sym(string *key, symbol* sym){
 /*-----------Logic-------------*/
 
 /*---------Struct-----------*/
+void set_field_type(astree* node, symbol* sym, const string* struct_name){
+  sym->attributes.set(ATTR_field);
+  switch(node->symbol){
+    case TOK_IDENT:
+    sym->attributes.set(ATTR_struct);
+    sym->struct_name->append(*struct_name);
+    break;
+    case TOK_INT:
+    sym->attributes.set(ATTR_int);
+    break;
+    case TOK_VOID:
+    sym->attributes.set(ATTR_void);
+    break;
+    case TOK_BOOL:
+    sym->attributes.set(ATTR_bool);
+    break;
+    case TOK_CHAR:
+    sym->attributes.set(ATTR_char);
+    break;
+    case TOK_STRING:
+    sym->attributes.set(ATTR_string);
+    break;
+  }
+}
+
 void populate_fields(astree* root, symbol_table& fields){
   for(size_t i = 0; i < root->children.size(); i++){
     if(root->children[i]->symbol != TOK_TYPEID){
       string *key = NULL;
       for(size_t q = 0; q < root->children[i]->children.size(); q++){
         if(root->children[i]->children[q]->symbol == TOK_FIELD){
-          symbol* sym = new symbol();
+          symbol* sym = create_sym(root->children[i]->children[q]);
           sym->struct_name = new string;
-          int attr = var_type(root->children[i]);
-          sym->attributes.set(attr);
-          sym->attributes.set(ATTR_field);
           key = (string *)root->children[i]->children[q]->lexinfo;
-          if(attr == ATTR_struct){
-            sym->struct_name->append(*root->children[i]->lexinfo);
-          }
-          sym->filenr = root->children[i]->children[q]->filenr;
-          sym->linenr = root->children[i]->children[q]->linenr;
-          sym->offset = root->children[i]->children[q]->offset;
+          set_field_type(root->children[i]->children[q], sym,
+          root->children[i]->lexinfo);
           fields.insert({key, sym});
         }
       }
