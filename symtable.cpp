@@ -45,7 +45,7 @@ string *get_att_string(symbol* sym){
   return attrs;
 }
 
-print_field(string *key, symbol* struct_sym){
+void print_field(string *key, symbol* struct_sym){
   vector<string*> keys;
   keys.reserve(struct_sym->fields->size());
 
