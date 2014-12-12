@@ -20,6 +20,7 @@ symbol_table global_table;
 stack <symbol_table> sym_stack;
 int blocknr = 0;
 int block_count = 0;
+stack <int> block_stack;
 
 /*-----------Utilities-------------*/
 string *get_att_string(symbol* sym){
@@ -248,6 +249,9 @@ void insert_struct(astree* root){
 /*---------Function-----------*/
 
 void populate_param(astree* root, vector<symbol*> parameters){
+  block_stack.push(blocknr);
+  blocknr++;
+  block_count++;
   for(size_t i = 0; i < root->children.size(); i++){
     if(root->children[i]->symbol == TOK_PARAM){
       string *key = NULL;
@@ -262,6 +266,10 @@ void populate_param(astree* root, vector<symbol*> parameters){
         }
       }
     }
+    blocknr = block_stack.top();
+    block_stack.pop();
+    block_count--;
+
 }
 
 string *populate_function_sym(symbol* sym, astree* root){
