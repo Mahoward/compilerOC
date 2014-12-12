@@ -22,6 +22,9 @@ int blocknr = 0;
 int block_count = 0;
 stack <int> block_stack;
 
+//Declarations
+void visit(astree* root)
+
 /*-----------Utilities-------------*/
 string *get_att_string(symbol* sym){
   string *attrs = new string;
@@ -420,6 +423,6 @@ void visit(astree* root){
 }
 
 void build_sym(astree* root){
-  sym_stack.push(*global_table);
+  sym_stack.push(&global_table);
   visit(root);
 }
