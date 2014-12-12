@@ -76,7 +76,6 @@ void print_struct(string *key, symbol* struct_sym){
   print_fields(key, struct_sym);
 }
 int var_type(astree* node){
-  printf("%d", node->symbol);
   switch(node->symbol){
     case TOK_BOOL:
       return ATTR_bool;
@@ -85,12 +84,14 @@ int var_type(astree* node){
       return ATTR_char;
       break;
     case TOK_INT:
+      printf("HERE");
       return ATTR_int;
       break;
     case TOK_STRING:
       return ATTR_string;
       break;
     case TOK_IDENT:
+      printf("BOO");
       return ATTR_struct;
       break;
     default:
