@@ -277,7 +277,6 @@ void handle_struct(astree* root){
 /*---------Function-----------*/
 
 void populate_param(astree* root, vector<symbol*> parameters){
-  enter_block();
   for(size_t i = 0; i < root->children.size(); i++){
     if(root->children[i]->symbol == TOK_PARAM){
       string *key = NULL;
@@ -292,7 +291,6 @@ void populate_param(astree* root, vector<symbol*> parameters){
         }
       }
     }
-    leave_block();
 }
 
 void populate_function_sym(symbol* sym, astree* root){
@@ -345,10 +343,12 @@ void handle_function(astree* root){
         populate_function_sym(sym, root->children[i]);
         break;
       case TOK_PARAM:
+        enter_block();
         populate_param(root, *sym->parameters);
         break;
       case TOK_BLOCK:
         visit(root->children[i]);
+        leave_block();
         break;
       default:
         break;
