@@ -381,10 +381,22 @@ void handle_vardecl(astree* root){
 }
 
 /*---------Variable-----------*/
+/*
+
+case TOK_IDENT:
+case TOK_INT:
+case TOK_VOID:
+case TOK_BOOL:
+case TOK_CHAR:
+case TOK_STRING:
+handle_variable(root);
+break;
+
 void handle_variable(astree* root){
   //set_var_type(root, sym, root->lexinfo);
 
 }
+*/
 
 /*---------Main-----------*/
 void visit(astree* root){
@@ -406,20 +418,35 @@ void visit(astree* root){
       case TOK_VARDECL:
         handle_vardecl(root);
         break;
-      case TOK_IDENT:
-      case TOK_INT:
-      case TOK_VOID:
-      case TOK_BOOL:
-      case TOK_CHAR:
-      case TOK_STRING:
-        handle_variable(root);
+      case '+':
         break;
+      case '-':
+        break;
+      case '*':
+        break;
+      case '/':
+        break;
+      case '%':
+        break;
+      case TOK_POS:
+        break;
+      case TOK_NEG:
+        break;
+      case TOK_EQ:
+        break;
+      case TOK_NE:
+        break;
+      case TOK_LT:
+        break;
+      case TOK_LE:
+        break;
+      case TOK_GT:
+        break;
+      case TOK_GE:
+        break;
+
       case TOK_TYPEID:
         //Check to make sure this is found in the struct table
-        break;
-      case TOK_IF:
-        break;
-      case TOK_WHILE:
         break;
       case TOK_RETURN:
         break;
@@ -433,22 +460,20 @@ void visit(astree* root){
         break;
       case TOK_CALL:
         break;
-      case TOK_IFELSE:
-        break;
-      case TOK_INITDECL:
-        break;
-      case TOK_DECLID:
-        break;
-      case TOK_POS:
-        break;
-      case TOK_NEG:
-        break;
       case TOK_NEWARRAY:
         break;
       case TOK_RETURNVOID:
         //Check the function is supposed to return void
         break;
+
       case TOK_PROTOTYPE:
+        break;
+
+      case TOK_IFELSE:
+        break;
+      case TOK_IF:
+        break;
+      case TOK_WHILE:
         break;
       default:
         for(size_t i = 0; i < root->children.size(); i++){
