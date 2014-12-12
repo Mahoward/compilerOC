@@ -45,12 +45,28 @@ string *get_att_string(symbol* sym){
   return attrs;
 }
 
-void print_block(string *key, symbol* struct_sym){
+print_field(string *key, symbol* struct_sym){
+  vector<string*> keys;
+  keys.reserve(struct_sym->fields->size());
+
+  for(auto kv : struct_sym->fields) {
+    keys.push_back(kv.first);
+  }
+  /*
+  printf("%s (%ld.%ld.%ld) {%ld} %s\n",
+  key->c_str(), struct_sym->filenr,
+  struct_sym->linenr, struct_sym->offset,
+  struct_sym->blocknr, attp->c_str());
+  */
+}
+
+void print_struct(string *key, symbol* struct_sym){
   string *attp = get_att_string(struct_sym);
   printf("%s (%ld.%ld.%ld) {%ld} %s\n",
   key->c_str(), struct_sym->filenr,
   struct_sym->linenr, struct_sym->offset,
   struct_sym->blocknr, attp->c_str());
+  print_field(key, struct_sym);
 }
 int var_type(astree* node){
   switch(node->symbol){
@@ -93,8 +109,6 @@ void populate_fields(astree* root, symbol_table& fields){
           sym->filenr = root->children[i]->children[q]->filenr;
           sym->linenr = root->children[i]->children[q]->linenr;
           sym->offset = root->children[i]->children[q]->offset;
-          sym->blocknr = -1;
-          //print_struct(key, sym);
           fields.insert({key, sym});
           break;
         }
