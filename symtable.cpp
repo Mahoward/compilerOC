@@ -418,6 +418,12 @@ void visit(astree* root){
       case TOK_VARDECL:
         handle_vardecl(root);
         break;
+      case TOK_IFELSE:
+        printf("IFELSE STATEMENT");
+        break;
+      case TOK_IF:
+        printf("IFELSE STATEMENT");
+        break;
       case '+':
         break;
       case '-':
@@ -469,10 +475,6 @@ void visit(astree* root){
       case TOK_PROTOTYPE:
         break;
 
-      case TOK_IFELSE:
-        break;
-      case TOK_IF:
-        break;
       case TOK_WHILE:
         break;
       default:
