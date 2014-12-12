@@ -125,6 +125,23 @@ void insert_table(string* key, symbol* sym){
   sym_stack.top()->insert({key, sym});
 }
 
+bool in_gtable(string *key){
+  symbol_table::const_iterator inTable = global_table.find(key);
+  if(inTable == global_table.end){
+    return false;
+  }else{
+    return true;
+  }
+}
+
+bool in_table(){
+
+}
+
+void insert_global(string *key, symbol *sym){
+  global_table.insert({key, sym});
+}
+
 void enter_block(){
   block_stack.push(blocknr);
   block_count++;
@@ -136,6 +153,8 @@ void leave_block(){
   blocknr = block_stack.top();
   block_stack.pop();
 }
+
+
 /*-----------Printing-------------*/
 void print_fields(string *struct_name, symbol* struct_sym){
   vector<string*> keys;
@@ -297,16 +316,17 @@ void populate_param(astree* root, vector<symbol*> parameters){
     block_count--;
 }
 
-void populate_function_sym(symbol* sym, astree* root){
+string *populate_function_sym(symbol* sym, astree* root){
   string *key = NULL;
   sym->parameters = new vector<symbol*>;
   key = (string *)root->children[0]->lexinfo;
   print_sym(key,sym);
-  global_table.insert({key, sym});
+  return key;
 }
 
 void handle_function(astree* root){
   symbol* sym;
+  string *key = NULL;
   for(size_t i = 0; i < root->children.size(); i++){
     switch(root->children[i]->symbol){
       case TOK_IDENT:
@@ -314,48 +334,54 @@ void handle_function(astree* root){
         sym->attributes.set(ATTR_function);
         sym->attributes.set(ATTR_struct);
         sym->struct_name->append(*root->children[i]->lexinfo);
-        populate_function_sym(sym, root->children[i]);
+        key = populate_function_sym(sym, root->children[i]);
         break;
       case TOK_INT:
         sym = create_sym(root->children[i]->children[0]);
         sym->attributes.set(ATTR_function);
         sym->attributes.set(ATTR_int);
-        populate_function_sym(sym, root->children[i]);
+        key = populate_function_sym(sym, root->children[i]);
         break;
       case TOK_VOID:
         sym = create_sym(root->children[i]->children[0]);
         sym->attributes.set(ATTR_function);
         sym->attributes.set(ATTR_void);
-        populate_function_sym(sym, root->children[i]);
+        key = populate_function_sym(sym, root->children[i]);
         break;
       case TOK_BOOL:
         sym = create_sym(root->children[i]->children[0]);
         sym->attributes.set(ATTR_function);
         sym->attributes.set(ATTR_bool);
-        populate_function_sym(sym, root->children[i]);
+        key = populate_function_sym(sym, root->children[i]);
         break;
       case TOK_CHAR:
         sym = create_sym(root->children[i]->children[0]);
         sym->attributes.set(ATTR_function);
         sym->attributes.set(ATTR_char);
-        populate_function_sym(sym, root->children[i]);
+        key = populate_function_sym(sym, root->children[i]);
         break;
       case TOK_STRING:
         sym = create_sym(root->children[i]->children[0]);
         sym->attributes.set(ATTR_function);
         sym->attributes.set(ATTR_string);
-        populate_function_sym(sym, root->children[i]);
+        key = populate_function_sym(sym, root->children[i]);
         break;
       case TOK_PARAM:
         populate_param(root, *sym->parameters);
         break;
       case TOK_BLOCK:
+        if(in_gtable(key)){
+          eprintf("Multiple functions with name %s ", key->c_str());
+          set_exitstatus(1);
+          abort();
+        }
         visit(root->children[i]);
         break;
       default:
         break;
     }
   }
+  insert_global(key, sym);
 }
 
 /*---------Vardecl-----------*/
@@ -372,9 +398,8 @@ void handle_vardecl(astree* root){
     }
   }
   set_var_type(root->children[0], sym, root->children[0]->lexinfo);
-
   //TODO TYPECHECK RIGHT SIDE OF VARDEL
-
+  check_var(sym);
   print_sym(key, sym);
   insert_table(key, sym);
   return;
