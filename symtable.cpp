@@ -114,6 +114,16 @@ void print_struct(string *key, symbol* struct_sym){
   print_fields(key, struct_sym);
 }
 
+void print_sym(symbol* sym){
+  for(int i = 0; i < sym->blocknr; i++){
+    printf("  ");
+  }
+  string *attp = get_att_string(sym);
+  printf("%s (%ld.%ld.%ld) {%ld} %s\n",
+  key->c_str(), sym->filenr,
+  sym->linenr, sym->offset,
+  sym->blocknr, attp->c_str());
+}
 
 /*-----------Logic-------------*/
 void populate_fields(astree* root, symbol_table& fields){
@@ -196,8 +206,7 @@ string *populate_function_sym(symbol* sym, astree* root){
   for(size_t i = 0; i < root->children.size(); i++){
       if(root->children[i]->symbol == TOK_DECLID){
         key = (string *)root->children[i]->lexinfo;
-
-        printf("key: %s attr: %s\n", key->c_str(), attp->c_str());
+        print_sym(sym);
         return key;
       }
   }
@@ -206,7 +215,7 @@ string *populate_function_sym(symbol* sym, astree* root){
 
 void insert_function(astree* root){
   symbol* sym = create_sym(root);
-
+  sym->attributes.set(ATTR_function);
   for(size_t i = 0; i < root->children.size(); i++){
     switch(root->children[i]->symbol){
       case TOK_IDENT:
@@ -227,6 +236,12 @@ void insert_function(astree* root){
         break;
       case TOK_STRING:
         sym->attributes.set(ATTR_string);
+        break;
+      case TOK_PARAM:
+        populate_param(root);
+        break;
+      case TOK_BLOCK:
+        view(root->children[i]);
         break;
       default:
         break;
