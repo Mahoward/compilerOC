@@ -49,6 +49,7 @@ string *get_att_string(symbol* sym){
 
 symbol* create_sym(astree* node){
   symbol* sym = new symbol();
+  sym->struct_name = new string;
   sym->filenr = node->filenr;
   sym->linenr = node->linenr;
   sym->offset = node->offset;
