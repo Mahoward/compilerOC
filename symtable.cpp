@@ -226,7 +226,7 @@ void insert_struct(astree* root){
 }
 
 /*---------Function-----------*/
-void populate_param(astree* root){
+void populate_param(astree* root, vector<symbol*> parameters){
   for(size_t i = 0; i < root->children.size(); i++){
     if(root->children[i]->symbol == TOK_PARAM){
       string *key = NULL;
@@ -237,7 +237,7 @@ void populate_param(astree* root){
           set_var_type(root->children[i]->children[q], sym,
                        root->children[i]->lexinfo);
           print_sym(key, sym);
-          root->parameters.push_back(sym);
+          parameters.push_back(sym);
         }
       }
     }
@@ -247,7 +247,7 @@ string *populate_function_sym(symbol* sym, astree* root){
   string *key = NULL;
   key = (string *)root->children[0]->lexinfo;
   print_sym(key,sym);
-  populate_param(root);
+  populate_param(root, &root->parameters);
   return key;
 }
 
