@@ -382,7 +382,7 @@ void handle_vardecl(astree* root){
 
 /*---------Variable-----------*/
 void handle_variable(astree* root){
-  set_var_type(root, sym, root->lexinfo);
+  //set_var_type(root, sym, root->lexinfo);
 
 }
 
