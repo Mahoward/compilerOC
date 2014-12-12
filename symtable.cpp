@@ -49,7 +49,7 @@ void print_field(string *key, symbol* struct_sym){
   vector<string*> keys;
   keys.reserve(struct_sym->fields->size());
 
-  for(auto kv : struct_sym->fields) {
+  for(auto kv : *struct_sym->fields) {
     keys.push_back(kv.first);
   }
   /*
