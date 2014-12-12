@@ -94,7 +94,7 @@ void populate_fields(astree* root, symbol_table& fields){
           sym->linenr = root->children[i]->children[q]->linenr;
           sym->offset = root->children[i]->children[q]->offset;
           sym->blocknr = -1;
-          print_block(key, sym);
+          //print_struct(key, sym);
           fields.insert({key, sym});
           break;
         }
@@ -152,14 +152,115 @@ void insert_struct(astree* root){
   }
 }
 
+string *populate_function_sym(symbol* sym, astree* root){
+  string *key = NULL;
+  for(int i = 0; i < root->children.size(); i++){
+      if(root->children[i]->symbol == TOK_DECLID){
+        printf("So far so good\n");
+      }
+  }
+}
+
+void insert_function(astree* root){
+  symbol* sym = new symbol();
+  for(int i = 0; i < root->children.size(); i++){
+    switch(root->children[i]->symbol){
+      case TOK_IDENT:
+        sym->attributes.set(ATTR_struct);
+        populate_function_sym(sym, root->children[i]);
+        break;
+      case TOK_INT:
+        sym->attributes.set(ATTR_int);
+        populate_function_sym(sym, root->children[i]);
+        break;
+      case TOK_VOID:
+        sym->attributes.set(ATTR_void);
+        populate_function_sym(sym, root->children[i]);
+        break;
+      case TOK_BOOL:
+        sym->attributes.set(ATTR_bool);
+        populate_function_sym(sym, root->children[i]);
+        break;
+      case TOK_CHAR:
+        sym->attributes.set(ATTR_char);
+        populate_function_sym(sym, root->children[i]);
+        break;
+      case TOK_STRING:
+        sym->attributes.set(ATTR_string);
+        populate_function_sym(root->children[i]);
+        break;
+    }
+  }
+}
+
+insert_new_var(root){
+  case TOK_BOOL;
+    if(root->children[0]->symbol == TOK_DECLID ||
+       root->children[0]->symbol == TOK_ARRAY)
+    break;
+  case TOK_CHAR;
+    break;
+  case TOK_INT;
+    break;
+  case TOK_STRING;
+    break;
+}
+
 void visit(astree* root){
     switch(root->symbol){
       case TOK_STRUCT:
         insert_struct(root);
         break;
+      case TOK_FUNCTION;
+        insert_function(root);
+        break;
+      case TOK_VARDECL:
+        new_var(root);
+        break;
+      case TOK_TYPEID;
+        //Check to make sure this is found in the struct table
+        break;
+      case TOK_IF;
+        break;
+      case TOK_WHILE;
+        break;
+      case TOK_RETURN;
+        break;
+      case TOK_ARRAY;
+        break;
+      case TOK_IDENT;
+        break;
+      case TOK_ORD;
+        break;
+      case TOK_CHR;
+        break;
+      case TOK_NEWSTRING;
+        break;
+      case TOK_BLOCK;
+        break;
+      case TOK_CALL;
+        break;
+      case TOK_IFELSE;
+        break;
+      case TOK_INITDECL;
+        break;
+      case TOK_DECLID;
+        break;
+      case TOK_POS;
+        break;
+      case TOK_NEG;
+        break;
+      case TOK_NEWARRAY;
+        break;
+      case TOK_RETURNVOID;
+        //Check the function is supposed to return void
+        break;
+      case TOK_PROTOTYPE;
+        break;
       default:
         for(size_t i = 0; i < root->children.size(); i++){
-            visit(root->children[i]);
+          visit(root->children[i]);
         }
     }
+
 }

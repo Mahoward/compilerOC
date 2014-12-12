@@ -69,7 +69,8 @@ basetype  : TOK_VOID            { $$ = $1; }
           | TOK_CHAR            { $$ = $1; }
           | TOK_INT             { $$ = $1; }
           | TOK_STRING          { $$ = $1; }
-          | TOK_IDENT           { $$ = $1; }
+          | TOK_IDENT           { $1->symbol = TOK_TYPEID;
+                                  $$ = $1; }
           ;
 
 function  : identdecl param')'block
