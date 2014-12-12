@@ -128,7 +128,7 @@ void print_fields(string *struct_name, symbol* struct_sym){
 
 }
 
-void print_struct(string *key, symbol* struct_sym){
+void print_struct(string *key, const symbol* struct_sym){
   string *attp = get_att_string(struct_sym);
   printf("%s (%ld.%ld.%ld) {%ld} %s\n",
   key->c_str(), struct_sym->filenr,
@@ -231,6 +231,7 @@ void populate_param(astree* root){
     if(root->children[i]->symbol == TOK_PARAM){
       string *key = NULL;
       for(size_t q = 0; q < root->children[i]->children.size(); q++){
+          key = (string *)root->children[i]->children[q]->children->[0]->lexinfo;
           symbol *sym = create_sym(root->children[i]->children[q]->children[0]);
           sym->attributes.set(ATTR_param);
           set_var_type(root->children[i]->children[q], sym,
