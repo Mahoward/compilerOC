@@ -48,11 +48,11 @@ string *get_att_string(symbol* sym){
 }
 
 symbol* create_sym(astree* node){
-  symbol* sym = new symb();
+  symbol* sym = new symbol();
   sym->filenr = node->filenr;
   sym->linenr = node->linenr;
   sym->offset = node->offset;
-  sym->blocknr = blcknr;
+  sym->blocknr = blocknr;
   sym->fields = NULL;
   sym->parameters = NULL;
   return sym;
@@ -210,7 +210,7 @@ void insert_function(astree* root){
     switch(root->children[i]->symbol){
       case TOK_IDENT:
         sym->attributes.set(ATTR_struct);
-        sym->struct_name->append(*root->children[i]->lexinfo)
+        sym->struct_name->append(*root->children[i]->lexinfo);
         break;
       case TOK_INT:
         sym->attributes.set(ATTR_int);
