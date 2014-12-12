@@ -19,7 +19,9 @@ symbol_table struct_table;
 symbol_table global_table;
 stack <symbol_table> sym_stack;
 int depth = 0;
+int block_count = 0;
 
+/*-----------Utilities-------------*/
 string *get_att_string(symbol* sym){
   string *attrs = new string;
   if(sym->attributes[ATTR_void])    {attrs->append("void ");}
@@ -45,6 +47,30 @@ string *get_att_string(symbol* sym){
   return attrs;
 }
 
+int var_type(astree* node){
+  switch(node->symbol){
+    case TOK_BOOL:
+    return ATTR_bool;
+    break;
+    case TOK_CHAR:
+    return ATTR_char;
+    break;
+    case TOK_INT:
+    return ATTR_int;
+    break;
+    case TOK_STRING:
+    return ATTR_string;
+    break;
+    case TOK_IDENT:
+    return ATTR_struct;
+    break;
+    default:
+    printf("VAR TYPE ERROR\n");
+    return -1;
+  }
+}
+
+/*-----------Printing-------------*/
 void print_fields(string *struct_name, symbol* struct_sym){
   vector<string*> keys;
   keys.reserve(struct_sym->fields->size());
@@ -75,30 +101,9 @@ void print_struct(string *key, symbol* struct_sym){
   struct_sym->blocknr, attp->c_str());
   print_fields(key, struct_sym);
 }
-int var_type(astree* node){
-  switch(node->symbol){
-    case TOK_BOOL:
-      return ATTR_bool;
-      break;
-    case TOK_CHAR:
-      return ATTR_char;
-      break;
-    case TOK_INT:
-      return ATTR_int;
-      break;
-    case TOK_STRING:
-      return ATTR_string;
-      break;
-    case TOK_IDENT:
-      return ATTR_struct;
-      break;
-    default:
-      printf("VAR TYPE ERROR\n");
-      return -1;
-  }
-}
 
 
+/*-----------Logic-------------*/
 void populate_fields(astree* root, symbol_table& fields){
   for(size_t i = 0; i < root->children.size(); i++){
     if(root->children[i]->symbol != TOK_TYPEID){
@@ -178,7 +183,7 @@ string *populate_function_sym(symbol* sym, astree* root){
   for(size_t i = 0; i < root->children.size(); i++){
       if(root->children[i]->symbol == TOK_DECLID){
         key = (string *)root->children[i]->lexinfo;
-        printf("So far so good\n");
+        printf("key: %s\n", key->c_str());
         return key;
       }
   }
