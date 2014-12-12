@@ -189,10 +189,11 @@ void insert_function(astree* root){
         sym->attributes.set(ATTR_string);
         populate_function_sym(root->children[i]);
         break;
+      default:
     }
   }
 }
-
+/*
 insert_new_var(root){
   case TOK_BOOL;
     if(root->children[0]->symbol == TOK_DECLID ||
@@ -205,7 +206,7 @@ insert_new_var(root){
   case TOK_STRING;
     break;
 }
-
+*/
 void visit(astree* root){
     switch(root->symbol){
       case TOK_STRUCT:
@@ -215,7 +216,7 @@ void visit(astree* root){
         insert_function(root);
         break;
       case TOK_VARDECL:
-        new_var(root);
+        //new_var(root);
         break;
       case TOK_TYPEID;
         //Check to make sure this is found in the struct table
