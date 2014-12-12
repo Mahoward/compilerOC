@@ -59,7 +59,7 @@ void print_fields(string *struct_name, symbol* struct_sym){
 
   for(size_t i = 0; i < keys.size(); i++){
     string *attp = get_att_string(syms[i]);
-    printf("%s (%ld.%ld.%ld) {%s} %s\n",
+    printf("  %s (%ld.%ld.%ld) {%s} %s\n",
     keys[i]->c_str(), syms[i]->filenr,
     syms[i]->linenr, syms[i]->offset,
     struct_name->c_str(), attp->c_str());
