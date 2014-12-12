@@ -86,7 +86,7 @@ void set_var_type(astree* node, symbol* sym, string* struct_name){
   switch(node->symbol){
     case TOK_IDENT:
     sym->attributes.set(ATTR_struct);
-    sym->struct_name->append();
+    sym->struct_name->append(*struct_name);
     break;
     case TOK_INT:
     sym->attributes.set(ATTR_int);
