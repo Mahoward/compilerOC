@@ -30,7 +30,7 @@ string *get_att_string(symbol* sym){
   if(sym->attributes[ATTR_int])     {attrs->append("int ");}
   if(sym->attributes[ATTR_null])    {attrs->append("null ");}
   if(sym->attributes[ATTR_string])  {attrs->append("string ");}
-  if(sym->attributes[ATTR_struct])  {attrs->append("struct ");
+  if(sym->attributes[ATTR_struct])  {attrs->append("struct ");}
                                       //attrs->append("\"");
                                       //attrs->append(*sym->struct_name);
                                       //attrs->append("\" ");}
