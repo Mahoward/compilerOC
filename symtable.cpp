@@ -49,8 +49,12 @@ void print_fields(string *struct_name, symbol* struct_sym){
   vector<string*> keys;
   keys.reserve(struct_sym->fields->size());
 
+  vector<symbol*> syms;
+  syms.reserve(struct_sym->fields->size());
+
   for(auto kv : *struct_sym->fields) {
     keys.push_back(kv.first);
+    syms.push_back(kv.second);
   }
   /*
   printf("%s (%ld.%ld.%ld) {%ld} %s\n",
