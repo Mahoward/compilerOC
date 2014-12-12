@@ -4,6 +4,8 @@
 
 int count = 0;
 while (count <= 100) {
+  int foobar = 10;
+  string yeah = "";
    count = count + 1;
    puti (count);
    endl ();
