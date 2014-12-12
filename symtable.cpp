@@ -58,7 +58,7 @@ void print_fields(string *struct_name, symbol* struct_sym){
   }
 
   for(size_t i = 0; i < keys.size(); i++){
-    string *attp = get_att_string(struct_sym);
+    string *attp = get_att_string(syms[i]);
     printf("%s (%ld.%ld.%ld) {%s} %s\n",
     keys[i]->c_str(), syms[i]->filenr,
     syms[i]->linenr, syms[i]->offset,
@@ -84,14 +84,12 @@ int var_type(astree* node){
       return ATTR_char;
       break;
     case TOK_INT:
-      printf("HERE");
       return ATTR_int;
       break;
     case TOK_STRING:
       return ATTR_string;
       break;
     case TOK_IDENT:
-      printf("BOO");
       return ATTR_struct;
       break;
     default:
@@ -114,7 +112,6 @@ void populate_fields(astree* root, symbol_table& fields){
           sym->attributes.set(ATTR_field);
           key = (string *)root->children[i]->children[q]->lexinfo;
           if(attr == ATTR_struct){
-            printf("%s\n", key->c_str());
             sym->struct_name->append(*root->children[i]->lexinfo);
           }
           sym->filenr = root->children[i]->children[q]->filenr;
