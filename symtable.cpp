@@ -53,11 +53,10 @@ void print_fields(string *struct_name, symbol* struct_sym){
   syms.reserve(struct_sym->fields->size());
 
   for(auto kv : *struct_sym->fields) {
-    printf("%s\n", kv.first->c_str());
     keys.push_back(kv.first);
     syms.push_back(kv.second);
   }
-  /*
+
   for(size_t i = 0; i < keys.size(); i++){
     string *attp = get_att_string(struct_sym);
     printf("%s (%ld.%ld.%ld) {%s} %s\n",
@@ -65,7 +64,6 @@ void print_fields(string *struct_name, symbol* struct_sym){
     syms[i]->linenr, syms[i]->offset,
     struct_name->c_str(), attp->c_str());
   }
-  */
 
 }
 
@@ -103,7 +101,6 @@ int var_type(astree* node){
 
 void populate_fields(astree* root, symbol_table& fields){
   for(size_t i = 0; i < root->children.size(); i++){
-    printf("Loop: %d %d\n", root->children[i]->symbol, TOK_TYPEID);
     if(root->children[i]->symbol != TOK_TYPEID){
       string *key = NULL;
       for(size_t q = 0; q < root->children[i]->children.size(); q++){
