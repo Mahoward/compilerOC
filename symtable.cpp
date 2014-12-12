@@ -23,7 +23,7 @@ int block_count = 0;
 stack <int> block_stack;
 
 //Declarations
-void visit(astree* root)
+void visit(astree* root);
 
 /*-----------Utilities-------------*/
 string *get_att_string(symbol* sym){
