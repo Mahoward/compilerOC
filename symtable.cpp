@@ -115,7 +115,7 @@ void print_struct(string *key, symbol* struct_sym){
 }
 
 void print_sym(string *key, symbol* sym){
-  for(int i = 0; i < sym->blocknr; i++){
+  for(size_t i = 0; i < sym->blocknr; i++){
     printf("  ");
   }
   string *attp = get_att_string(sym);
