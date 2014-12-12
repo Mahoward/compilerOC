@@ -249,7 +249,6 @@ string *populate_function_sym(symbol* sym, astree* root){
   sym->parameters = new vector<symbol*>;
   key = (string *)root->children[0]->lexinfo;
   print_sym(key,sym);
-  populate_param(root, *sym->parameters);
   return key;
 }
 
@@ -295,7 +294,7 @@ void insert_function(astree* root){
         populate_function_sym(sym, root->children[i]);
         break;
       case TOK_PARAM:
-        populate_param(root);
+        populate_param(root, *sym->parameters);
         break;
       case TOK_BLOCK:
         //visit(root->children[i]);
