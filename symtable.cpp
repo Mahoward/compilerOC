@@ -53,9 +53,11 @@ void print_fields(string *struct_name, symbol* struct_sym){
   syms.reserve(struct_sym->fields->size());
 
   for(auto kv : *struct_sym->fields) {
+    prinf("%s\n", kv.first->c_str());
     keys.push_back(kv.first);
     syms.push_back(kv.second);
   }
+  /*
   for(size_t i = 0; i < keys.size(); i++){
     string *attp = get_att_string(struct_sym);
     printf("%s (%ld.%ld.%ld) {%s} %s\n",
@@ -63,6 +65,7 @@ void print_fields(string *struct_name, symbol* struct_sym){
     syms[i]->linenr, syms[i]->offset,
     struct_name->c_str(), attp->c_str());
   }
+  */
 
 }
 
