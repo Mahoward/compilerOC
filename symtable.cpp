@@ -247,7 +247,7 @@ string *populate_function_sym(symbol* sym, astree* root){
   string *key = NULL;
   key = (string *)root->children[0]->lexinfo;
   print_sym(key,sym);
-  populate_param(root, &root->parameters);
+  populate_param(root, &sym->parameters);
   return key;
 }
 
