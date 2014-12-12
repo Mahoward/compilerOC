@@ -53,7 +53,7 @@ void print_fields(string *struct_name, symbol* struct_sym){
   syms.reserve(struct_sym->fields->size());
 
   for(auto kv : *struct_sym->fields) {
-    prinf("%s\n", kv.first->c_str());
+    printf("%s\n", kv.first->c_str());
     keys.push_back(kv.first);
     syms.push_back(kv.second);
   }
