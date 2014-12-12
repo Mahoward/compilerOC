@@ -133,7 +133,7 @@ void insert_struct(astree* root){
   symbol* struct_sym = new symbol();
   struct_sym->attributes.set(ATTR_struct);
   struct_sym->fields = new symbol_table();
-  struct_sym->struct_name = root->lexinfo;
+  struct_sym->struct_name->append(root->lexinfo);
   populate_fields(root, *struct_sym->fields);
   string* key = populate_struct_sym(root, struct_sym);
   if(key == NULL){
