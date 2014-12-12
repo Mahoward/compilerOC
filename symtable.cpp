@@ -196,7 +196,7 @@ string *populate_function_sym(symbol* sym, astree* root){
       if(root->children[i]->symbol == TOK_DECLID){
         key = (string *)root->children[i]->lexinfo;
 
-        printf("key: %s %s\n", key->c_str());
+        printf("key: %s\n", key->c_str());
         return key;
       }
   }
@@ -210,7 +210,7 @@ void insert_function(astree* root){
     switch(root->children[i]->symbol){
       case TOK_IDENT:
         sym->attributes.set(ATTR_struct);
-        sym->struct_name->append(*root->children[i]->lexinfo);
+        //sym->struct_name->append(*root->children[i]->lexinfo);
         break;
       case TOK_INT:
         sym->attributes.set(ATTR_int);
