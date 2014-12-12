@@ -84,7 +84,7 @@ void populate_fields(astree* root, symbol_table& fields){
         if(root->children[i]->children[q]->symbol == TOK_FIELD){
           symbol* sym = new symbol();
           int attr = var_type(root->children[i]);
-          if(attr == ATTR_struct){sym->struct_name.append(root->children[i]->lexinfo);}
+          if(attr == ATTR_struct){sym->struct_name->append(root->children[i]->lexinfo);}
           sym->attributes.set(attr);
           sym->attributes.set(ATTR_field);
           key = (string *)root->children[i]->children[q]->lexinfo;
