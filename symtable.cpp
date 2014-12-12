@@ -82,7 +82,7 @@ int var_type(astree* node){
   }
 }
 
-void set_var_type(astree* node, symbol* sym, string* struct_name){
+void set_var_type(astree* node, symbol* sym, const string* struct_name){
   switch(node->symbol){
     case TOK_IDENT:
     sym->attributes.set(ATTR_struct);
@@ -128,7 +128,7 @@ void print_fields(string *struct_name, symbol* struct_sym){
 
 }
 
-void print_struct(string *key, const symbol* struct_sym){
+void print_struct(string *key, symbol* struct_sym){
   string *attp = get_att_string(struct_sym);
   printf("%s (%ld.%ld.%ld) {%ld} %s\n",
   key->c_str(), struct_sym->filenr,
