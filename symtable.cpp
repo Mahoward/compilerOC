@@ -121,6 +121,18 @@ void pop_table(){
 void insert_table(string* key, symbol* sym){
   sym_stack.top()->insert({key, sym});
 }
+
+void enter_block(){
+  block_stack.push(blocknr);
+  block_count++;
+  blocknr = block_count;
+
+}
+
+void leave_block(){
+  blocknr = block_stack.top();
+  block_stack.pop();
+}
 /*-----------Printing-------------*/
 void print_fields(string *struct_name, symbol* struct_sym){
   vector<string*> keys;
@@ -262,9 +274,7 @@ void insert_struct(astree* root){
 /*---------Function-----------*/
 
 void populate_param(astree* root, vector<symbol*> parameters){
-  block_stack.push(blocknr);
-  blocknr++;
-  block_count++;
+  enter_block();
   for(size_t i = 0; i < root->children.size(); i++){
     if(root->children[i]->symbol == TOK_PARAM){
       string *key = NULL;
@@ -279,8 +289,7 @@ void populate_param(astree* root, vector<symbol*> parameters){
         }
       }
     }
-    blocknr = block_stack.top();
-    block_stack.pop();
+    leave_block();
 }
 
 void populate_function_sym(symbol* sym, astree* root){
@@ -343,20 +352,8 @@ void insert_function(astree* root){
     }
   }
 }
-/*
-insert_new_var(root){
-  case TOK_BOOL;
-    if(root->children[0]->symbol == TOK_DECLID ||
-       root->children[0]->symbol == TOK_ARRAY)
-    break;
-  case TOK_CHAR;
-    break;
-  case TOK_INT;
-    break;
-  case TOK_STRING;
-    break;
-}
-*/
+
+/*---------Main-----------*/
 void visit(astree* root){
     switch(root->symbol){
       case TOK_STRUCT:
@@ -364,6 +361,12 @@ void visit(astree* root){
         break;
       case TOK_FUNCTION:
         insert_function(root);
+        break;
+      case TOK_BLOCK:
+
+        for(size_t i = 0; i < root->children.size(); i++){
+          visit(root->children[i]);
+        }
         break;
       case TOK_VARDECL:
         //new_var(root);
@@ -386,8 +389,6 @@ void visit(astree* root){
       case TOK_CHR:
         break;
       case TOK_NEWSTRING:
-        break;
-      case TOK_BLOCK:
         break;
       case TOK_CALL:
         break;
