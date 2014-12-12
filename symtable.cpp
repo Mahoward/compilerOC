@@ -82,6 +82,29 @@ int var_type(astree* node){
   }
 }
 
+void set_var_type(astree* node, symbol* sym, string* struct_name){
+  switch(node->symbol){
+    case TOK_IDENT:
+    sym->attributes.set(ATTR_struct);
+    sym->struct_name->append();
+    break;
+    case TOK_INT:
+    sym->attributes.set(ATTR_int);
+    break;
+    case TOK_VOID:
+    sym->attributes.set(ATTR_void);
+    break;
+    case TOK_BOOL:
+    sym->attributes.set(ATTR_bool);
+    break;
+    case TOK_CHAR:
+    sym->attributes.set(ATTR_char);
+    break;
+    case TOK_STRING:
+    sym->attributes.set(ATTR_string);
+    break;
+  }
+}
 /*-----------Printing-------------*/
 void print_fields(string *struct_name, symbol* struct_sym){
   vector<string*> keys;
@@ -202,29 +225,31 @@ void insert_struct(astree* root){
   }
 }
 
-string *populate_function_sym(symbol* sym, astree* root){
-  string *key = NULL;
+/*---------Function-----------*/
+void populate_param(astree* sym){
   for(size_t i = 0; i < root->children.size(); i++){
-      if(root->children[i]->symbol == TOK_DECLID){
-        key = (string *)root->children[i]->lexinfo;
-        print_sym(key,sym);
-        return key;
+    if(root->children[i]->symbol == TOK_PARAM){
+      string *key = NULL;
+      for(size_t q = 0; q < root->children[i]->children.size(); q++){
+          symbol *sym = create_sym(root->children[i]->children[q]->children[0]);
+          sym->attributes.set(ATTR_param);
+          set_var_type(root->children[i]->children[q], sym,
+                       root->children[i]->lexinfo);
+          //fields.insert({key, sym});
+        }
       }
-  }
-  return key;
+    }
 }
 
-/*---------Function-----------*/
-symbol* create_func_sym(astree* node){
-  symbol* sym = new symbol();
-  sym->struct_name = new string;
-  sym->filenr = node->filenr;
-  sym->linenr = node->linenr;
-  sym->offset = node->offset;
-  sym->blocknr = blocknr;
-  sym->fields = NULL;
-  sym->parameters = NULL;
-  return sym;
+string *populate_function_sym(symbol* sym, astree* root){
+  string *key = NULL;
+  key = (string *)root->children[0]->lexinfo;
+  print_sym(key,sym);
+  populate_param(root);
+  return key;
+    }
+  }
+  return key;
 }
 
 void insert_function(astree* root){
