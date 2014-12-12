@@ -263,7 +263,7 @@ void populate_param(astree* root, vector<symbol*> parameters){
           set_var_type(root->children[i]->children[q], sym,
                        root->children[i]->children[q]->lexinfo);
           print_sym(key, sym);
-          table.insert({key, sym});
+          table->insert({key, sym});
           parameters.push_back(sym);
         }
       }
