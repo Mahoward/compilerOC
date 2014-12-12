@@ -451,6 +451,7 @@ void visit(astree* root){
       case TOK_STRUCT:
         handle_struct(root);
         break;
+      case TOK_PROTOTYPE:
       case TOK_FUNCTION:
         handle_function(root);
         break;
@@ -518,9 +519,6 @@ void visit(astree* root){
         break;
       case TOK_RETURNVOID:
         //Check the function is supposed to return void
-        break;
-
-      case TOK_PROTOTYPE:
         break;
       default:
         for(size_t i = 0; i < root->children.size(); i++){
