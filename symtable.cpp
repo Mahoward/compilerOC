@@ -236,7 +236,7 @@ void populate_param(astree* root, vector<symbol*> parameters){
           symbol *sym = create_sym(root->children[i]->children[q]->children[0]);
           sym->attributes.set(ATTR_param);
           set_var_type(root->children[i]->children[q], sym,
-                       root->children[i]->lexinfo);
+                       root->children[i]->children[q]->lexinfo);
           print_sym(key, sym);
           parameters.push_back(sym);
         }
