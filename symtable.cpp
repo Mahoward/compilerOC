@@ -311,9 +311,13 @@ void populate_param(astree* root, vector<symbol*> parameters){
         }
       }
     }
-    blocknr = block_stack.top();
-    block_stack.pop();
-    block_count--;
+    if(root->symbol == TOK_PROTOTYPE){
+      leave_block();
+    }else{
+      blocknr = block_stack.top();
+      block_stack.pop();
+      block_count--;
+    }
 }
 
 string *populate_function_sym(symbol* sym, astree* root){
