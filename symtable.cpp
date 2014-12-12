@@ -408,6 +408,16 @@ void handle_ifelse(astree* root){
   return;
 }
 
+/*---------While-----------*/
+void handle_while(astree* root){
+  for(size_t i = 0; i< root->children.size(); i++){
+    if(root->children[i]->symbol == TOK_BLOCK){
+      visit(root->children[i]);
+    }
+  }
+  return;
+}
+
 /*---------Main-----------*/
 void visit(astree* root){
     switch(root->symbol){
@@ -431,6 +441,9 @@ void visit(astree* root){
       case TOK_IFELSE:
       case TOK_IF:
         handle_ifelse(root);
+        break;
+      case TOK_WHILE:
+        handle_while(root);
         break;
       case '+':
         break;
@@ -481,9 +494,6 @@ void visit(astree* root){
         break;
 
       case TOK_PROTOTYPE:
-        break;
-
-      case TOK_WHILE:
         break;
       default:
         for(size_t i = 0; i < root->children.size(); i++){
