@@ -228,41 +228,42 @@ symbol* create_func_sym(astree* node){
 }
 
 void insert_function(astree* root){
+  symbol* sym;
   for(size_t i = 0; i < root->children.size(); i++){
     switch(root->children[i]->symbol){
       case TOK_IDENT:
-        symbol* sym = create_sym(root->children[i]);
+        sym = create_sym(root->children[i]);
         sym->attributes.set(ATTR_function);
         sym->attributes.set(ATTR_struct);
         sym->struct_name->append(*root->children[i]->lexinfo);
         populate_function_sym(sym, root->children[i]);
         break;
       case TOK_INT:
-        symbol* sym = create_sym(root->children[i]);
+        sym = create_sym(root->children[i]);
         sym->attributes.set(ATTR_function);
         sym->attributes.set(ATTR_int);
         populate_function_sym(sym, root->children[i]);
         break;
       case TOK_VOID:
-        symbol* sym = create_sym(root->children[i]);
+        sym = create_sym(root->children[i]);
         sym->attributes.set(ATTR_function);
         sym->attributes.set(ATTR_void);
         populate_function_sym(sym, root->children[i]);
         break;
       case TOK_BOOL:
-        symbol* sym = create_sym(root->children[i]);
+        sym = create_sym(root->children[i]);
         sym->attributes.set(ATTR_function);
         sym->attributes.set(ATTR_bool);
         populate_function_sym(sym, root->children[i]);
         break;
       case TOK_CHAR:
-        symbol* sym = create_sym(root->children[i]);
+        sym = create_sym(root->children[i]);
         sym->attributes.set(ATTR_function);
         sym->attributes.set(ATTR_char);
         populate_function_sym(sym, root->children[i]);
         break;
       case TOK_STRING:
-        symbol* sym = create_sym(root->children[i]);
+        sym = create_sym(root->children[i]);
         sym->attributes.set(ATTR_function);
         sym->attributes.set(ATTR_string);
         populate_function_sym(sym, root->children[i]);
