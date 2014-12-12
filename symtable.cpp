@@ -236,7 +236,8 @@ void populate_param(astree* root){
           sym->attributes.set(ATTR_param);
           set_var_type(root->children[i]->children[q], sym,
                        root->children[i]->lexinfo);
-          //fields.insert({key, sym});
+          print_sym(key, sym);
+          root->parameters.push_back(sym);
         }
       }
     }
@@ -292,7 +293,7 @@ void insert_function(astree* root){
         populate_function_sym(sym, root->children[i]);
         break;
       case TOK_PARAM:
-        //populate_param(root);
+        populate_param(root);
         break;
       case TOK_BLOCK:
         //visit(root->children[i]);
