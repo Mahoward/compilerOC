@@ -83,6 +83,8 @@ int var_type(astree* node){
 }
 
 void set_var_type(astree* node, symbol* sym, const string* struct_name){
+  sym->attributes.set(ATTR_variable);
+  sym->attributes.set(ATTR_lval);
   switch(node->symbol){
     case TOK_IDENT:
     sym->attributes.set(ATTR_struct);

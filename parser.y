@@ -78,7 +78,7 @@ function  : identdecl param')'block
           ;
 
 param     : param','identdecl   { $$ = adopt1($1, $3);
-                                  free_ast($3); }
+                                  free_ast($2); }
           | '(' identdecl       { $$ = adopt1sym($1, $2, TOK_PARAM); }
           | '('                 { $1->symbol = TOK_PARAM;
                                   $$ = $1;}
