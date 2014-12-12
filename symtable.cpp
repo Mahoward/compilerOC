@@ -398,6 +398,16 @@ void handle_variable(astree* root){
 }
 */
 
+/*---------Ifelse-----------*/
+void handle_ifelse(astree* root){
+  for(size_t i = 0; i< root->children.size(); i++){
+    if(root->children[i]->symbol == TOK_BLOCK){
+      visit(root->children[i]);
+    }
+  }
+  return;
+}
+
 /*---------Main-----------*/
 void visit(astree* root){
     switch(root->symbol){
@@ -419,10 +429,11 @@ void visit(astree* root){
         handle_vardecl(root);
         break;
       case TOK_IFELSE:
-        printf("IFELSE STATEMENT");
+        printf("IFELSE STATEMENT\n");
+        handle_ifelse(root);
         break;
       case TOK_IF:
-        printf("IFELSE STATEMENT");
+        printf("IFELSE STATEMENT\n");
         break;
       case '+':
         break;
