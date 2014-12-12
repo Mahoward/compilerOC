@@ -212,51 +212,51 @@ void visit(astree* root){
       case TOK_STRUCT:
         insert_struct(root);
         break;
-      case TOK_FUNCTION;
+      case TOK_FUNCTION:
         insert_function(root);
         break;
       case TOK_VARDECL:
         //new_var(root);
         break;
-      case TOK_TYPEID;
+      case TOK_TYPEID:
         //Check to make sure this is found in the struct table
         break;
-      case TOK_IF;
+      case TOK_IF:
         break;
-      case TOK_WHILE;
+      case TOK_WHILE:
         break;
-      case TOK_RETURN;
+      case TOK_RETURN:
         break;
-      case TOK_ARRAY;
+      case TOK_ARRAY:
         break;
-      case TOK_IDENT;
+      case TOK_IDENT:
         break;
-      case TOK_ORD;
+      case TOK_ORD:
         break;
-      case TOK_CHR;
+      case TOK_CHR:
         break;
-      case TOK_NEWSTRING;
+      case TOK_NEWSTRING:
         break;
-      case TOK_BLOCK;
+      case TOK_BLOCK:
         break;
-      case TOK_CALL;
+      case TOK_CALL:
         break;
-      case TOK_IFELSE;
+      case TOK_IFELSE:
         break;
-      case TOK_INITDECL;
+      case TOK_INITDECL:
         break;
-      case TOK_DECLID;
+      case TOK_DECLID:
         break;
-      case TOK_POS;
+      case TOK_POS:
         break;
-      case TOK_NEG;
+      case TOK_NEG:
         break;
-      case TOK_NEWARRAY;
+      case TOK_NEWARRAY:
         break;
-      case TOK_RETURNVOID;
+      case TOK_RETURNVOID:
         //Check the function is supposed to return void
         break;
-      case TOK_PROTOTYPE;
+      case TOK_PROTOTYPE:
         break;
       default:
         for(size_t i = 0; i < root->children.size(); i++){
