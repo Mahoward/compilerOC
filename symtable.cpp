@@ -103,10 +103,10 @@ int var_type(astree* node){
 
 void populate_fields(astree* root, symbol_table& fields){
   for(size_t i = 0; i < root->children.size(); i++){
+    printf("Loop: %s\n", root->children[i]->lexinfo->c_str());
     if(root->children[i]->symbol != TOK_TYPEID){
       string *key = NULL;
       for(size_t q = 0; q < root->children[i]->children.size(); q++){
-        printf("Loop: %s\n", root->children[i]->children[q]->lexinfo->c_str());
         if(root->children[i]->children[q]->symbol == TOK_FIELD){
           symbol* sym = new symbol();
           sym->struct_name = new string;
