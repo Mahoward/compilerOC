@@ -20,7 +20,7 @@ symbol_table global_table;
 stack <symbol_table> sym_stack;
 int depth = 0;
 
-string *get_att_string(symbol* sym){
+string *get_att_string(string *key, symbol* sym){
   string *attrs = new string;
   if(sym->attributes[ATTR_void])    {attrs->append("void ");}
   if(sym->attributes[ATTR_bool])    {attrs->append("bool ");}
@@ -28,7 +28,10 @@ string *get_att_string(symbol* sym){
   if(sym->attributes[ATTR_int])     {attrs->append("int ");}
   if(sym->attributes[ATTR_null])    {attrs->append("null ");}
   if(sym->attributes[ATTR_string])  {attrs->append("string ");}
-  if(sym->attributes[ATTR_struct])  {attrs->append("struct ");}
+  if(sym->attributes[ATTR_struct])  {attrs->append("struct ");
+                                      attrs->append("\"");
+                                      attrs->append(sym->struct_name);
+                                      attrs->append("\" ");}
   if(sym->attributes[ATTR_array])   {attrs->append("array ");}
   if(sym->attributes[ATTR_function]){attrs->append("function ");}
   if(sym->attributes[ATTR_variable]){attrs->append("variable ");}
@@ -43,7 +46,7 @@ string *get_att_string(symbol* sym){
 }
 
 void print_block(string *key, symbol* struct_sym){
-  string *attp = get_att_string(struct_sym);
+  string *attp = get_att_string(key, struct_sym);
   printf("%s (%ld.%ld.%ld) {%ld} %s \"%s\"\n",
   key->c_str(), struct_sym->filenr,
   struct_sym->linenr, struct_sym->offset,
@@ -81,6 +84,7 @@ void populate_fields(astree* root, symbol_table& fields){
         if(root->children[i]->children[q]->symbol == TOK_FIELD){
           symbol* sym = new symbol();
           int attr = var_type(root->children[i]);
+          if(attr == ATTR_struct){sym->stuct_name = root->children[i]->lexinfo;}
           sym->attributes.set(attr);
           sym->attributes.set(ATTR_field);
           key = (string *)root->children[i]->children[q]->lexinfo;
@@ -129,6 +133,7 @@ void insert_struct(astree* root){
   symbol* struct_sym = new symbol();
   struct_sym->attributes.set(ATTR_struct);
   struct_sym->fields = new symbol_table();
+  struct_sym->struct_name = root->lexinfo;
   populate_fields(root, *struct_sym->fields);
   string* key = populate_struct_sym(root, struct_sym);
   if(key == NULL){

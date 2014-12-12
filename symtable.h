@@ -33,6 +33,7 @@ struct symbol {
   symbol_table* fields;
   size_t filenr, linenr, offset;
   size_t blocknr;
+  string *stuct_name;
   vector<symbol*>* parameters;
 };
 
