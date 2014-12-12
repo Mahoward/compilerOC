@@ -246,10 +246,10 @@ void populate_param(astree* root, vector<symbol*> parameters){
 
 string *populate_function_sym(symbol* sym, astree* root){
   string *key = NULL;
-  sym->parameters = new vector<sym*>;
+  sym->parameters = new vector<symbol*>;
   key = (string *)root->children[0]->lexinfo;
   print_sym(key,sym);
-  populate_param(root, &sym->parameters);
+  populate_param(root, *sym->parameters);
   return key;
 }
 
