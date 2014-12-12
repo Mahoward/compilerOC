@@ -254,7 +254,7 @@ string *populate_struct_sym(astree* root, symbol* struct_sym){
   return key;
 }
 
-void insert_struct(astree* root){
+void handle_struct(astree* root){
   symbol* struct_sym = new symbol();
   struct_sym->struct_name = new string;
   struct_sym->attributes.set(ATTR_struct);
@@ -303,7 +303,7 @@ void populate_function_sym(symbol* sym, astree* root){
   global_table.insert({key, sym});
 }
 
-void insert_function(astree* root){
+void handle_function(astree* root){
   symbol* sym;
   for(size_t i = 0; i < root->children.size(); i++){
     switch(root->children[i]->symbol){
@@ -360,10 +360,10 @@ void insert_function(astree* root){
 void visit(astree* root){
     switch(root->symbol){
       case TOK_STRUCT:
-        insert_struct(root);
+        handle_struct(root);
         break;
       case TOK_FUNCTION:
-        insert_function(root);
+        handle_function(root);
         break;
       case TOK_BLOCK:
         enter_block();
@@ -374,7 +374,7 @@ void visit(astree* root){
         leave_block();
         break;
       case TOK_VARDECL:
-        //(root);
+        vardecl_handler(root);
         break;
       case TOK_TYPEID:
         //Check to make sure this is found in the struct table
