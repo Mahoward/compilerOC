@@ -156,9 +156,12 @@ string *populate_function_sym(symbol* sym, astree* root){
   string *key = NULL;
   for(int i = 0; i < root->children.size(); i++){
       if(root->children[i]->symbol == TOK_DECLID){
+        key = (string *)root->children[i]->lexinfo;
         printf("So far so good\n");
+        return key;
       }
   }
+  return key;
 }
 
 void insert_function(astree* root){
