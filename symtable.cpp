@@ -124,7 +124,7 @@ void pop_table(){
 void insert_table(string* key, symbol* sym){
   sym_stack.top()->insert({key, sym});
 }
-
+/*
 bool in_gtable(string *key){
   symbol_table::const_iterator inTable = global_table.find(key);
   if(inTable == global_table.end){
@@ -137,7 +137,7 @@ bool in_gtable(string *key){
 bool in_table(){
 
 }
-
+*/
 void insert_global(string *key, symbol *sym){
   global_table.insert({key, sym});
 }
@@ -370,11 +370,13 @@ void handle_function(astree* root){
         populate_param(root, *sym->parameters);
         break;
       case TOK_BLOCK:
+        /*
         if(in_gtable(key)){
           eprintf("Multiple functions with name %s ", key->c_str());
           set_exitstatus(1);
           abort();
         }
+        */
         visit(root->children[i]);
         break;
       default:
@@ -399,7 +401,7 @@ void handle_vardecl(astree* root){
   }
   set_var_type(root->children[0], sym, root->children[0]->lexinfo);
   //TODO TYPECHECK RIGHT SIDE OF VARDEL
-  check_var(sym);
+  //check_var(sym);
   print_sym(key, sym);
   insert_table(key, sym);
   return;
@@ -529,6 +531,7 @@ void visit(astree* root){
 }
 
 void build_sym(astree* root){
+  global_table = new symbol_table();
   sym_stack.push(&global_table);
   visit(root);
 }
