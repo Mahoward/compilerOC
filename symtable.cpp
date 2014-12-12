@@ -76,6 +76,7 @@ void print_struct(string *key, symbol* struct_sym){
   print_fields(key, struct_sym);
 }
 int var_type(astree* node){
+  printf("%d", node->symbol);
   switch(node->symbol){
     case TOK_BOOL:
       return ATTR_bool;
@@ -110,7 +111,7 @@ void populate_fields(astree* root, symbol_table& fields){
           int attr = var_type(root->children[i]);
           sym->attributes.set(attr);
           sym->attributes.set(ATTR_field);
-          key = (string *)root->children[i]->lexinfo;
+          key = (string *)root->children[i]->children[q]->lexinfo;
           if(attr == ATTR_struct){
             printf("%s\n", key->c_str());
             sym->struct_name->append(*root->children[i]->lexinfo);
