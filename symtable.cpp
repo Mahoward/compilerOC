@@ -210,7 +210,7 @@ void insert_function(astree* root){
     switch(root->children[i]->symbol){
       case TOK_IDENT:
         sym->attributes.set(ATTR_struct);
-        //sym->struct_name->append(*root->children[i]->lexinfo);
+        sym->struct_name->append(*root->children[i]->lexinfo);
         break;
       case TOK_INT:
         sym->attributes.set(ATTR_int);
