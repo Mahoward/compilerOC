@@ -366,7 +366,7 @@ void handle_vardecl(astree* root){
       sym = create_sym(root->children[0]->children[i]);
     }
     if(root->children[0]->children[i]->symbol == TOK_ARRAY){
-      sym->attributes.set(ATTR_ARRAY);
+      sym->attributes.set(ATTR_array);
     }
   }
   set_var_type(root->children[0], sym, root->children[0]->lexinfo);
@@ -400,7 +400,7 @@ void visit(astree* root){
       case TOK_BOOL:
       case TOK_CHAR:
       case TOK_STRING:
-        handle_variable(root);
+        //handle_variable(root);
         break;
       case TOK_TYPEID:
         //Check to make sure this is found in the struct table
