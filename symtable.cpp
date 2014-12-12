@@ -363,13 +363,15 @@ void visit(astree* root){
         insert_function(root);
         break;
       case TOK_BLOCK:
-
+        enter_block();
+        push_table();
         for(size_t i = 0; i < root->children.size(); i++){
           visit(root->children[i]);
         }
+        leave_block();
         break;
       case TOK_VARDECL:
-        //new_var(root);
+        //(root);
         break;
       case TOK_TYPEID:
         //Check to make sure this is found in the struct table
@@ -415,4 +417,9 @@ void visit(astree* root){
         }
     }
 
+}
+
+void build_sym(astree* root){
+  sym_stack.push(*global_table);
+  visit(root);
 }
