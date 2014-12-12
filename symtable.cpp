@@ -103,7 +103,7 @@ int var_type(astree* node){
 
 void populate_fields(astree* root, symbol_table& fields){
   for(size_t i = 0; i < root->children.size(); i++){
-    printf("Loop: %s\n", root->children[i]->symbol);
+    printf("Loop: %d %d\n", root->children[i]->symbol, TOK_TYPEID);
     if(root->children[i]->symbol != TOK_TYPEID){
       string *key = NULL;
       for(size_t q = 0; q < root->children[i]->children.size(); q++){
