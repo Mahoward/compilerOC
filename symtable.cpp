@@ -218,7 +218,7 @@ string *populate_function_sym(symbol* sym, astree* root){
 symbol* create_func_sym(astree* node){
   symbol* sym = new symbol();
   sym->struct_name = new string;
-  sym->filenr = node->children[i]->filenr;
+  sym->filenr = node->filenr;
   sym->linenr = node->linenr;
   sym->offset = node->offset;
   sym->blocknr = blocknr;
