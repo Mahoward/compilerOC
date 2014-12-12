@@ -107,6 +107,7 @@ void populate_fields(astree* root, symbol_table& fields){
       string *key = NULL;
       for(size_t q = 0; q < root->children[i]->children.size(); q++){
         if(root->children[i]->children[q]->symbol == TOK_FIELD){
+          printf("Into Fields: %s\n", root->children[i]->children[q]->lexinfo);
           symbol* sym = new symbol();
           sym->struct_name = new string;
           int attr = var_type(root->children[i]);
@@ -116,7 +117,6 @@ void populate_fields(astree* root, symbol_table& fields){
           sym->attributes.set(attr);
           sym->attributes.set(ATTR_field);
           key = (string *)root->children[i]->children[q]->lexinfo;
-          printf("Into Fields: %s\n", key->c_str());
           sym->filenr = root->children[i]->children[q]->filenr;
           sym->linenr = root->children[i]->children[q]->linenr;
           sym->offset = root->children[i]->children[q]->offset;
