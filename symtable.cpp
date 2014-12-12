@@ -358,6 +358,19 @@ void handle_function(astree* root){
 
 /*---------Vardecl-----------*/
 void handle_vardecl(astree* root){
+  symbol* sym;
+  string* key;
+  for(size_t i = 0; i < root->children[0]->children.size(); i++){
+    if(root->children[0]->children[i]->symbol == TOK_DECLID){
+      key = (string *)root->children[0]->children[i]->lexinfo;
+      sym = create_sym(root->children[0]->children[i]);
+    }
+    if(root->children[0]->children[i]->symbol == TOK_ARRAY){
+      sym->attributes.set(ATTR_ARRAY);
+    }
+  }
+  set_var_type(root->children[0], sym, root->children[0]->lexinfo);
+  print_sym(key, sym);
   return;
 }
 
@@ -381,6 +394,14 @@ void visit(astree* root){
       case TOK_VARDECL:
         handle_vardecl(root);
         break;
+      case TOK_IDENT:
+      case TOK_INT:
+      case TOK_VOID:
+      case TOK_BOOL:
+      case TOK_CHAR:
+      case TOK_STRING:
+        handle_variable(root);
+        break;
       case TOK_TYPEID:
         //Check to make sure this is found in the struct table
         break;
@@ -391,8 +412,6 @@ void visit(astree* root){
       case TOK_RETURN:
         break;
       case TOK_ARRAY:
-        break;
-      case TOK_IDENT:
         break;
       case TOK_ORD:
         break;
