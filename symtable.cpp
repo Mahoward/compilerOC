@@ -357,8 +357,8 @@ void handle_function(astree* root){
 }
 
 /*---------Vardecl-----------*/
-void handle_vardecl(root){
-
+void handle_vardecl(astree* root){
+  return;
 }
 
 /*---------Main-----------*/
