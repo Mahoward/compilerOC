@@ -108,12 +108,13 @@ void populate_fields(astree* root, symbol_table& fields){
           symbol* sym = new symbol();
           sym->struct_name = new string;
           int attr = var_type(root->children[i]);
-          if(attr == ATTR_struct){
-            sym->struct_name->append(*root->children[i]->lexinfo);
-          }
           sym->attributes.set(attr);
           sym->attributes.set(ATTR_field);
           key = (string *)root->children[i]->children[q]->lexinfo;
+          if(attr == ATTR_struct){
+            printf("%s", key->c_str());
+            sym->struct_name->append(*root->children[i]->lexinfo);
+          }
           sym->filenr = root->children[i]->children[q]->filenr;
           sym->linenr = root->children[i]->children[q]->linenr;
           sym->offset = root->children[i]->children[q]->offset;
