@@ -20,7 +20,7 @@ symbol_table global_table;
 stack <symbol_table> sym_stack;
 int depth = 0;
 
-string *get_att_string(string *key, symbol* sym){
+string *get_att_string(symbol* sym){
   string *attrs = new string;
   if(sym->attributes[ATTR_void])    {attrs->append("void ");}
   if(sym->attributes[ATTR_bool])    {attrs->append("bool ");}
@@ -46,7 +46,7 @@ string *get_att_string(string *key, symbol* sym){
 }
 
 void print_block(string *key, symbol* struct_sym){
-  string *attp = get_att_string(key, struct_sym);
+  string *attp = get_att_string(struct_sym);
   printf("%s (%ld.%ld.%ld) {%ld} %s\n",
   key->c_str(), struct_sym->filenr,
   struct_sym->linenr, struct_sym->offset,
@@ -154,7 +154,7 @@ void insert_struct(astree* root){
 
 string *populate_function_sym(symbol* sym, astree* root){
   string *key = NULL;
-  for(int i = 0; i < root->children.size(); i++){
+  for(size_t i = 0; i < root->children.size(); i++){
       if(root->children[i]->symbol == TOK_DECLID){
         key = (string *)root->children[i]->lexinfo;
         printf("So far so good\n");
@@ -166,7 +166,7 @@ string *populate_function_sym(symbol* sym, astree* root){
 
 void insert_function(astree* root){
   symbol* sym = new symbol();
-  for(int i = 0; i < root->children.size(); i++){
+  for(size_t i = 0; i < root->children.size(); i++){
     switch(root->children[i]->symbol){
       case TOK_IDENT:
         sym->attributes.set(ATTR_struct);
@@ -190,9 +190,10 @@ void insert_function(astree* root){
         break;
       case TOK_STRING:
         sym->attributes.set(ATTR_string);
-        populate_function_sym(root->children[i]);
+        populate_function_sym(sym, root->children[i]);
         break;
       default:
+        break;
     }
   }
 }
