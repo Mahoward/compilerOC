@@ -252,6 +252,7 @@ void populate_param(astree* root, vector<symbol*> parameters){
   block_stack.push(blocknr);
   blocknr++;
   block_count++;
+  symbol_table table = new symbol_table();
   for(size_t i = 0; i < root->children.size(); i++){
     if(root->children[i]->symbol == TOK_PARAM){
       string *key = NULL;
@@ -262,22 +263,23 @@ void populate_param(astree* root, vector<symbol*> parameters){
           set_var_type(root->children[i]->children[q], sym,
                        root->children[i]->children[q]->lexinfo);
           print_sym(key, sym);
+          table.insert({key, sym});
           parameters.push_back(sym);
         }
       }
     }
     blocknr = block_stack.top();
     block_stack.pop();
-    block_count--;
+    block_count;
 
 }
 
-string *populate_function_sym(symbol* sym, astree* root){
+void populate_function_sym(symbol* sym, astree* root){
   string *key = NULL;
   sym->parameters = new vector<symbol*>;
   key = (string *)root->children[0]->lexinfo;
   print_sym(key,sym);
-  return key;
+  global_table.insert({key, sym});
 }
 
 void insert_function(astree* root){
