@@ -356,6 +356,11 @@ void handle_function(astree* root){
   }
 }
 
+/*---------Vardecl-----------*/
+void handle_vardecl(root){
+
+}
+
 /*---------Main-----------*/
 void visit(astree* root){
     switch(root->symbol){
@@ -374,7 +379,7 @@ void visit(astree* root){
         leave_block();
         break;
       case TOK_VARDECL:
-        vardecl_handler(root);
+        handle_vardecl(root);
         break;
       case TOK_TYPEID:
         //Check to make sure this is found in the struct table
