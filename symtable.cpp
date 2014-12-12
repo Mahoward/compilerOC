@@ -226,7 +226,7 @@ void insert_struct(astree* root){
 }
 
 /*---------Function-----------*/
-void populate_param(astree* sym){
+void populate_param(astree* root){
   for(size_t i = 0; i < root->children.size(); i++){
     if(root->children[i]->symbol == TOK_PARAM){
       string *key = NULL;
@@ -246,9 +246,6 @@ string *populate_function_sym(symbol* sym, astree* root){
   key = (string *)root->children[0]->lexinfo;
   print_sym(key,sym);
   populate_param(root);
-  return key;
-    }
-  }
   return key;
 }
 
