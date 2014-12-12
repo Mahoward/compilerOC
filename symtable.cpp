@@ -429,11 +429,8 @@ void visit(astree* root){
         handle_vardecl(root);
         break;
       case TOK_IFELSE:
-        printf("IFELSE STATEMENT\n");
-        handle_ifelse(root);
-        break;
       case TOK_IF:
-        printf("IFELSE STATEMENT\n");
+        handle_ifelse(root);
         break;
       case '+':
         break;
