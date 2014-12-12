@@ -191,12 +191,12 @@ void insert_struct(astree* root){
 
 string *populate_function_sym(symbol* sym, astree* root){
   string *key = NULL;
-  string *attp = get_att_string(sym);
+  //string *attp = get_att_string(sym);
   for(size_t i = 0; i < root->children.size(); i++){
       if(root->children[i]->symbol == TOK_DECLID){
         key = (string *)root->children[i]->lexinfo;
 
-        printf("key: %s %s\n", key->c_str(), attp->c_str());
+        printf("key: %s %s\n", key->c_str());
         return key;
       }
   }
