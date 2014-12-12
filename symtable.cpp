@@ -56,12 +56,14 @@ void print_fields(string *struct_name, symbol* struct_sym){
     keys.push_back(kv.first);
     syms.push_back(kv.second);
   }
-  /*
-  printf("%s (%ld.%ld.%ld) {%ld} %s\n",
-  key->c_str(), struct_sym->filenr,
-  struct_sym->linenr, struct_sym->offset,
-  struct_sym->blocknr, attp->c_str());
-  */
+  for(size_t i = 0; i < keys.size(); i++){
+    string *attp = get_att_string(struct_sym);
+    printf("%s (%ld.%ld.%ld) {%s} %s\n",
+    keys[i]->c_str(), syms[i]->filenr,
+    syms[i]->linenr, syms[i]->offset,
+    struct_name->c_str(), attp->c_str());
+  }
+
 }
 
 void print_struct(string *key, symbol* struct_sym){
