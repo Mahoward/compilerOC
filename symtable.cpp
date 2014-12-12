@@ -187,7 +187,7 @@ void populate_fields(astree* root, symbol_table& fields){
           symbol* sym = create_sym(root->children[i]->children[q]);
           sym->struct_name = new string;
           key = (string *)root->children[i]->children[q]->lexinfo;
-          set_field_type(root->children[i]->children[q], sym,
+          set_field_type(root->children[i], sym,
           root->children[i]->lexinfo);
           fields.insert({key, sym});
         }
