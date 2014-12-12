@@ -37,6 +37,6 @@ struct symbol {
   vector<symbol*>* parameters;
 };
 
-void visit(astree* root);
+void build_sym(astree* root)
 
 #endif
