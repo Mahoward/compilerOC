@@ -372,8 +372,18 @@ void handle_vardecl(astree* root){
     }
   }
   set_var_type(root->children[0], sym, root->children[0]->lexinfo);
+
+  //TODO TYPECHECK RIGHT SIDE OF VARDEL
+
   print_sym(key, sym);
+  insert_table(key, sym);
   return;
+}
+
+/*---------Variable-----------*/
+void handle_variable(astree* root){
+  set_var_type(root, sym, root->lexinfo);
+
 }
 
 /*---------Main-----------*/
@@ -402,7 +412,7 @@ void visit(astree* root){
       case TOK_BOOL:
       case TOK_CHAR:
       case TOK_STRING:
-        //handle_variable(root);
+        handle_variable(root);
         break;
       case TOK_TYPEID:
         //Check to make sure this is found in the struct table

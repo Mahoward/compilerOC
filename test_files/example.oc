@@ -2,9 +2,9 @@ struct node { int foo; node link; }
 node func (node head, int length) {
 	int a = 0; string b = ""; node c = new node();
 	if (a < 3){
-		int d = 8; a = length; c = c.link; 
+		int d = 8; a = length; c = c.link;
 	}
-	else { 
+	else {
 		string e = "";
 		if (0 == 0){
 			int f = 8;
@@ -14,4 +14,5 @@ node func (node head, int length) {
 		}
 	}
 }
+int foo;
 node h = func (null, 10);
