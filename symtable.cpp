@@ -542,7 +542,7 @@ void visit(astree* root){
 }
 
 void build_sym(FILE* out, astree* root){
-  sym_file = out
+  sym_file = out;
   //global_table = new symbol_table();
   sym_stack.push(&global_table);
   visit(root);
