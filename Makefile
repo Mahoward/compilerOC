@@ -10,7 +10,8 @@ VALGRIND  = valgrind --leak-check=full --show-reachable=yes
 # Definitions of list of files:
 #
 HSOURCES  = astree.h lyutils.h  auxlib.h  stringset.h symtable.h
-CSOURCES  = astree.cpp lyutils.cpp auxlib.cpp stringset.cpp main.cpp symtable.cpp
+CSOURCES  = astree.cpp lyutils.cpp auxlib.cpp stringset.cpp \
+ 						main.cpp symtable.cpp
 LSOURCES  = scanner.l
 YSOURCES  = parser.y
 ETCSRC    = README ${MKFILE} ${DEPSFILE}
@@ -99,7 +100,7 @@ spotless : clean
 	- rm ${EXECBIN} List.*.ps List.*.pdf
 
 submit: spotless
-	submit cmps104a-wm.f14 asg4 ${SUBSRC}
+	submit cmps104a-wm.f14 asg5 ${SUBSRC}
 
 
 #
