@@ -96,7 +96,8 @@ clean :
 		${patsubst %, ${test}.%, out err}}
 
 spotless : clean
-	- rm test_files/*.str test_files/*.tok test_files/*.ast
+	- rm test_files/*.str test_files/*.tok
+	- rm test_files/*.ast test_files/*.sym
 	- rm ${EXECBIN} List.*.ps List.*.pdf
 
 submit: spotless
