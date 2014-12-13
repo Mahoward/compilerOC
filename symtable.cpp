@@ -190,7 +190,7 @@ void print_struct(string *key, symbol* struct_sym){
 }
 
 void print_sym(string *key, symbol* sym){
-  for(size_t i = 0; i < depth; i++){
+  for(int i = 0; i < depth; i++){
     printf("  ");
   }
   string *attp = get_att_string(sym);
@@ -299,7 +299,6 @@ void handle_struct(astree* root){
 
 void populate_param(astree* root, vector<symbol*> parameters){
   enter_block();
-  printf("Depth: %d\n", depth);
   for(size_t i = 0; i < root->children.size(); i++){
     if(root->children[i]->symbol == TOK_PARAM){
       string *key = NULL;
