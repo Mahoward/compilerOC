@@ -323,7 +323,11 @@ void populate_param(astree* root, vector<symbol*> parameters){
 string *populate_function_sym(symbol* sym, astree* root){
   string *key = NULL;
   sym->parameters = new vector<symbol*>;
-  key = (string *)root->children[0]->lexinfo;
+  for(size_t i = 0; i < root->children.size(); i++){
+    if(root->children[i]->symbol == TOK_DECLID){
+      key = (string *)root->children[i]->lexinfo;
+    }
+  }
   print_sym(key,sym);
   return key;
 }
