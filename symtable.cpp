@@ -15,6 +15,8 @@
 #include "yyparse.h"
 #include "auxlib.h"
 
+FILE *sym_file;
+
 symbol_table struct_table;
 symbol_table global_table;
 stack <symbol_table*> sym_stack;
@@ -172,7 +174,7 @@ void print_fields(string *struct_name, symbol* struct_sym){
 
   for(size_t i = 0; i < keys.size(); i++){
     string *attp = get_att_string(syms[i]);
-    printf("  %s (%ld.%ld.%ld) {%s} %s\n",
+    fprintf(sym_file, "  %s (%ld.%ld.%ld) {%s} %s\n",
     keys[i]->c_str(), syms[i]->filenr,
     syms[i]->linenr, syms[i]->offset,
     struct_name->c_str(), attp->c_str());
@@ -182,7 +184,7 @@ void print_fields(string *struct_name, symbol* struct_sym){
 
 void print_struct(string *key, symbol* struct_sym){
   string *attp = get_att_string(struct_sym);
-  printf("%s (%ld.%ld.%ld) {%ld} %s\n",
+  fprintf(sym_file, "%s (%ld.%ld.%ld) {%ld} %s\n",
   key->c_str(), struct_sym->filenr,
   struct_sym->linenr, struct_sym->offset,
   struct_sym->blocknr, attp->c_str());
@@ -194,7 +196,7 @@ void print_sym(string *key, symbol* sym){
     printf("  ");
   }
   string *attp = get_att_string(sym);
-  printf("%s (%ld.%ld.%ld) {%ld} %s\n",
+  fprintf(sym_file, "%s (%ld.%ld.%ld) {%ld} %s\n",
   key->c_str(), sym->filenr,
   sym->linenr, sym->offset,
   sym->blocknr, attp->c_str());
@@ -539,7 +541,8 @@ void visit(astree* root){
 
 }
 
-void build_sym(astree* root){
+void build_sym(FILE* out, astree* root){
+  sym_file = out
   //global_table = new symbol_table();
   sym_stack.push(&global_table);
   visit(root);
