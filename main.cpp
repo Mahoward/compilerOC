@@ -120,7 +120,8 @@ int main (int argc, char** argv) {
    FILE *str_out = fopen(print_file(filename, "str"), "w+");
    dump_stringset(str_out);
 
-   build_sym(yyparse_astree);
+   FILE *sym_out = fopen(print_file(filename, "sym"), "w+");
+   build_sym(sym_out, yyparse_astree);
 
    FILE *ast_out = fopen(print_file(filename, "ast"), "w+");
    dump_astree(ast_out, yyparse_astree);
