@@ -18,6 +18,7 @@
 symbol_table struct_table;
 symbol_table global_table;
 stack <symbol_table*> sym_stack;
+int depth = 0;
 int blocknr = 0;
 int block_count = 0;
 stack <int> block_stack;
@@ -143,13 +144,14 @@ void insert_global(string *key, symbol *sym){
 }
 
 void enter_block(){
+  depth++;
   block_stack.push(blocknr);
   block_count++;
   blocknr = block_count;
-
 }
 
 void leave_block(){
+  depth--;
   blocknr = block_stack.top();
   block_stack.pop();
 }
@@ -314,6 +316,7 @@ void populate_param(astree* root, vector<symbol*> parameters){
     if(root->symbol == TOK_PROTOTYPE){
       leave_block();
     }else{
+      depth--;
       blocknr = block_stack.top();
       block_stack.pop();
       block_count--;
