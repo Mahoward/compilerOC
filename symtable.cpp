@@ -205,7 +205,8 @@ void print_sym(string *key, symbol* sym){
 /*-----------Logic-------------*/
 
 /*---------Struct-----------*/
-void set_field_type(astree* node, symbol* sym, const string* struct_name){
+void set_field_type(astree* node, symbol* sym,
+                    const string* struct_name){
   sym->attributes.set(ATTR_field);
   switch(node->symbol){
     case TOK_IDENT:
@@ -304,9 +305,12 @@ void populate_param(astree* root, vector<symbol*> parameters){
   for(size_t i = 0; i < root->children.size(); i++){
     if(root->children[i]->symbol == TOK_PARAM){
       string *key = NULL;
-      for(size_t q = 0; q < root->children[i]->children.size(); q++){
-          key = (string *)root->children[i]->children[q]->children[0]->lexinfo;
-          symbol *sym = create_sym(root->children[i]->children[q]->children[0]);
+      for(size_t q = 0;
+          q < root->children[i]->children.size(); q++){
+          key = (string*)
+            root->children[i]->children[q]->children[0]->lexinfo;
+          symbol *sym =
+            create_sym(root->children[i]->children[q]->children[0]);
           sym->attributes.set(ATTR_param);
           set_var_type(root->children[i]->children[q], sym,
                        root->children[i]->children[q]->lexinfo);
