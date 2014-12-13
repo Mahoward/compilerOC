@@ -299,6 +299,7 @@ void handle_struct(astree* root){
 
 void populate_param(astree* root, vector<symbol*> parameters){
   enter_block();
+  printf("Depth: %d\n", depth);
   for(size_t i = 0; i < root->children.size(); i++){
     if(root->children[i]->symbol == TOK_PARAM){
       string *key = NULL;
